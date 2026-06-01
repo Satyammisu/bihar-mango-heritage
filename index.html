@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bihar Smart Mango Knowledge Wall</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#f7f8fa;
+overflow-x:hidden;
+}
+
+/* TOP NAVBAR */
+
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.35);
+backdrop-filter:blur(10px);
+z-index:999;
+color:white;
+}
+
+.logo{
+font-size:1.2rem;
+font-weight:600;
+}
+
+/* HERO SECTION */
+
+.hero{
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,0.45),
+rgba(0,0,0,0.45)),
+url('images/hero.jpg');
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:20px;
+}
+
+.hero-content{
+max-width:900px;
+}
+
+.hero h1{
+font-size:4rem;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:1.3rem;
+margin-bottom:30px;
+}
+
+.btn{
+display:inline-block;
+padding:15px 35px;
+background:#ff9800;
+color:white;
+text-decoration:none;
+border-radius:50px;
+font-weight:600;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#f57c00;
+transform:translateY(-3px);
+}
+
+/* STATS */
+
+.stats{
+padding:70px 20px;
+display:flex;
+justify-content:center;
+gap:60px;
+flex-wrap:wrap;
+background:white;
+}
+
+.stat{
+text-align:center;
+}
+
+.stat h2{
+font-size:3rem;
+color:#ff9800;
+}
+
+.stat p{
+color:#555;
+}
+
+/* SECTION TITLE */
+
+.section-title{
+text-align:center;
+font-size:2.5rem;
+margin-top:40px;
+margin-bottom:40px;
+color:#2e7d32;
+}
+
+/* CARDS */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+padding:20px 40px 80px;
+}
+
+.card{
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.card-content{
+padding:20px;
+}
+
+.card-content h3{
+color:#2e7d32;
+margin-bottom:10px;
+}
+
+.card-content p{
+color:#666;
+margin-bottom:15px;
+}
+
+.sweetness{
+font-weight:600;
+color:#ff9800;
+margin-bottom:15px;
+}
+
+.card-btn{
+display:inline-block;
+padding:10px 20px;
+background:#2e7d32;
+color:white;
+text-decoration:none;
+border-radius:8px;
+}
+
+/* FOOTER */
+
+footer{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:40px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:2.5rem;
+}
+
+.hero p{
+font-size:1rem;
+}
+
+.navbar{
+padding:15px;
+font-size:0.9rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div class="logo">
+🥭 Bihar Mango Heritage
+</div>
+
+<div>
+Department of Horticulture
+</div>
+
+</div>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>🥭 Bihar Smart Mango Knowledge Wall</h1>
+
+<p>
+Explore Bihar's Rich Mango Heritage Through Interactive QR Technology
+</p>
+
+<a href="#mangoes" class="btn">
+Explore Mango Varieties
+</a>
+
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="stat">
+<h2>50+</h2>
+<p>Mango Varieties</p>
+</div>
+
+<div class="stat">
+<h2>38</h2>
+<p>Districts</p>
+</div>
+
+<div class="stat">
+<h2>1</h2>
+<p>Digital Knowledge Platform</p>
+</div>
+
+</section>
+
+<h2 class="section-title" id="mangoes">
+Famous Mango Varieties of Bihar
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<img src="images/zardalu.jpg">
+
+<div class="card-content">
+
+<h3>Zardalu Mango</h3>
+
+<p>Pride of Bhagalpur</p>
+
+<div class="sweetness">
+Sweetness: █████████░ 9/10
+</div>
+
+<a href="zardalu.html" class="card-btn">
+Know More
+</a>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="images/maldah.jpg">
+
+<div class="card-content">
+
+<h3>Maldah Mango</h3>
+
+<p>Traditional Bihar Variety</p>
+
+<div class="sweetness">
+Sweetness: ████████░░ 8/10
+</div>
+
+<a href="maldah.html" class="card-btn">
+Know More
+</a>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="images/langra.jpg">
+
+<div class="card-content">
+
+<h3>Langra Mango</h3>
+
+<p>Rich Aroma & Taste</p>
+
+<div class="sweetness">
+Sweetness: ████████░░ 8/10
+</div>
+
+<a href="langra.html" class="card-btn">
+Know More
+</a>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="images/gulabkhas.jpg">
+
+<div class="card-content">
+
+<h3>Gulab Khas Mango</h3>
+
+<p>Known for its fragrance</p>
+
+<div class="sweetness">
+Sweetness: █████████░ 9/10
+</div>
+
+<a href="gulabkhas.html" class="card-btn">
+Know More
+</a>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="images/bombai.jpg">
+
+<div class="card-content">
+
+<h3>Bombai Mango</h3>
+
+<p>Popular Local Variety</p>
+
+<div class="sweetness">
+Sweetness: ███████░░░ 7/10
+</div>
+
+<a href="bombai.html" class="card-btn">
+Know More
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h2>Department of Horticulture</h2>
+
+<p>Government of Bihar</p>
+
+<p>🥭 Bihar Smart Mango Knowledge Wall</p>
+
+</footer>
+
+</body>
+</html>

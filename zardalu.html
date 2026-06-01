@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zardalu Mango | Bihar Smart Mango Knowledge Wall</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#f5f7fa;
+overflow-x:hidden;
+color:#333;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+height:100vh;
+
+background:
+linear-gradient(
+rgba(0,0,0,0.30),
+rgba(0,0,0,0.50)
+),
+url('images/zardalu.jpg');
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+
+color:white;
+
+position:relative;
+}
+
+/* Government Branding */
+
+.govt{
+position:absolute;
+top:25px;
+right:35px;
+
+text-align:right;
+
+font-size:14px;
+font-weight:500;
+
+line-height:1.8;
+}
+
+/* Event Badge */
+
+.event{
+position:absolute;
+top:25px;
+left:35px;
+
+background:#ff9800;
+color:white;
+
+padding:12px 20px;
+
+border-radius:40px;
+
+font-weight:600;
+
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+}
+
+/* Hero Content */
+
+.hero-content{
+max-width:900px;
+padding:20px;
+}
+
+.hero-content h1{
+font-size:5rem;
+font-weight:800;
+margin-bottom:10px;
+}
+
+.hero-content h2{
+font-size:2rem;
+font-weight:500;
+margin-bottom:20px;
+}
+
+.hero-content p{
+font-size:1.2rem;
+line-height:1.8;
+}
+
+/* ================= QUICK FACTS ================= */
+
+.quick-facts{
+
+max-width:1200px;
+
+margin:-60px auto 40px;
+
+background:white;
+
+padding:25px;
+
+border-radius:25px;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+gap:20px;
+
+position:relative;
+
+z-index:100;
+
+box-shadow:0 10px 35px rgba(0,0,0,.15);
+
+}
+
+.fact{
+text-align:center;
+}
+
+.fact h3{
+color:#ff9800;
+margin-bottom:8px;
+}
+
+.fact p{
+font-weight:600;
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:0 20px 40px;
+}
+
+/* ================= CARDS ================= */
+
+.card{
+background:white;
+
+padding:35px;
+
+border-radius:25px;
+
+margin-bottom:30px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.section-title{
+font-size:2rem;
+margin-bottom:25px;
+color:#2e7d32;
+}
+
+/* ================= INFO GRID ================= */
+
+.info-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.info-box{
+
+background:#fff8e7;
+
+padding:20px;
+
+border-radius:15px;
+
+text-align:center;
+
+transition:.3s;
+}
+
+.info-box:hover{
+transform:translateY(-5px);
+}
+
+.info-box h3{
+color:#ff9800;
+margin-bottom:10px;
+}
+
+/* ================= SWEETNESS ================= */
+
+.sweetness{
+
+margin-top:30px;
+
+font-size:1.4rem;
+
+font-weight:600;
+
+color:#ff9800;
+
+line-height:2;
+}
+
+/* ================= GI BADGE ================= */
+
+.gi{
+
+display:inline-block;
+
+background:#2e7d32;
+
+color:white;
+
+padding:14px 25px;
+
+border-radius:40px;
+
+margin-top:20px;
+
+font-weight:600;
+}
+
+/* ================= BENEFITS ================= */
+
+.benefits{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.benefit{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+text-align:center;
+
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+transition:.3s;
+}
+
+.benefit:hover{
+transform:translateY(-6px);
+}
+
+.benefit h3{
+margin-bottom:10px;
+}
+
+/* ================= STORY BOX ================= */
+
+.story{
+
+background:linear-gradient(
+135deg,
+#ff9800,
+#f57c00
+);
+
+color:white;
+
+padding:35px;
+
+border-radius:20px;
+
+line-height:2;
+
+margin-top:30px;
+}
+
+/* ================= BUTTON ================= */
+
+.btn{
+
+display:inline-block;
+
+padding:14px 30px;
+
+background:#ff9800;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:10px;
+
+font-weight:600;
+
+margin-top:25px;
+}
+
+.btn:hover{
+background:#f57c00;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+
+background:#2e7d32;
+
+color:white;
+
+text-align:center;
+
+padding:40px;
+
+margin-top:40px;
+}
+
+footer hr{
+margin:20px 0;
+border:1px solid rgba(255,255,255,.2);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+.hero{
+height:80vh;
+}
+
+.hero-content h1{
+font-size:2.5rem;
+}
+
+.hero-content h2{
+font-size:1.3rem;
+}
+
+.hero-content p{
+font-size:1rem;
+}
+
+.event{
+left:15px;
+top:15px;
+font-size:12px;
+padding:10px 15px;
+}
+
+.govt{
+right:15px;
+top:15px;
+font-size:11px;
+}
+
+.quick-facts{
+margin-top:-40px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="event">
+🥭 Aam Mahotsav 2026
+</div>
+
+<div class="govt">
+
+🏛 Government of Bihar
+
+<br>
+
+🌿 Department of Horticulture
+
+</div>
+
+<div class="hero-content">
+
+<h1>🥭 Zardalu Mango</h1>
+
+<h2>जरदालु आम</h2>
+
+<p style="font-size:1.4rem;font-weight:600;">
+The Pride of Bhagalpur, Bihar
+</p>
+
+<p>
+A Premium GI-Tagged Mango Known For Its
+Distinctive Aroma, Rich Flavour And
+Golden-Yellow Beauty.
+</p>
+
+</div>
+
+</section>
+
+<!-- QUICK FACTS -->
+
+<div class="quick-facts">
+
+<div class="fact">
+<h3>📍 Origin</h3>
+<p>Bhagalpur</p>
+</div>
+
+<div class="fact">
+<h3>🏅 GI Status</h3>
+<p>GI Tagged</p>
+</div>
+
+<div class="fact">
+<h3>🍯 Sweetness</h3>
+<p>9 / 10</p>
+</div>
+
+<div class="fact">
+<h3>🌿 Aroma</h3>
+<p>Premium</p>
+</div>
+
+<div class="fact">
+<h3>📅 Season</h3>
+<p>June – July</p>
+</div>
+
+</div>
+
+<div class="container">
+
+<!-- ABOUT -->
+
+<div class="card">
+
+<h2 class="section-title">
+🥭 About Zardalu Mango
+</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+<h3>Origin</h3>
+<p>Bhagalpur, Bihar</p>
+</div>
+
+<div class="info-box">
+<h3>Season</h3>
+<p>June – July</p>
+</div>
+
+<div class="info-box">
+<h3>Colour</h3>
+<p>Golden Yellow</p>
+</div>
+
+<div class="info-box">
+<h3>Aroma</h3>
+<p>Strong & Pleasant</p>
+</div>
+
+<div class="info-box">
+<h3>Pulp</h3>
+<p>Juicy & Rich</p>
+</div>
+
+<div class="info-box">
+<h3>Type</h3>
+<p>Premium Table Mango</p>
+</div>
+
+</div>
+
+<div class="sweetness">
+
+Sweetness Index
+
+<br><br>
+
+█████████░
+
+9 / 10
+
+</div>
+
+<div class="gi">
+🏅 Geographical Indication (GI) Tagged Variety
+</div>
+
+</div>
+
+<!-- UNIQUENESS -->
+
+<div class="card">
+
+<h2 class="section-title">
+🌟 Uniqueness
+</h2>
+
+<p style="line-height:2;font-size:1.05rem;">
+
+Zardalu Mango is one of Bihar's most celebrated mango varieties and is highly valued for its distinctive aroma, rich flavour, attractive golden-yellow appearance and premium quality. Closely associated with Bhagalpur, it enjoys strong demand among mango lovers because of its exceptional taste and fragrance.
+
+</p>
+
+</div>
+
+<!-- BENEFITS -->
+
+<h2 class="section-title">
+💚 Health Benefits
+</h2>
+
+<div class="benefits">
+
+<div class="benefit">
+<h3>🛡 Immunity Booster</h3>
+<p>Rich source of Vitamin C.</p>
+</div>
+
+<div class="benefit">
+<h3>👁 Eye Health</h3>
+<p>Contains Vitamin A.</p>
+</div>
+
+<div class="benefit">
+<h3>⚡ Natural Energy</h3>
+<p>Healthy source of energy.</p>
+</div>
+
+<div class="benefit">
+<h3>🌿 Digestion</h3>
+<p>Supports digestive health.</p>
+</div>
+
+<div class="benefit">
+<h3>❤️ Heart Health</h3>
+<p>Contains beneficial nutrients.</p>
+</div>
+
+<div class="benefit">
+<h3>✨ Skin Health</h3>
+<p>Rich in antioxidants.</p>
+</div>
+
+</div>
+
+<!-- STORY -->
+
+<div class="story">
+
+<h2>💡 Did You Know?</h2>
+
+<br>
+
+<p>
+
+Zardalu Mango is among Bihar's most famous mango varieties. Known for its extraordinary aroma and premium taste, it has become a symbol of Bhagalpur's horticultural heritage. The variety is widely appreciated for its unique flavour and remains one of the most sought-after mangoes in eastern India.
+
+</p>
+
+</div>
+
+<center>
+
+<a href="index.html" class="btn">
+
+← Back To Mango Gallery
+
+</a>
+
+</center>
+
+</div>
+
+<footer>
+
+<h2>Department of Horticulture</h2>
+
+<p>Government of Bihar</p>
+
+<hr>
+
+<p>
+🥭 Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
+</p>
+
+</footer>
+
+</body>
+</html>

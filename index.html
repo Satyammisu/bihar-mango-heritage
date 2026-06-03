@@ -50,18 +50,36 @@
         .section-title { font-size: 42px; text-align: center; color: #2e7d32; margin-bottom: 40px; font-weight: 800; }
         
         /* MANGO GRID */
-        .mango-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: 0.4s; }
+        .mango-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            scroll-behavior: smooth;
+            padding-bottom: 20px;
+        }
+        .mango-grid::-webkit-scrollbar { height: 8px; }
+        .mango-grid::-webkit-scrollbar-thumb { background: #2e7d32; border-radius: 20px; }
+
+        .card { background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: 0.4s; min-width: 320px; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,.15); }
         .card img { width: 100%; height: 260px; object-fit: cover; }
         .card-content { padding: 25px; }
-        .btn { display: inline-block; padding: 12px 24px; background: #2e7d32; color: white; text-decoration: none; border-radius: 10px; margin-top: 15px; }
+        .btn { display: inline-block; padding: 12px 24px; background: #2e7d32; color: white; text-decoration: none; border-radius: 10px; margin-top: 15px; cursor: pointer; border: none; }
 
         /* QR GALLERY */
         .qr-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center; }
         
         #question { padding: 15px; width: min(600px, 90%); border-radius: 10px; border: 1px solid #ccc; }
         footer { background: #1b5e20; color: white; padding: 40px; text-align: center; }
+
+        /* MOBILE OPTIMIZATION */
+        @media(max-width:768px){
+            .hero h1{ font-size:36px; }
+            .section-title{ font-size:28px; }
+            .hero-btn{ width:90%; }
+            .card{ min-width:280px; }
+            .topbar{ flex-direction:column; text-align:center; gap:10px; }
+        }
     </style>
 </head>
 <body>
@@ -107,13 +125,9 @@
         <h2 class="section-title">AI Mango Mitra</h2>
         <div style="max-width: 800px; margin: auto; text-align: center; padding: 40px; background: #fff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
             <input type="text" id="question" placeholder="Ask a question about Bihar mangoes...">
-            <button onclick="askMangoMitra()" class="btn">
-Ask Mitra
-</button>
-
-<button onclick="startVoiceInput()" class="btn">
-🎤 Speak
-</button>
+            <br><br>
+            <button onclick="askMangoMitra()" class="btn">Ask Mitra</button>
+            <button onclick="startVoiceInput()" class="btn">🎤 Speak</button>
             <div id="answer" style="margin-top:20px; font-weight:700;"></div>
         </div>
     </section>
@@ -181,5 +195,6 @@ Ask Mitra
     <script src="js/language.js"></script>
     <script src="js/mango-mitra.js"></script>
     <script src="js/orchard.js"></script>
+    <script src="js/voice.js"></script>
 </body>
 </html>

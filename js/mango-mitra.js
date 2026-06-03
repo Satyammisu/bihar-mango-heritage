@@ -3,36 +3,42 @@ async function askMangoMitra() {
     const question =
         document.getElementById("question").value;
 
-    const answerDiv =
+    const answerBox =
         document.getElementById("answer");
-        speechSynthesis.speak(
-    new SpeechSynthesisUtterance(answer)
-);
 
-    answerDiv.innerHTML = "Thinking...";
+    if(!question){
+        answerBox.innerHTML =
+        "Please enter a question.";
+        return;
+    }
+
+    answerBox.innerHTML =
+    "🤖 Bihar Mango Mitra is thinking...";
 
     try {
 
         const response =
-            await fetch(
-                "http://127.0.0.1:8000/ask?question="
-                + encodeURIComponent(question)
-            );
+        await fetch(
+            "http://127.0.0.1:8000/ask?question=" +
+            encodeURIComponent(question)
+        );
 
         const data =
-            await response.json();
+        await response.json();
 
-        answerDiv.innerHTML =
-            data.answer;
+        answerBox.innerHTML =
+        data.answer;
+
+        speakAnswer(data.answer);
 
     }
 
     catch(error){
 
-        console.log(error);
+        answerBox.innerHTML =
+        "❌ Unable to connect to AI Mango Mitra";
 
-        answerDiv.innerHTML =
-            "AI Mango Mitra unavailable.";
+        console.error(error);
 
     }
 

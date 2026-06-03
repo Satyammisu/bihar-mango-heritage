@@ -14,29 +14,21 @@
         .topbar { background: #1b5e20; color: white; padding: 12px 8%; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
 
         /* HERO */
-        .hero{
-height:100vh;
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url('images/orchard-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
 
-background:
-linear-gradient(
-rgba(0,0,0,.45),
-rgba(0,0,0,.45)
-),
-url('images/orchard-hero.jpg');
-
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-color:white;
-
-position:relative;
-overflow:hidden;
-} }
         .hero-btn { display: inline-block; padding: 15px 35px; background: #ff9800; color: white; text-decoration: none; border-radius: 10px; font-weight: 700; margin-top: 20px; transition: 0.3s; cursor: pointer; border: none; font-size: 16px; }
         .hero-btn:hover { background: #e68900; }
 
@@ -72,7 +64,6 @@ overflow:hidden;
         <div>
             <h1>Bihar Smart Mango Knowledge Wall</h1>
             <p>Experience the heritage of Aam Mahotsav 2026</p>
-            
             <a href="#mangoes" class="hero-btn" id="enterOrchard">Enter The Orchard</a>
             <br><br>
             <button onclick="startExperience()" class="hero-btn">🎧 Start Experience</button>
@@ -107,33 +98,13 @@ overflow:hidden;
     </audio>
 
     <script>
-       const mangoData = [
-{
-    name: "Zardalu",
-    slug: "zardalu",
-    qr: "zardalu-qr.png"
-},
-{
-    name: "Maldah",
-    slug: "maldah",
-    qr: "Maldah-qr.png"
-},
-{
-    name: "Langra",
-    slug: "langra",
-    qr: "Langra-qr.png"
-},
-{
-    name: "Gulab Khas",
-    slug: "gulabkhas",
-    qr: "Gulabkhas-qr.png"
-},
-{
-    name: "Bombai",
-    slug: "bombai",
-    qr: "Bombai-qr.png"
-}
-];
+        const mangoData = [
+            { name: "Zardalu", slug: "zardalu", qr: "zardalu-qr.png" },
+            { name: "Maldah", slug: "maldah", qr: "Maldah-qr.png" },
+            { name: "Langra", slug: "langra", qr: "Langra-qr.png" },
+            { name: "Gulab Khas", slug: "gulabkhas", qr: "Gulabkhas-qr.png" },
+            { name: "Bombai", slug: "bombai", qr: "Bombai-qr.png" }
+        ];
         
         const grid = document.getElementById('mangoGridContainer');
         const qrGallery = document.getElementById('qrGallery');
@@ -158,15 +129,10 @@ overflow:hidden;
         });
 
         function startExperience() {
-            // Play Audio
             const audio = document.getElementById('birdsAudio');
             audio.play().catch(e => console.log("Audio play deferred"));
-
-            // Speak Welcome
             const msg = new SpeechSynthesisUtterance("Welcome to Bihar Mango Heritage. Explore the rich mango traditions of Bihar.");
             speechSynthesis.speak(msg);
-
-            // Navigate
             window.location.hash = '#mangoes';
         }
     </script>

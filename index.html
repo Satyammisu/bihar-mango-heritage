@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         html { scroll-behavior: smooth; }
         body { background: #f5f7fa; overflow-x: hidden; }
+
+        .leaf { position:fixed; top:-100px; font-size:30px; pointer-events:none; animation:fall linear infinite; z-index:999; }
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(120vh) rotate(360deg); }
+        }
 
         /* TOP BAR */
         .topbar { background: #1b5e20; color: white; padding: 12px 8%; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
@@ -47,9 +60,7 @@
         /* QR GALLERY */
         .qr-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center; }
         
-        /* RESPONSIVE INPUT */
         #question { padding: 15px; width: min(600px, 90%); border-radius: 10px; border: 1px solid #ccc; }
-        
         footer { background: #1b5e20; color: white; padding: 40px; text-align: center; }
     </style>
 </head>
@@ -62,8 +73,8 @@
 
     <section class="hero">
         <div>
-            <h1>Bihar Smart Mango Knowledge Wall</h1>
-            <p>Experience the heritage of Aam Mahotsav 2026</p>
+            <h1 style="font-size:64px;font-weight:800;">🌳 Bihar Smart Mango Knowledge Wall</h1>
+            <p style="font-size:24px;margin-top:15px;">Experience the Heritage of Aam Mahotsav 2026</p>
             <a href="#mangoes" class="hero-btn" id="enterOrchard">Enter The Orchard</a>
             <br><br>
             <button onclick="startExperience()" class="hero-btn">🎧 Start Experience</button>
@@ -78,6 +89,18 @@
     <section class="section">
         <h2 class="section-title">Quick Access QR Gallery</h2>
         <div class="qr-gallery" id="qrGallery"></div>
+    </section>
+
+    <section class="section" id="mahotsav">
+        <h2 class="section-title">Aam Mahotsav 2026</h2>
+        <div style="max-width:1000px; margin:auto; background:white; padding:40px; border-radius:25px; box-shadow:0 10px 30px rgba(0,0,0,.08); text-align:center;">
+            <h3 style="color:#2e7d32;font-size:32px;">Celebrating Bihar's Mango Heritage</h3>
+            <p style="margin-top:20px;font-size:18px;line-height:1.8;">
+                Aam Mahotsav 2026 showcases Bihar's famous mango varieties, orchard innovations, farmer success stories, GI-tagged mangoes, export opportunities, cultural heritage and tourism experiences.
+            </p>
+            <br>
+            <img src="images/orchard-hero.jpg" style="width:100%; max-width:800px; border-radius:20px;">
+        </div>
     </section>
 
     <section class="section">
@@ -98,6 +121,17 @@
     </audio>
 
     <script>
+        // Leaf Animation
+        for(let i=0; i<15; i++){
+            const leaf = document.createElement('div');
+            leaf.className = 'leaf';
+            leaf.innerHTML = '🍃';
+            leaf.style.left = Math.random()*100 + 'vw';
+            leaf.style.animationDuration = (8+Math.random()*8) + 's';
+            leaf.style.animationDelay = Math.random()*5 + 's';
+            document.body.appendChild(leaf);
+        }
+
         const mangoData = [
             { name: "Zardalu", slug: "zardalu", qr: "zardalu-qr.png" },
             { name: "Maldah", slug: "maldah", qr: "Maldah-qr.png" },
@@ -128,10 +162,12 @@
             `;
         });
 
-        function startExperience() {
+        function startExperience(){
             const audio = document.getElementById('birdsAudio');
-            audio.play().catch(e => console.log("Audio play deferred"));
-            const msg = new SpeechSynthesisUtterance("Welcome to Bihar Mango Heritage. Explore the rich mango traditions of Bihar.");
+            audio.play().catch(e => console.log("Audio deferred"));
+            const msg = new SpeechSynthesisUtterance("Welcome to Bihar Mango Heritage. Explore the rich mango traditions of Bihar and discover world famous mango varieties.");
+            msg.rate = 1;
+            msg.pitch = 1;
             speechSynthesis.speak(msg);
             window.location.hash = '#mangoes';
         }

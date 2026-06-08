@@ -3,369 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Maldah Mango | Bihar Smart Mango Knowledge Wall</title>
-
+<title>Dudhiya Maldah | Bihar Smart Mango Knowledge Wall</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #f5f7fa; color: #333; overflow-x: hidden; line-height: 1.6; }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    /* Hero Section */
+    .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('images/dudhiya.jpg'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center; color: white; position: relative; }
+    .govt { position: absolute; top: 25px; right: 35px; text-align: right; font-size: 14px; font-weight: 500; line-height: 1.8; }
+    .event { position: absolute; top: 25px; left: 35px; background: #ff9800; color: white; padding: 12px 20px; border-radius: 40px; font-weight: 600; box-shadow: 0 5px 20px rgba(0,0,0,.25); }
+    .hero-content h1 { font-size: 5rem; font-weight: 800; }
+    .hero-content h2 { font-size: 2.5rem; font-weight: 500; margin-bottom: 20px; }
 
-body{
-background:#f5f7fa;
-overflow-x:hidden;
-color:#333;
-}
+    /* Layout */
+    .container { max-width: 1200px; margin: auto; padding: 0 20px 40px; }
+    .card { background: white; padding: 35px; border-radius: 25px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(0,0,0,.08); }
+    .section-title { font-size: 2rem; margin-bottom: 25px; color: #2e7d32; }
 
-.hero{
-height:100vh;
-background:
-linear-gradient(rgba(0,0,0,0.30),
-rgba(0,0,0,0.50)),
-url('images/maldah.jpg');
-background-size:cover;
-background-position:center;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-color:white;
-position:relative;
-}
+    /* Info Grid */
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .info-box { background: #fff8e7; padding: 20px; border-radius: 15px; text-align: center; }
+    .info-box h3 { color: #ff9800; margin-bottom: 10px; }
 
-.govt{
-position:absolute;
-top:25px;
-right:35px;
-text-align:right;
-font-size:14px;
-line-height:1.8;
-}
+    /* Table */
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 15px; overflow: hidden; }
+    th, td { padding: 18px; border: 1px solid #eee; text-align: center; }
+    th { background: #2e7d32; color: white; }
 
-.event{
-position:absolute;
-top:25px;
-left:35px;
-background:#ff9800;
-padding:12px 20px;
-border-radius:40px;
-font-weight:600;
-}
-
-.hero-content h1{
-font-size:4.5rem;
-font-weight:800;
-}
-
-.hero-content h2{
-font-size:2rem;
-margin:15px 0;
-}
-
-.quick-facts{
-max-width:1200px;
-margin:-60px auto 40px;
-background:white;
-padding:25px;
-border-radius:25px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:20px;
-box-shadow:0 10px 35px rgba(0,0,0,.15);
-position:relative;
-z-index:100;
-}
-
-.fact{text-align:center;}
-.fact h3{color:#ff9800;}
-
-.container{
-max-width:1200px;
-margin:auto;
-padding:0 20px 40px;
-}
-
-.card{
-background:white;
-padding:35px;
-border-radius:25px;
-margin-bottom:30px;
-box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-.section-title{
-font-size:2rem;
-margin-bottom:25px;
-color:#2e7d32;
-}
-
-.info-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.info-box{
-background:#fff8e7;
-padding:20px;
-border-radius:15px;
-text-align:center;
-}
-
-.info-box h3{
-color:#ff9800;
-margin-bottom:10px;
-}
-
-.gi{
-display:inline-block;
-background:#2e7d32;
-color:white;
-padding:14px 25px;
-border-radius:40px;
-margin-top:20px;
-font-weight:600;
-}
-
-.benefits{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.benefit{
-background:white;
-padding:25px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 4px 15px rgba(0,0,0,.08);
-}
-
-.story{
-background:linear-gradient(135deg,#ff9800,#f57c00);
-color:white;
-padding:35px;
-border-radius:20px;
-line-height:2;
-margin-top:30px;
-}
-
-.btn{
-display:inline-block;
-padding:14px 30px;
-background:#ff9800;
-color:white;
-text-decoration:none;
-border-radius:10px;
-margin-top:25px;
-}
-
-footer{
-background:#2e7d32;
-color:white;
-text-align:center;
-padding:40px;
-margin-top:40px;
-}
-
-@media(max-width:768px){
-.hero-content h1{font-size:2.5rem;}
-.hero-content h2{font-size:1.3rem;}
-}
-
+    /* Health Section */
+    .health-card { background: #e8f5e9; padding: 40px; border-radius: 25px; margin-bottom: 30px; border: 2px solid #2e7d32; }
+    footer { background: #2e7d32; color: white; text-align: center; padding: 40px; margin-top: 40px; line-height: 1.8; }
 </style>
 </head>
-
 <body>
 
 <section class="hero">
-
-<div class="event">
-🥭 Aam Mahotsav 2026
-</div>
-
-<div class="govt">
-🏛 Government of Bihar<br>
-🌿 Department of Horticulture
-</div>
-
-<div class="hero-content">
-
-<h1>🥭 Maldah Mango</h1>
-
-<h2>मालदह आम</h2>
-
-<p style="font-size:1.4rem;font-weight:600;">
-A Traditional Heritage Mango of Bihar
-</p>
-
-<p>
-Known for its balanced sweetness, juicy pulp and pleasant aroma.
-</p>
-
-</div>
-
+    <div class="event">🥭 Aam Mahotsav 2026</div>
+    <div class="govt">🏛 Government of Bihar<br>🌿 Department of Horticulture</div>
+    <div class="hero-content">
+        <h1>🥭 Dudhiya Maldah</h1>
+        <h2>दुधिया मालदह</h2>
+        <p style="font-size:1.3rem; font-weight:600; margin-bottom: 15px;">Heritage Mango Variety of Digha, Patna</p>
+        <p style="font-size: 1.1rem;">Celebrated for its creamy texture, rich sweetness, and iconic appearance.</p>
+    </div>
 </section>
 
-<div class="quick-facts">
-
-<div class="fact">
-<h3>📍 Origin</h3>
-<p>Bihar</p>
-</div>
-
-<div class="fact">
-<h3>🏅 Status</h3>
-<p>Traditional Variety</p>
-</div>
-
-<div class="fact">
-<h3>🍯 Sweetness</h3>
-<p>8 / 10</p>
-</div>
-
-<div class="fact">
-<h3>🌿 Aroma</h3>
-<p>Pleasant</p>
-</div>
-
-<div class="fact">
-<h3>📅 Season</h3>
-<p>June – July</p>
-</div>
-
+<!-- Quick Facts Section -->
+<div style="max-width:1200px; margin:-60px auto 40px; background:white; padding:25px; border-radius:25px; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; box-shadow:0 10px 35px rgba(0,0,0,.15); position:relative; z-index:100;">
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📍 Origin</h3><p><b>Digha, Patna</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📅 Season</h3><p><b>Late May – June</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">🧪 TSS</h3><p><b>20°–22° Brix</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📊 Glycemic Index</h3><p><b>55–58</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">🏅 GI Status</h3><p><b>Application in Progress</b></p></div>
 </div>
 
 <div class="container">
+    <div class="card">
+        <h2 class="section-title">🥭 Mango Profile</h2>
+        <div class="info-grid">
+            <div class="info-box"><h3>Sweetness Index</h3><p>9 / 10</p></div>
+            <div class="info-box"><h3>Colour</h3><p>Milky Greenish-Yellow</p></div>
+            <div class="info-box"><h3>Pulp</h3><p>Creamy & Smooth</p></div>
+            <div class="info-box"><h3>Aroma</h3><p>Mild Fruity Aroma</p></div>
+            <div class="info-box"><h3>Type</h3><p>Premium Table Mango</p></div>
+            <div class="info-box"><h3>Recommended Use</h3><p>Fresh Consumption</p></div>
+            <div class="info-box"><h3>🩺 Diabetic Suitability</h3><p>Moderate Consumption</p></div>
+        </div>
+    </div>
 
-<div class="card">
+    <div class="card">
+        <h2 class="section-title">⚖️ Variety Comparison</h2>
+        <table>
+            <thead>
+                <tr><th>Variety</th><th>TSS (° Brix)</th><th>Glycemic Index</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Dudhiya Maldah (Bihar)</strong></td><td>20–22</td><td>55–58</td></tr>
+                <tr><td>Alphonso (Maharashtra)</td><td>20–22</td><td>58</td></tr>
+                <tr><td>Totapuri (South India)</td><td>15–17</td><td>52</td></tr>
+            </tbody>
+        </table>
+    </div>
 
-<h2 class="section-title">🥭 About Maldah Mango</h2>
+    <div class="card">
+        <h2 class="section-title">🏆 Why Dudhiya Maldah is Special</h2>
+        <ul style="line-height:2; font-size:1.05rem; padding-left:25px;">
+            <li>Renowned for its distinctive, creamy, 'milky' pulp texture.</li>
+            <li>A traditional favourite in Bihar households for its balanced sweetness.</li>
+            <li>Highly valued for its smooth, fiber-free consistency.</li>
+            <li>Features a subtle and sophisticated fragrance.</li>
+            <li>Represents the rich biodiversity of Bihar's mango orchards.</li>
+        </ul>
+    </div>
 
-<div class="info-grid">
+    <div class="card">
+        <h2 class="section-title">📊 Expert Summary</h2>
+        <p style="line-height:2; font-size:1.05rem;">
+            Dudhiya Maldah is one of Bihar's premium heritage mango varieties. With TSS values comparable to Alphonso and a moderate Glycemic Index, it offers an excellent balance of sweetness, flavour and nutritional value. The variety remains highly preferred for fresh consumption due to its smooth texture and rich taste profile.
+        </p>
+    </div>
 
-<div class="info-box">
-<h3>Origin</h3>
-<p>Bihar</p>
-</div>
+    <div class="health-card">
+        <h2 class="section-title" style="color:#2e7d32;">🩺 Nutritional Information</h2>
+        <p style="font-size:1.1rem; line-height:2;">
+            Dudhiya Maldah mango contains natural fruit sugars, vitamins, minerals and antioxidants. The Glycemic Index (GI) and Total Soluble Solids (TSS) values presented here are intended for informational and educational purposes. Individuals with diabetes or specific dietary conditions should consult a qualified healthcare professional regarding appropriate fruit consumption.
+        </p>
+    </div>
 
-<div class="info-box">
-<h3>Season</h3>
-<p>June – July</p>
-</div>
-
-<div class="info-box">
-<h3>Colour</h3>
-<p>Yellow</p>
-</div>
-
-<div class="info-box">
-<h3>Aroma</h3>
-<p>Pleasant</p>
-</div>
-
-<div class="info-box">
-<h3>Pulp</h3>
-<p>Soft & Juicy</p>
-</div>
-
-<div class="info-box">
-<h3>Type</h3>
-<p>Table Mango</p>
-</div>
-
-</div>
-
-<div style="margin-top:25px;font-size:1.3rem;color:#ff9800;">
-Sweetness Index<br><br>
-████████░░<br>
-8 / 10
-</div>
-
-<div class="gi">
-🏅 Traditional Heritage Variety
-</div>
-
-</div>
-
-<div class="card">
-
-<h2 class="section-title">🌟 Uniqueness</h2>
-
-<p style="line-height:2;">
-Maldah Mango is one of the traditional mango varieties of Bihar and eastern India. It is appreciated for its balanced sweetness, juicy pulp and pleasant aroma. The variety is popular among mango lovers for its taste and versatility.
-</p>
-
-</div>
-
-<h2 class="section-title">💚 Health Benefits</h2>
-
-<div class="benefits">
-
-<div class="benefit">
-<h3>🛡 Immunity</h3>
-<p>Rich source of Vitamin C.</p>
-</div>
-
-<div class="benefit">
-<h3>👁 Eye Health</h3>
-<p>Contains Vitamin A.</p>
-</div>
-
-<div class="benefit">
-<h3>⚡ Energy</h3>
-<p>Natural energy booster.</p>
-</div>
-
-<div class="benefit">
-<h3>🌿 Digestion</h3>
-<p>Supports digestive health.</p>
-</div>
-
-<div class="benefit">
-<h3>❤️ Heart Health</h3>
-<p>Contains beneficial nutrients.</p>
-</div>
-
-<div class="benefit">
-<h3>✨ Skin Health</h3>
-<p>Rich in antioxidants.</p>
-</div>
-
-</div>
-
-<div class="story">
-
-<h2>💡 Did You Know?</h2>
-
-<p>
-Maldah Mango is valued for its sweet taste, juicy texture and traditional significance. It remains one of the preferred mango varieties in many parts of eastern India.
-</p>
-
-</div>
-
-<center>
-<a href="index.html" class="btn">
-← Back To Mango Gallery
-</a>
-</center>
-
+    <center>
+        <a href="index.html" style="display:inline-block; padding:14px 30px; background:#ff9800; color:white; text-decoration:none; border-radius:10px; font-weight:600; margin-top:25px;">
+            ← Back To Mango Gallery
+        </a>
+    </center>
 </div>
 
 <footer>
-
-<h2>Department of Horticulture</h2>
-
-<p>Government of Bihar</p>
-
-<p>🥭 Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026</p>
-
+    🏛 Government of Bihar
+    <br>
+    🌿 Department of Horticulture
+    <br><br>
+    🥭 Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
 </footer>
 
 </body>

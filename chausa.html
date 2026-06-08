@@ -6,7 +6,6 @@
 <title>Chausa Mango | Bihar Smart Mango Knowledge Wall</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-    /* Global Styles and Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     html { scroll-behavior: smooth; }
     body { background: #f5f7fa; color: #333; overflow-x: hidden; line-height: 1.6; }
@@ -15,81 +14,53 @@
     .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('images/chausa.jpg'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center; color: white; position: relative; }
     .govt { position: absolute; top: 25px; right: 35px; text-align: right; font-size: 14px; font-weight: 500; line-height: 1.8; }
     .event { position: absolute; top: 25px; left: 35px; background: #ff9800; color: white; padding: 12px 20px; border-radius: 40px; font-weight: 600; box-shadow: 0 5px 20px rgba(0,0,0,.25); }
-    .hero-content { max-width: 900px; padding: 20px; }
-    .hero-content h1 { font-size: 5rem; font-weight: 800; margin-bottom: 10px; }
-    .hero-content h2 { font-size: 2rem; font-weight: 500; margin-bottom: 20px; }
+    .hero-content h1 { font-size: 5rem; font-weight: 800; }
 
-    /* Quick Facts Section */
-    .quick-facts { max-width: 1200px; margin: -60px auto 40px; background: white; padding: 25px; border-radius: 25px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; z-index: 100; box-shadow: 0 10px 35px rgba(0,0,0,.15); }
-    .fact { text-align: center; }
-    .fact h3 { color: #ff9800; margin-bottom: 8px; }
-    .fact p { font-weight: 600; }
-
-    /* Main Container and Cards */
+    /* Layout */
     .container { max-width: 1200px; margin: auto; padding: 0 20px 40px; }
     .card { background: white; padding: 35px; border-radius: 25px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(0,0,0,.08); }
     .section-title { font-size: 2rem; margin-bottom: 25px; color: #2e7d32; }
 
-    /* Info Grid for Data points */
+    /* Info Grid */
     .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .info-box { background: #fff8e7; padding: 20px; border-radius: 15px; text-align: center; transition: 0.3s; }
-    .info-box:hover { transform: translateY(-5px); }
+    .info-box { background: #fff8e7; padding: 20px; border-radius: 15px; text-align: center; }
     .info-box h3 { color: #ff9800; margin-bottom: 10px; }
 
-    /* Comparative Table Styling */
+    /* Table */
     table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 15px; overflow: hidden; }
     th, td { padding: 18px; border: 1px solid #eee; text-align: center; }
-    th { background: #2e7d32; color: white; font-weight: 600; }
-    tr:nth-child(even) { background-color: #f9f9f9; }
+    th { background: #2e7d32; color: white; }
 
-    /* Health and Benefit Section Styling */
+    /* Disclaimer Section */
     .health-card { background: #e8f5e9; padding: 40px; border-radius: 25px; margin-bottom: 30px; border: 2px solid #2e7d32; }
-    .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .benefit { background: white; padding: 25px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,.08); transition: 0.3s; }
-    .benefit:hover { transform: translateY(-6px); }
-
-    /* Footer and Button */
-    .btn { display: inline-block; padding: 14px 30px; background: #ff9800; color: white; text-decoration: none; border-radius: 10px; font-weight: 600; margin-top: 25px; }
-    .btn:hover { background: #f57c00; }
     footer { background: #2e7d32; color: white; text-align: center; padding: 40px; margin-top: 40px; }
 </style>
 </head>
 <body>
 
-<!-- HERO SECTION -->
 <section class="hero">
     <div class="event">🥭 Aam Mahotsav 2026</div>
     <div class="govt">🏛 Government of Bihar<br>🌿 Department of Horticulture</div>
-    <div class="hero-content">
-        <h1>🥭 Chausa Mango</h1>
-        <h2>चौसा आम</h2>
-    </div>
+    <div class="hero-content"><h1>🥭 Chausa Mango</h1></div>
 </section>
 
-<!-- QUICK FACTS -->
-<div class="quick-facts">
-    <div class="fact"><h3>📍 Origin</h3><p>Buxar, Bihar</p></div>
-    <div class="fact"><h3>🍯 Sweetness</h3><p>9 / 10</p></div>
-    <div class="fact"><h3>📅 Season</h3><p>Late June – July</p></div>
-    <div class="fact"><h3>📉 GI</h3><p>55–60</p></div>
-</div>
-
-<div class="container">
-    <!-- ABOUT SECTION -->
+<div class="container" style="margin-top: 40px;">
     <div class="card">
-        <h2 class="section-title">🥭 About Chausa</h2>
+        <h2 class="section-title">🥭 Mango Profile</h2>
         <div class="info-grid">
             <div class="info-box"><h3>Origin</h3><p>Buxar, Bihar</p></div>
             <div class="info-box"><h3>Season</h3><p>Late June – July</p></div>
             <div class="info-box"><h3>TSS</h3><p>21°–23° Brix</p></div>
-            <div class="info-box"><h3>Glycemic Index</h3><p>55–60 (Moderate)</p></div>
+            <div class="info-box"><h3>Glycemic Index</h3><p>55–60</p></div>
+            <div class="info-box"><h3>Colour</h3><p>Golden Yellow</p></div>
+            <div class="info-box"><h3>Pulp</h3><p>Soft & Juicy</p></div>
+            <div class="info-box"><h3>Aroma</h3><p>Intense Sweet</p></div>
+            <div class="info-box"><h3>Recommended Use</h3><p>Fresh Consumption</p></div>
         </div>
     </div>
 
-    <!-- COMPARATIVE ANALYSIS -->
     <div class="card">
-        <h2 class="section-title">⚖️ Comparative Health Analysis</h2>
-        <p>Scientific comparison of Bihar Chausa with national standard varieties for health-conscious consumers.</p>
+        <h2 class="section-title">⚖️ Variety Comparison</h2>
         <table>
             <thead>
                 <tr><th>Variety</th><th>TSS (° Brix)</th><th>Glycemic Index</th></tr>
@@ -102,26 +73,16 @@
         </table>
     </div>
 
-    <!-- HEALTH INSIGHT FOR DIABETICS -->
     <div class="health-card">
-        <h2 class="section-title" style="color:#2e7d32;">🩺 Health Insight for Diabetics</h2>
-        <p style="font-size: 1.1rem;">Our regional <strong>Chausa</strong> mango maintains a balanced Glycemic Index (GI), providing a controlled and slower release of natural sugars. When consumed in moderation, it serves as a scientifically preferable, nutrient-rich alternative for diabetic patients compared to high-TSS commercial hybrid mangoes found in other regions.</p>
+        <h2 class="section-title" style="color:#2e7d32;">🩺 Nutritional Information</h2>
+        <p style="font-size:1.1rem; line-height:2;">
+            Chausa mango contains natural fruit sugars, vitamins, minerals and antioxidants. The Glycemic Index (GI) and Total Soluble Solids (TSS) values presented here are intended for informational and educational purposes. Individuals with diabetes or specific dietary conditions should consult a qualified healthcare professional regarding appropriate fruit consumption.
+        </p>
     </div>
-
-    <!-- BENEFITS -->
-    <h2 class="section-title">💚 Health Benefits</h2>
-    <div class="benefits">
-        <div class="benefit"><h3>🛡 Immunity Booster</h3><p>High levels of Vitamin C and antioxidants support immune health.</p></div>
-        <div class="benefit"><h3>👁 Eye Health</h3><p>Significant amounts of Vitamin A for optimal vision maintenance.</p></div>
-        <div class="benefit"><h3>⚡ Natural Energy</h3><p>Provides sustained energy without the aggressive sugar spikes.</p></div>
-    </div>
-
-    <center><a href="index.html" class="btn">← Back To Mango Gallery</a></center>
 </div>
 
 <footer>
-    <h2>Department of Horticulture</h2>
-    <p>Government of Bihar | Aam Mahotsav 2026</p>
+    <p>Government of Bihar | Department of Horticulture | Aam Mahotsav 2026</p>
 </footer>
 
 </body>

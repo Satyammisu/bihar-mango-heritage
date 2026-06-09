@@ -3,419 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Krishnabhog Mango | Bihar Smart Mango Knowledge Wall</title>
-
+<title>Kalkatiya Mango | Bihar Smart Mango Knowledge Wall</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-background:#f5f7fa;
-overflow-x:hidden;
-color:#333;
-}
-
-/* ================= HERO ================= */
-
-.hero{
-height:100vh;
-
-background:
-linear-gradient(
-rgba(0,0,0,0.30),
-rgba(0,0,0,0.50)
-),
-url('images/krishnabhog.jpg');
-
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-
-color:white;
-
-position:relative;
-}
-
-/* Government Branding */
-
-.govt{
-position:absolute;
-top:25px;
-right:35px;
-
-text-align:right;
-
-font-size:14px;
-font-weight:500;
-
-line-height:1.8;
-}
-
-/* Event Badge */
-
-.event{
-position:absolute;
-top:25px;
-left:35px;
-
-background:#ff9800;
-color:white;
-
-padding:12px 20px;
-
-border-radius:40px;
-
-font-weight:600;
-
-box-shadow:0 5px 20px rgba(0,0,0,.25);
-}
-
-/* Hero Content */
-
-.hero-content{
-max-width:900px;
-padding:20px;
-}
-
-.hero-content h1{
-font-size:5rem;
-font-weight:800;
-margin-bottom:10px;
-}
-
-.hero-content h2{
-font-size:2rem;
-font-weight:500;
-margin-bottom:20px;
-}
-
-.hero-content p{
-font-size:1.2rem;
-line-height:1.8;
-}
-
-/* ================= QUICK FACTS ================= */
-
-.quick-facts{
-
-max-width:1200px;
-
-margin:-60px auto 40px;
-
-background:white;
-
-padding:25px;
-
-border-radius:25px;
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-
-gap:20px;
-
-position:relative;
-
-z-index:100;
-
-box-shadow:0 10px 35px rgba(0,0,0,.15);
-
-}
-
-.fact{
-text-align:center;
-}
-
-.fact h3{
-color:#ff9800;
-margin-bottom:8px;
-}
-
-.fact p{
-font-weight:600;
-}
-
-/* ================= CONTAINER ================= */
-
-.container{
-max-width:1200px;
-margin:auto;
-padding:0 20px 40px;
-}
-
-/* ================= CARDS ================= */
-
-.card{
-background:white;
-
-padding:35px;
-
-border-radius:25px;
-
-margin-bottom:30px;
-
-box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-.section-title{
-font-size:2rem;
-margin-bottom:25px;
-color:#2e7d32;
-}
-
-/* ================= INFO GRID ================= */
-
-.info-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.info-box{
-
-background:#fff8e7;
-
-padding:20px;
-
-border-radius:15px;
-
-text-align:center;
-
-transition:.3s;
-}
-
-.info-box:hover{
-transform:translateY(-5px);
-}
-
-.info-box h3{
-color:#ff9800;
-margin-bottom:10px;
-}
-
-/* ================= SWEETNESS ================= */
-
-.sweetness{
-
-margin-top:30px;
-
-font-size:1.4rem;
-
-font-weight:600;
-
-color:#ff9800;
-
-line-height:2;
-}
-
-/* ================= GI BADGE ================= */
-
-.gi{
-
-display:inline-block;
-
-background:#2e7d32;
-
-color:white;
-
-padding:14px 25px;
-
-border-radius:40px;
-
-margin-top:20px;
-
-font-weight:600;
-}
-
-/* ================= BENEFITS ================= */
-
-.benefits{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.benefit{
-
-background:white;
-
-padding:25px;
-
-border-radius:20px;
-
-text-align:center;
-
-box-shadow:0 4px 15px rgba(0,0,0,.08);
-
-transition:.3s;
-}
-
-.benefit:hover{
-transform:translateY(-6px);
-}
-
-.benefit h3{
-margin-bottom:10px;
-}
-
-/* ================= STORY BOX ================= */
-
-.story{
-
-background:linear-gradient(
-135deg,
-#ff9800,
-#f57c00
-);
-
-color:white;
-
-padding:35px;
-
-border-radius:20px;
-
-line-height:2;
-
-margin-top:30px;
-}
-
-/* ================= BUTTON ================= */
-
-.btn{
-
-display:inline-block;
-
-padding:14px 30px;
-
-background:#ff9800;
-
-color:white;
-
-text-decoration:none;
-
-border-radius:10px;
-
-font-weight:600;
-
-margin-top:25px;
-}
-
-.btn:hover{
-background:#f57c00;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-
-background:#2e7d32;
-
-color:white;
-
-text-align:center;
-
-padding:40px;
-
-margin-top:40px;
-}
-
-footer hr{
-margin:20px 0;
-border:1px solid rgba(255,255,255,.2);
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:768px){
-
-.hero{
-height:80vh;
-}
-
-.hero-content h1{
-font-size:2.5rem;
-}
-
-.hero-content h2{
-font-size:1.3rem;
-}
-
-.hero-content p{
-font-size:1rem;
-}
-
-.event{
-left:15px;
-top:15px;
-font-size:12px;
-padding:10px 15px;
-}
-
-.govt{
-right:15px;
-top:15px;
-font-size:11px;
-}
-
-.quick-facts{
-margin-top:-40px;
-}
-
-}
-
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #f5f7fa; color: #333; overflow-x: hidden; line-height: 1.6; }
+
+    /* Hero Section */
+    .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('images/kalkatiya.jpg'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center; color: white; position: relative; }
+    .govt { position: absolute; top: 25px; right: 35px; text-align: right; font-size: 14px; font-weight: 500; line-height: 1.8; }
+    .event { position: absolute; top: 25px; left: 35px; background: #ff9800; color: white; padding: 12px 20px; border-radius: 40px; font-weight: 600; box-shadow: 0 5px 20px rgba(0,0,0,.25); }
+    .hero-content h1 { font-size: 5rem; font-weight: 800; }
+    .hero-content h2 { font-size: 2.5rem; font-weight: 500; margin-bottom: 20px; }
+
+    /* Layout */
+    .container { max-width: 1200px; margin: auto; padding: 0 20px 40px; }
+    .card { background: white; padding: 35px; border-radius: 25px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(0,0,0,.08); }
+    .section-title { font-size: 2rem; margin-bottom: 25px; color: #2e7d32; }
+
+    /* Info Grid */
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .info-box { background: #fff8e7; padding: 20px; border-radius: 15px; text-align: center; }
+    .info-box h3 { color: #ff9800; margin-bottom: 10px; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 15px; overflow: hidden; }
+    th, td { padding: 18px; border: 1px solid #eee; text-align: center; }
+    th { background: #2e7d32; color: white; }
+
+    /* Health Section */
+    .health-card { background: #e8f5e9; padding: 40px; border-radius: 25px; margin-bottom: 30px; border: 2px solid #2e7d32; }
+    footer { background: #2e7d32; color: white; text-align: center; padding: 40px; margin-top: 40px; line-height: 1.8; }
 </style>
-
 </head>
-
 <body>
 
 <section class="hero">
-
-<div class="event">
-🥭 Aam Mahotsav 2026
-</div>
-
-<div class="govt">
-
-🏛 Government of Bihar
-
-<br>
-
-🌿 Department of Horticulture
-
-</div>
-
-<div class="hero-content">
-
-<h1>🥭 Krishnabhog Mango</h1>
-
-<h2>कृष्णभोग आम</h2>
-
-<p style="font-size:1.4rem;font-weight:600;">
-The Royal Delight of Bihar
-</p>
-
-<p>
-A premium mango variety prized for its rich, sweet flavour, deep golden colour, and exquisite aroma.
-</p>
-
-</div>
-
+    <div class="event">🥭 Aam Mahotsav 2026</div>
+    <div class="govt">🏛 Government of Bihar<br>🌿 Department of Horticulture</div>
+    <div class="hero-content">
+        <h1>🥭 Kalkatiya Mango</h1>
+        <h2>कलकतिया (Kalkatiya)</h2>
+        <p style="font-size:1.3rem; font-weight:600; margin-bottom: 15px;">The Pride of Bihari Culinary Heritage</p>
+        <p style="font-size: 1.1rem;">One of Bihar's most valued traditional varieties for pickling and processing.</p>
+        <p style="font-size:1rem; margin-top:15px; background:rgba(255,255,255,.15); padding:10px 20px; border-radius:30px; display:inline-block;">🌍 Heritage Variety of Bihar</p>
+        <p style="font-size:1rem; margin-top:10px; background:rgba(255,255,255,.15); padding:10px 20px; border-radius:30px; display:inline-block;">🏺 Traditional Processing Cultivar</p>
+    </div>
 </section>
+
+<!-- Quick Facts Section -->
+<div style="max-width:1200px; margin:-60px auto 40px; background:white; padding:25px; border-radius:25px; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; box-shadow:0 10px 35px rgba(0,0,0,.15); position:relative; z-index:100;">
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📍 Traditional Belt</h3><p><b>Darbhanga Region, Bihar</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📅 Season</h3><p><b>Late June – July</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">🧂 Primary Utility</h3><p><b>Pickle Preparation</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">🧪 Texture</h3><p><b>Firm, Dense & Moderately Fibrous</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">🌱 Market Arrival</h3><p><b>Late Season</b></p></div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2 class="section-title">🥭 Mango Profile</h2>
+        <div class="info-grid">
+            <div class="info-box"><h3>Flavor Profile</h3><p>Intense Tangy</p></div>
+            <div class="info-box"><h3>Texture</h3><p>Firm, Dense & Moderately Fibrous</p></div>
+            <div class="info-box"><h3>Primary Utility</h3><p>Pickle Preparation</p></div>
+            <div class="info-box"><h3>Durability</h3><p>Excellent for Preservation</p></div>
+            <div class="info-box"><h3>Processing Utility</h3><p>Very High</p></div>
+            <div class="info-box"><h3>Typical Use</h3><p>Chutney, Pickle, Aam Panna</p></div>
+            <div class="info-box"><h3>Cultivation Belt</h3><p>Darbhanga Region, Bihar</p></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">📈 Quality Parameters</h2>
+        <div class="info-grid">
+            <div class="info-box"><h3>Flavor Intensity</h3><p>High Tanginess</p></div>
+            <div class="info-box"><h3>Texture</h3><p>Firm & Dense</p></div>
+            <div class="info-box"><h3>Preservation Suitability</h3><p>Excellent</p></div>
+            <div class="info-box"><h3>Processing Utility</h3><p>Very High</p></div>
+        </div>
+    </div>
+
+    <!-- Scientific Highlights Card -->
+    <div class="card">
+        <h2 class="section-title">🔬 Scientific Highlights</h2>
+        <div class="info-grid">
+            <div class="info-box"><h3>Species</h3><p>Mangifera indica L.</p></div>
+            <div class="info-box"><h3>Cultivation Belt</h3><p>Darbhanga Region, Bihar</p></div>
+            <div class="info-box"><h3>Harvest Window</h3><p>Late June – July</p></div>
+            <div class="info-box"><h3>Fruit Character</h3><p>Excellent Processing & Pickling</p></div>
+            <div class="info-box"><h3>Market Arrival</h3><p>Late Season</p></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">⚖️ Variety Comparison</h2>
+        <table>
+            <thead>
+                <tr><th>Variety</th><th>Primary Use</th><th>Texture</th><th>Flavor</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Kalkatiya</strong></td><td>Pickling</td><td>Firm/Dense</td><td>High Tanginess</td></tr>
+                <tr><td>Chausa</td><td>Table</td><td>Soft/Juicy</td><td>Very Sweet</td></tr>
+                <tr><td>Gulabkhas</td><td>Table</td><td>Firm/Smooth</td><td>Sweet/Aromatic</td></tr>
+                <tr><td>Dashehari</td><td>Table</td><td>Firm/Smooth</td><td>Sweet</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">📌 Key Identification Features</h2>
+        <ul style="line-height:2; padding-left:25px;">
+            <li>Large fruit size</li>
+            <li>Firm dense pulp</li>
+            <li>Preferred for pickle making</li>
+            <li>Late season harvest</li>
+            <li>Traditional cultivar of Darbhanga region</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">🏆 Why Kalkatiya is Essential</h2>
+        <ul style="line-height:2; font-size:1.05rem; padding-left:25px;">
+            <li>Widely preferred for traditional oil-based pickle preparation in the Darbhanga region, Bihar.</li>
+            <li>Its firm, dense, and moderately fibrous pulp ensures structural integrity during sun-drying and processing.</li>
+            <li>Remarkably durable, making it ideal for long-term preservation in household kitchens.</li>
+            <li>Represents the culinary backbone of the Darbhanga region's traditional mango heritage.</li>
+            <li>Versatile in culinary use for chutney, pickles, and traditional beverages like Aam Panna.</li>
+        </ul>
+    </div>
+
+    <!-- Interactive QR Section -->
+    <div class="card">
+        <h2 class="section-title">📱 Learn More</h2>
+        <center>
+            <img src="images/qr-kalkatiya.png" width="180" alt="QR Code">
+            <p style="font-size:13px;color:#666; margin-top:10px;">Digital Knowledge Repository • Department of Horticulture</p>
+            <p style="margin-top:15px;">Scan to explore Kalkatiya's role in Bihar's culinary heritage on the Smart Knowledge Wall</p>
+        </center>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">📊 Expert Summary</h2>
+        <p style="line-height:2; font-size:1.05rem;">
+            Kalkatiya occupies a unique position within Bihar's mango diversity as a specialized processing and pickling cultivar. Its firm texture, high keeping quality, and suitability for traditional preservation techniques have made it an integral component of North Bihar's culinary heritage for generations.
+        </p>
+    </div>
+
+    <div class="health-card">
+        <h2 class="section-title" style="color:#2e7d32;">🩺 Nutritional Information</h2>
+        <p style="font-size:1.1rem; line-height:2;">
+            Kalkatiya mango contains natural carbohydrates, vitamins, minerals, and antioxidants. The information presented here is intended for educational purposes. Consumption patterns may vary depending on preparation methods such as pickling, chutney making, or fresh culinary use.
+        </p>
+    </div>
+
+    <center>
+        <a href="index.html" style="display:inline-block; padding:14px 30px; background:#ff9800; color:white; text-decoration:none; border-radius:10px; font-weight:600; margin-top:25px;">
+            ← Back To Mango Gallery
+        </a>
+    </center>
+</div>
+
+<footer>
+    🏛 Government of Bihar
+    <br>
+    🌿 Department of Horticulture
+    <br><br>
+    🥭 Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
+</footer>
+
+</body>
+</html>

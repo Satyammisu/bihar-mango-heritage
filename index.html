@@ -52,7 +52,7 @@
     <script>
         const mangoData = [
             { name: "Bhagalpuri Jardalu", slug: "zardalu", qr: "zardalu-qr.png", origin: "Bhagalpur", giStatus: "Yes (2018)", season: "May-June", color: "Bright golden yellow", gi: "52-55", tss: "20.3°-23° Brix" },
-            { name: "Dudhiya Malda", slug: "maldah", qr: "maldah-qr.png", origin: "Digha (Patna)", giStatus: "In progress", season: "Late May-June", color: "Greenish/yellow tinge", gi: "55-58", tss: "20°-22° Brix" },
+            { name: "Dudhiya Malda", slug: "dudhiyamaldah", qr: "dudhiyamaldah-qr.png", origin: "Digha (Patna)", giStatus: "In progress", season: "Late May-June", color: "Greenish/yellow tinge", gi: "55-58", tss: "20°-22° Brix" },
             { name: "Langra", slug: "langra", qr: "langra-qr.png", origin: "Ganges plains", giStatus: "No", season: "June-July", color: "Remains green", gi: "54-56", tss: "19°-21° Brix" },
             { name: "Chausa", slug: "chausa", qr: "chausa-qr.png", origin: "Buxar", giStatus: "No", season: "Late June-July", color: "Bright golden yellow", gi: "58-60", tss: "21°-23° Brix" },
             { name: "Gulabkhas", slug: "gulabkhas", qr: "gulabkhas-qr.png", origin: "Supaul/Eastern Bihar", giStatus: "No", season: "May-Early June", color: "Reddish-pink blush", gi: "53-56", tss: "18°-20° Brix" },
@@ -78,7 +78,6 @@
             if (!question.trim()) { document.getElementById("answer").innerHTML = "Please enter a question."; return; }
             document.getElementById("answer").innerHTML = "🥭 AI Mango Mitra is analyzing your question...";
             try {
-                // Corrected GET request to match FastAPI @app.get("/ask")
                 const response = await fetch(`http://127.0.0.1:8000/ask?question=${encodeURIComponent(question)}`);
                 const data = await response.json();
                 document.getElementById("answer").innerHTML = data.answer;

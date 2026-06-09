@@ -1,91 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background: #f5f7fa; overflow-x: hidden; }
-        .topbar { background: #1b5e20; color: white; padding: 12px 8%; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
-        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url('images/orchard-hero.jpg'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center; color: white; }
-        .section { padding: 80px 8%; }
-        .section-title { font-size: 42px; text-align: center; color: #2e7d32; margin-bottom: 40px; font-weight: 800; }
-        .mango-grid { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 20px; }
-        .card { background: white; border-radius: 20px; padding: 20px; min-width: 300px; transition: 0.3s; }
-        .card:hover { transform: translateY(-8px); }
-        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
-        .btn { display: inline-block; padding: 12px 24px; background: #2e7d32; color: white; text-decoration: none; border-radius: 10px; margin-top: 15px; cursor: pointer; border: none; }
-        .btn:hover { background:#1b5e20; }
-        .qr-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center; }
-        footer { background: #1b5e20; color: white; padding: 40px; text-align: center; }
-        @media(max-width:768px){ .topbar { flex-direction: column; gap: 10px; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bihar Smart Mango Knowledge Wall | Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #f5f7fa; color: #333; line-height: 1.6; }
+
+    /* Top Bar Layout Component */
+    .topbar { 
+        background: #2e7d32; 
+        color: white; 
+        padding: 15px 35px; 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .topbar div { display: flex; align-items: center; gap: 15px; }
+    #siteTitle { font-weight: 700; font-size: 1.1rem; }
+    #deptText { font-size: 0.9rem; opacity: 0.95; font-weight: 400; }
+    
+    /* Interactive Controls System */
+    .controls-wrapper { display: flex; align-items: center; gap: 12px; }
+    
+    #languageSwitcher {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.9rem;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+    #languageSwitcher:hover { background: rgba(255, 255, 255, 0.25); }
+    #languageSwitcher option { color: #333; background: white; }
+
+    #audioGuideTrigger {
+        background: #ff9800;
+        color: white;
+        border: none;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.85rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    #audioGuideTrigger:hover { background: #e68a00; transform: translateY(-1px); }
+
+    /* Hero Branding Frame */
+    .hero { 
+        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/orchard-hero.jpg'); 
+        background-size: cover; 
+        background-position: center; 
+        height: 45vh; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
+        color: white; 
+        text-align: center; 
+        padding: 20px;
+    }
+    .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); }
+    .hero p { font-size: 1.2rem; max-width: 700px; font-weight: 300; }
+
+    /* Main Container & Varieties Grid */
+    .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+    .grid-title { font-size: 2rem; color: #2e7d32; margin-bottom: 30px; font-weight: 700; text-align: center; }
+    
+    .mango-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 30px; 
+    }
+
+    /* Exhibition Cards Architecture */
+    .mango-card { 
+        background: white; 
+        border-radius: 20px; 
+        overflow: hidden; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+        transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        display: flex; 
+        flex-direction: column;
+    }
+    .mango-card:hover { 
+        transform: translateY(-8px); 
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
+    }
+    .card-img { height: 200px; background-size: cover; background-position: center; position: relative; }
+    .tag { position: absolute; top: 15px; left: 15px; background: #ff9800; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    
+    .card-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .card-body h3 { font-size: 1.4rem; color: #333; margin-bottom: 8px; }
+    .card-body h4 { font-size: 1rem; color: #ff9800; font-weight: 500; margin-bottom: 12px; }
+    .card-body p { font-size: 0.95rem; color: #666; margin-bottom: 20px; }
+    
+    .view-btn { 
+        display: block; 
+        text-align: center; 
+        background: #2e7d32; 
+        color: white; 
+        padding: 12px; 
+        border-radius: 10px; 
+        text-decoration: none; 
+        font-weight: 600; 
+        transition: background 0.3s ease; 
+    }
+    .view-btn:hover { background: #1b5e20; }
+
+    footer { background: #2e7d32; color: white; text-align: center; padding: 40px; margin-top: 60px; line-height: 1.8; }
+</style>
 </head>
 <body>
-    <div class="topbar"><div>🥭 Bihar Mango Heritage</div><div>Dept. of Horticulture, Govt of Bihar</div></div>
-    <section class="hero">
-        <div><h1>🌳 Bihar Smart Mango Knowledge Wall</h1>
-        <p>Explore Bihar's GI-tagged mango heritage and AI-powered Mango Mitra.</p>
-        <br><br><a href="#mangoes" class="btn">Explore Varieties</a>
-        <a href="#ai" class="btn" style="margin-left:10px;">Ask AI Mitra</a></div>
-    </section>
-    <section class="section" id="mangoes">
-        <h2 class="section-title">Featured Varieties</h2>
-        <div class="mango-grid" id="mangoGridContainer"></div>
-    </section>
-    <section class="section">
-        <h2 class="section-title">Quick Access QR Gallery</h2>
-        <div class="qr-gallery" id="qrGallery"></div>
-    </section>
-    <section class="section" id="ai">
-        <h2 class="section-title">AI Mango Mitra</h2>
-        <div style="max-width:800px;margin:auto;text-align:center;">
-            <input type="text" id="question" placeholder="Ask about GI, sweetness, varieties..." style="width:80%;padding:15px;border-radius:10px;border:1px solid #ccc;">
-            <button onclick="askMango()" class="btn">Ask Mitra</button>
-            <div id="answer" style="margin-top:20px;padding:20px;background:white;border-radius:10px;"></div>
+
+<div class="topbar">
+    <div id="siteTitle">Bihar Smart Mango Knowledge Wall</div>
+    <div class="controls-wrapper">
+        <span id="deptText">Department of Horticulture, Government of Bihar</span>
+        <select id="languageSwitcher">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="mai">मैथिली</option>
+            <option value="bho">भोजपुरी</option>
+        </select>
+        <button id="audioGuideTrigger">🎙️ Audio Guide</button>
+    </div>
+</div>
+
+<section class="hero">
+    <h1 id="heroTitle">Bihar Smart Mango Knowledge Wall</h1>
+    <p id="heroText">
+        Celebrating the rich history, exceptional taste, and horticultural heritage varieties of Bihar.
+    </p>
+</section>
+
+<div class="container">
+    <h2 id="galleryTitle" class="grid-title">Featured Exhibition Varieties</h2>
+    
+    <div class="mango-grid">
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/gulabkhas.jpg');">
+                <span id="tag1" class="tag">Early Season</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Gulabkhas</h3>
+                    <h4>गुलाबखास</h4>
+                    <p>Celebrated for its beautiful reddish-pink blush and signature rose-like aroma.</p>
+                </div>
+                <a href="gulabkhas.html" id="btn1" class="view-btn">Explore Variety →</a>
+            </div>
         </div>
-    </section>
-    <footer><p>&copy; 2026 Dept. of Horticulture, Govt of Bihar</p></footer>
-    <script>
-        const mangoData = [
-            { name: "Bhagalpuri Jardalu", slug: "zardalu", qr: "zardalu-qr.png", origin: "Bhagalpur", giStatus: "Yes (2018)", season: "May-June", color: "Bright golden yellow", gi: "52-55", tss: "20.3°-23° Brix" },
-            { name: "Dudhiya Malda", slug: "dudhiyamaldah", qr: "dudhiyamaldah-qr.png", origin: "Digha (Patna)", giStatus: "In progress", season: "Late May-June", color: "Greenish/yellow tinge", gi: "55-58", tss: "20°-22° Brix" },
-            { name: "Langra", slug: "langra", qr: "langra-qr.png", origin: "Ganges plains", giStatus: "No", season: "June-July", color: "Remains green", gi: "54-56", tss: "19°-21° Brix" },
-            { name: "Chausa", slug: "chausa", qr: "chausa-qr.png", origin: "Buxar", giStatus: "No", season: "Late June-July", color: "Bright golden yellow", gi: "58-60", tss: "21°-23° Brix" },
-            { name: "Gulabkhas", slug: "gulabkhas", qr: "gulabkhas-qr.png", origin: "Supaul/Eastern Bihar", giStatus: "No", season: "May-Early June", color: "Reddish-pink blush", gi: "53-56", tss: "18°-20° Brix" },
-            { name: "Bombai", slug: "bombai", qr: "bombai-qr.png", origin: "Sitamarhi/N. Bihar", giStatus: "No", season: "Mid-May to June", color: "Green/yellow-green", gi: "51-54", tss: "17°-19° Brix" },
-            { name: "Krishna Bhog", slug: "krishnabhog", qr: "krishnabhog-qr.png", origin: "Madhubani", giStatus: "No", season: "June", color: "Greenish/yellow tinge", gi: "54-56", tss: "19°-20° Brix" },
-            { name: "Sukul", slug: "sukul", qr: "sukul-qr.png", origin: "Hajipur/Samastipur", giStatus: "No", season: "Mid-June to July", color: "Greenish-yellow/golden", gi: "53-55", tss: "18°-19° Brix" },
-            { name: "Sipahiya", slug: "sipahiya", qr: "sipahiya-qr.png", origin: "Samastipur", giStatus: "No", season: "Late June to July", color: "Dark green/yellow-green", gi: "52-54", tss: "17°-18° Brix" },
-            { name: "Amrapali", slug: "amrapali", qr: "amrapali-qr.png", origin: "Across Bihar", giStatus: "No", season: "July", color: "Deep yellow/orange", gi: "56-58", tss: "22°-24° Brix" },
-            { name: "Kalkatiya", slug: "kalkatiya", qr: "kalkatiya-qr.png", origin: "Darbhanga", giStatus: "No", season: "Late June to July", color: "Deep yellow", gi: "55-57", tss: "19°-20° Brix" }
-        ];
 
-        const grid = document.getElementById('mangoGridContainer');
-        const qrGallery = document.getElementById('qrGallery');
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/krishnabhog.jpg');">
+                <span id="tag2" class="tag">Mid Season</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Krishnabhog</h3>
+                    <h4>कृष्णभोग</h4>
+                    <p>The culinary pride of the Mithila region, rendering balanced sweetness with smooth pulp.</p>
+                </div>
+                <a href="krishnabhog.html" id="btn2" class="view-btn">Explore Variety →</a>
+            </div>
+        </div>
 
-        mangoData.forEach(m => {
-            grid.innerHTML += `<div class="card"><img src="images/${m.slug}.jpg" alt="${m.name}"><div class="card-content"><h3>${m.name}</h3><p><b>Origin:</b> ${m.origin}</p><p><b>Season:</b> ${m.season}</p><p><b>GI Status:</b> ${m.giStatus}</p><p><b>TSS:</b> ${m.tss}</p><a href="${m.slug}.html" class="btn">Know More</a></div></div>`;
-            qrGallery.innerHTML += `<div><img src="qr/${m.qr}" alt="${m.name} QR" style="width:120px;height:120px;object-fit:contain;"><p>${m.name}</p></div>`;
-        });
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/sukul.jpg');">
+                <span id="tag3" class="tag">Mid Season</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Sukul</h3>
+                    <h4>सुकुल</h4>
+                    <p>A regional favorite trusted traditionally for its delicate balance and low fiber structure.</p>
+                </div>
+                <a href="sukul.html" id="btn3" class="view-btn">Explore Variety →</a>
+            </div>
+        </div>
 
-        async function askMango() {
-            const questionInput = document.getElementById("question");
-            const question = questionInput.value;
-            if (!question.trim()) { document.getElementById("answer").innerHTML = "Please enter a question."; return; }
-            document.getElementById("answer").innerHTML = "🥭 AI Mango Mitra is analyzing your question...";
-            try {
-                const response = await fetch(`http://127.0.0.1:8000/ask?question=${encodeURIComponent(question)}`);
-                const data = await response.json();
-                document.getElementById("answer").innerHTML = data.answer;
-            } catch(error) { document.getElementById("answer").innerHTML = "Unable to connect to AI Mango Mitra."; }
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/kalkatiya.jpg');">
+                <span id="tag4" class="tag">Processing Variety</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Kalkatiya</h3>
+                    <h4>कल्कतिया</h4>
+                    <p>A highly resilient, firm processing-grade variety foundational to North Bihar pickling.</p>
+                </div>
+                <a href="kalkatiya.html" id="btn4" class="view-btn">Explore Variety →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer id="footerText">
+    🏛 Government of Bihar
+    <br>
+    🌿 Department of Horticulture
+    <br><br>
+    © Aam Mahotsav 2026 | Bihar Smart Mango Knowledge Wall
+</footer>
+
+<script>
+// Global Narration Storage Configuration
+let kioskWelcomeMessage = "";
+
+async function loadLanguage(lang) {
+    try {
+        const response = await fetch(`lang/${lang}.json`);
+        if (!response.ok) {
+            throw new Error(`HTTP Matrix Interruption! Status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+
+        // Kiosk State Persistence Management
+        localStorage.setItem("lang", lang);
+
+        // 1. Top Navigation & Institutional Metadata Mapping
+        document.getElementById("siteTitle").innerHTML = "🥭 " + data.siteTitle;
+        document.getElementById("deptText").innerHTML = data.deptText;
+        document.getElementById("audioGuideTrigger").innerHTML = "🎙️ " + data.audioGuideBtn;
+        
+        // 2. Core Branding Hero Engine
+        document.getElementById("heroTitle").innerHTML = data.heroTitle;
+        document.getElementById("heroText").innerHTML = data.heroText;
+        
+        // 3. Exhibition Title Localization
+        document.getElementById("galleryTitle").innerHTML = data.galleryTitle;
+
+        // 4. Content State Badges Optimization
+        document.getElementById("tag1").innerHTML = data.tagEarly;
+        document.getElementById("tag2").innerHTML = data.tagMid;
+        document.getElementById("tag3").innerHTML = data.tagMid;
+        document.getElementById("tag4").innerHTML = data.tagProcessing;
+
+        // 5. Action Target Vectors Allocation (CTA)
+        const arrow = " →";
+        document.getElementById("btn1").innerHTML = data.exploreBtn + arrow;
+        document.getElementById("btn2").innerHTML = data.exploreBtn + arrow;
+        document.getElementById("btn3").innerHTML = data.exploreBtn + arrow;
+        document.getElementById("btn4").innerHTML = data.exploreBtn + arrow;
+
+        // 6. Corporate Footer Structure Rendering
+        document.getElementById("footerText").innerHTML = `
+            🏛 ${data.govBihar}
+            <br>
+            🌿 ${data.deptHort}
+            <br><br>
+            © ${data.footerEvent} | ${data.heroTitle}
+        `;
+
+        // Interactive Narration String Generation
+        kioskWelcomeMessage = data.welcomeNarration;
+
+    } catch (error) {
+        console.error("Critical Language Sync Interruption:", error);
+    }
+}
+
+// 🎙️ SpeechSynthesis Engine with Native Browser Verification Layer
+document.getElementById("audioGuideTrigger").addEventListener("click", () => {
+    // Technical Guardrail Check: Fail gracefully if browser speech synthesis engine is missing
+    if (!('speechSynthesis' in window)) {
+        alert("Voice support is not available in this browser configuration.");
+        return;
+    }
+
+    // Terminate existing streams to eliminate overlapping cross-narration
+    window.speechSynthesis.cancel();
+    
+    if (kioskWelcomeMessage) {
+        const speech = new SpeechSynthesisUtterance(kioskWelcomeMessage);
+        const currentLang = localStorage.getItem("lang") || "en";
+
+        // Native Regional Engine Switching Matrix (Fallback Mapping Strategy)
+        switch(currentLang) {
+            case "hi":
+            case "mai":
+            case "bho":
+                speech.lang = "hi-IN"; // Strategic mapping to standard hi-IN voice engine
+                break;
+            default:
+                speech.lang = "en-IN"; // Standard Indian English accent articulation
         }
 
-        const qInput = document.getElementById("question");
-        if(qInput) { qInput.addEventListener("keypress", function(e){ if(e.key==="Enter") askMango(); }); }
-    </script>
+        speech.rate = 0.95;  // Regulated pacing for loud public kiosk systems
+        speech.pitch = 1.0;  // Standard tone normalization parameter
+
+        window.speechSynthesis.speak(speech);
+    }
+});
+
+// Dropdown Interaction Sync Router
+document.getElementById("languageSwitcher").addEventListener("change", function() {
+    window.speechSynthesis.cancel(); // Terminate audio output immediately upon context switch
+    loadLanguage(this.value);
+});
+
+// Initialization Pipeline & Kiosk Recovery Router
+window.onload = () => {
+    const savedLang = localStorage.getItem("lang") || "en";
+    
+    const switcherInstance = document.getElementById("languageSwitcher");
+    if (switcherInstance) {
+        switcherInstance.value = savedLang;
+    }
+    
+    loadLanguage(savedLang);
+};
+</script>
+
 </body>
 </html>

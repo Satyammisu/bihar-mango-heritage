@@ -3,36 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bihar Smart Mango Knowledge Wall | Home</title>
+<title>Directorate of Horticulture | Bihar Smart Mango Knowledge Wall</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     html { scroll-behavior: smooth; }
     body { background: #f5f7fa; color: #333; line-height: 1.6; }
 
-    /* Top Bar Layout Component */
+    /* Government Institutional Top Bar - Refactored for Hierarchy */
     .topbar { 
-        background: #2e7d32; 
+        background: #1b5e20; 
         color: white; 
         padding: 15px 35px; 
         display: flex; 
         justify-content: space-between; 
         align-items: center; 
-        font-weight: 500;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     }
-    .topbar div { display: flex; align-items: center; gap: 15px; }
-    #siteTitle { font-weight: 700; font-size: 1.1rem; }
-    #deptText { font-size: 0.9rem; opacity: 0.95; font-weight: 400; }
+    .gov-branding-block { display: flex; flex-direction: column; gap: 2px; }
+    .gov-title { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; opacity: 0.9; text-transform: uppercase; }
+    .dept-title { font-size: 1.1rem; font-weight: 700; color: #ffb74d; }
+    .wall-title { font-size: 0.95rem; font-weight: 400; opacity: 0.85; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 3px; padding-top: 2px; }
     
     /* Interactive Controls System */
-    .controls-wrapper { display: flex; align-items: center; gap: 12px; }
+    .controls-wrapper { display: flex; align-items: center; gap: 15px; }
     
     #languageSwitcher {
         background: rgba(255, 255, 255, 0.15);
         color: white;
         border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 6px 12px;
+        padding: 8px 16px;
         border-radius: 20px;
         font-family: 'Poppins', sans-serif;
         font-size: 0.9rem;
@@ -44,26 +44,26 @@
     #languageSwitcher option { color: #333; background: white; }
 
     #audioGuideTrigger {
-        background: #ff9800;
+        background: #e65100;
         color: white;
         border: none;
-        padding: 6px 16px;
+        padding: 8px 20px;
         border-radius: 20px;
         font-family: 'Poppins', sans-serif;
         font-size: 0.85rem;
         cursor: pointer;
         font-weight: 600;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    #audioGuideTrigger:hover { background: #e68a00; transform: translateY(-1px); }
+    #audioGuideTrigger:hover { background: #bf360c; transform: translateY(-1px); }
 
     /* Hero Branding Frame */
     .hero { 
-        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/orchard-hero.jpg'); 
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('images/orchard-hero.jpg'); 
         background-size: cover; 
         background-position: center; 
-        height: 45vh; 
+        height: 40vh; 
         display: flex; 
         flex-direction: column; 
         justify-content: center; 
@@ -72,256 +72,414 @@
         text-align: center; 
         padding: 20px;
     }
-    .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); }
-    .hero p { font-size: 1.2rem; max-width: 700px; font-weight: 300; }
+    .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); }
+    .hero p { font-size: 1.15rem; max-width: 750px; font-weight: 300; opacity: 0.9; }
 
-    /* Main Container & Varieties Grid */
+    /* Main Container Layout */
     .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-    .grid-title { font-size: 2rem; color: #2e7d32; margin-bottom: 30px; font-weight: 700; text-align: center; }
+    .grid-title { font-size: 2rem; color: #1b5e20; margin-top: 20px; margin-bottom: 30px; font-weight: 700; text-align: center; }
     
     .mango-grid { 
         display: grid; 
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
         gap: 30px; 
+        margin-bottom: 50px;
     }
 
     /* Exhibition Cards Architecture */
     .mango-card { 
         background: white; 
-        border-radius: 20px; 
+        border-radius: 16px; 
         overflow: hidden; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06); 
         transition: transform 0.3s ease, box-shadow 0.3s ease; 
         display: flex; 
         flex-direction: column;
     }
     .mango-card:hover { 
-        transform: translateY(-8px); 
-        box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
+        transform: translateY(-6px); 
+        box-shadow: 0 12px 30px rgba(0,0,0,0.12); 
     }
-    .card-img { height: 200px; background-size: cover; background-position: center; position: relative; }
-    .tag { position: absolute; top: 15px; left: 15px; background: #ff9800; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    .card-img { height: 190px; background-size: cover; background-position: center; position: relative; }
+    .tag { position: absolute; top: 15px; left: 15px; background: #ef6c00; color: white; padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
     
-    .card-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .card-body h3 { font-size: 1.4rem; color: #333; margin-bottom: 8px; }
-    .card-body h4 { font-size: 1rem; color: #ff9800; font-weight: 500; margin-bottom: 12px; }
-    .card-body p { font-size: 0.95rem; color: #666; margin-bottom: 20px; }
+    .card-body { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .card-body h3 { font-size: 1.35rem; color: #212121; margin-bottom: 4px; font-weight: 700; }
+    .card-body h4 { font-size: 1rem; color: #e65100; font-weight: 500; margin-bottom: 12px; }
+    .card-body p { font-size: 0.9rem; color: #555; margin-bottom: 15px; height: 65px; overflow: hidden; text-overflow: ellipsis; }
     
+    /* Scientific Validation Footnote Block */
+    .scientific-source {
+        font-size: 0.75rem;
+        color: #757575;
+        background: #f1f8e9;
+        padding: 6px 12px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        border-left: 3px solid #689f38;
+        font-weight: 500;
+    }
+
     .view-btn { 
         display: block; 
         text-align: center; 
-        background: #2e7d32; 
+        background: #1b5e20; 
         color: white; 
         padding: 12px; 
-        border-radius: 10px; 
+        border-radius: 8px; 
         text-decoration: none; 
         font-weight: 600; 
+        font-size: 0.9rem;
         transition: background 0.3s ease; 
     }
-    .view-btn:hover { background: #1b5e20; }
+    .view-btn:hover { background: #0d5316; }
 
-    footer { background: #2e7d32; color: white; text-align: center; padding: 40px; margin-top: 60px; line-height: 1.8; }
+    /* QR Grid Component Validation Area */
+    .qr-card { text-align: center; padding: 22px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #e0e0e0; }
+    .qr-card img { width: 150px; height: 150px; margin: 0 auto 12px auto; display: block; background: #fafafa; padding: 6px; border-radius: 6px; }
+    .qr-card p { font-weight: 700; color: #1b5e20; font-size: 0.95rem; }
+    .qr-card span { font-size: 0.85rem; color: #616161; display: block; margin-top: 2px; }
+
+    .section-divider { border: 0; height: 1px; background: linear-gradient(to right, rgba(0,0,0,0), rgba(27,94,32,0.2), rgba(0,0,0,0)); margin: 10px 0 40px 0; }
+
+    footer { background: #1b5e20; color: white; text-align: center; padding: 40px; margin-top: 60px; line-height: 1.8; font-size: 0.9rem; }
 </style>
 </head>
 <body>
 
+<!-- Institutional Top Bar Component -->
 <div class="topbar">
-    <div id="siteTitle">Bihar Smart Mango Knowledge Wall</div>
+    <div class="gov-branding-block">
+        <span class="gov-title">🏛️ Government of Bihar</span>
+        <span id="deptText" class="dept-title">Directorate of Horticulture</span>
+        <span class="wall-title">🥭 Bihar Smart Mango Knowledge Wall</span>
+    </div>
     <div class="controls-wrapper">
-        <span id="deptText">Department of Horticulture, Government of Bihar</span>
         <select id="languageSwitcher">
             <option value="en">English</option>
             <option value="hi">हिन्दी</option>
             <option value="mai">मैथिली</option>
             <option value="bho">भोजपुरी</option>
         </select>
-        <button id="audioGuideTrigger">🎙️ Audio Guide</button>
+        <button id="audioGuideTrigger">🎙️ Audio Guide (Pre-recorded)</button>
     </div>
 </div>
 
+<!-- Hero Section Components -->
 <section class="hero">
     <h1 id="heroTitle">Bihar Smart Mango Knowledge Wall</h1>
     <p id="heroText">
-        Celebrating the rich history, exceptional taste, and horticultural heritage varieties of Bihar.
+        An institutional repository documenting the germplasm, genetic diversity, and agro-climatic profile of Bihar's heritage mango cultivars.
     </p>
 </section>
 
+<!-- Main Exhibition Grid -->
 <div class="container">
     <h2 id="galleryTitle" class="grid-title">Featured Exhibition Varieties</h2>
     
     <div class="mango-grid">
+        
+        <!-- 1. Amrapali Card -->
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/amrapali.jpg');">
+                <span class="tag tag-processing">Processing Variety</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Amrapali</h3>
+                    <h4>आम्रपाली</h4>
+                    <p>A hybrid variety (Dashehari × Neelum) characterized by regular bearing habits and high carotenoid density.</p>
+                    <div class="scientific-source">Source: ICAR-CISH Lucknow / BAU Sabour</div>
+                </div>
+                <a href="amrapali.html" class="view-btn explore-btn-text">Explore Variety →</a>
+            </div>
+        </div>
+
+        <!-- 2. Bombai Card -->
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/bombai.jpg');">
+                <span class="tag tag-early">Early Season</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Bombai</h3>
+                    <h4>बम्बई</h4>
+                    <p>An early-maturing commercial cultivar widely propagated across North Bihar agro-climatic zones.</p>
+                    <div class="scientific-source">Source: BAU Sabour / Directorate of Horticulture</div>
+                </div>
+                <a href="bombai.html" class="view-btn explore-btn-text">Explore Variety →</a>
+            </div>
+        </div>
+
+        <!-- 3. Chausa Card -->
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/chausa.jpg');">
+                <span class="tag tag-processing">Processing Variety</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Chausa</h3>
+                    <h4>चौसा</h4>
+                    <p>A late-season variety with low fiber index, high sucrose concentrations, and high pulp-to-stone ratio.</p>
+                    <div class="scientific-source">Source: ICAR-CISH / RPCAU Pusa</div>
+                </div>
+                <a href="chausa.html" class="view-btn explore-btn-text">Explore Variety →</a>
+            </div>
+        </div>
+
+        <!-- 4. Dudhiya Maldah Card -->
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/dudhiyamaldah.jpg');">
+                <span class="tag tag-mid">Mid Season</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Dudhiya Maldah</h3>
+                    <h4>दूधिया मालदह</h4>
+                    <p>A premier mid-season cultivar originating from Digha, noted for its exceptionally thin epicarp and unique aroma profile.</p>
+                    <div class="scientific-source">Source: Directorate of Horticulture Bihar / BAU Sabour</div>
+                </div>
+                <a href="dudhiyamaldah.html" class="view-btn explore-btn-text">Explore Variety →</a>
+            </div>
+        </div>
+
+        <!-- 5. Gulabkhas Card -->
         <div class="mango-card">
             <div class="card-img" style="background-image: url('images/gulabkhas.jpg');">
-                <span id="tag1" class="tag">Early Season</span>
+                <span class="tag tag-early">Early Season</span>
             </div>
             <div class="card-body">
                 <div>
                     <h3>Gulabkhas</h3>
                     <h4>गुलाबखास</h4>
-                    <p>Celebrated for its beautiful reddish-pink blush and signature rose-like aroma.</p>
+                    <p>An early-season indigenous cultivar showing characteristic reddish blush and specific aromatic volatiles.</p>
+                    <div class="scientific-source">Source: BAU Sabour / RPCAU Pusa</div>
                 </div>
-                <a href="gulabkhas.html" id="btn1" class="view-btn">Explore Variety →</a>
+                <a href="gulabkhas.html" class="view-btn explore-btn-text">Explore Variety →</a>
             </div>
         </div>
 
-        <div class="mango-card">
-            <div class="card-img" style="background-image: url('images/krishnabhog.jpg');">
-                <span id="tag2" class="tag">Mid Season</span>
-            </div>
-            <div class="card-body">
-                <div>
-                    <h3>Krishnabhog</h3>
-                    <h4>कृष्णभोग</h4>
-                    <p>The culinary pride of the Mithila region, rendering balanced sweetness with smooth pulp.</p>
-                </div>
-                <a href="krishnabhog.html" id="btn2" class="view-btn">Explore Variety →</a>
-            </div>
-        </div>
-
-        <div class="mango-card">
-            <div class="card-img" style="background-image: url('images/sukul.jpg');">
-                <span id="tag3" class="tag">Mid Season</span>
-            </div>
-            <div class="card-body">
-                <div>
-                    <h3>Sukul</h3>
-                    <h4>सुकुल</h4>
-                    <p>A regional favorite trusted traditionally for its delicate balance and low fiber structure.</p>
-                </div>
-                <a href="sukul.html" id="btn3" class="view-btn">Explore Variety →</a>
-            </div>
-        </div>
-
+        <!-- 6. Kalkatiya Card -->
         <div class="mango-card">
             <div class="card-img" style="background-image: url('images/kalkatiya.jpg');">
-                <span id="tag4" class="tag">Processing Variety</span>
+                <span class="tag tag-processing">Processing Variety</span>
             </div>
             <div class="card-body">
                 <div>
                     <h3>Kalkatiya</h3>
                     <h4>कल्कतिया</h4>
-                    <p>A highly resilient, firm processing-grade variety foundational to North Bihar pickling.</p>
+                    <p>A firm, high-acid late cultivar historically critical for commercial processing and pulp manufacturing matrix.</p>
+                    <div class="scientific-source">Source: RPCAU Pusa / Directorate of Horticulture</div>
                 </div>
-                <a href="kalkatiya.html" id="btn4" class="view-btn">Explore Variety →</a>
+                <a href="kalkatiya.html" class="view-btn explore-btn-text">Explore Variety →</a>
             </div>
         </div>
+
+        <!-- 7. Krishnabhog Card -->
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/krishnabhog.jpg');">
+                <span class="tag tag-mid">Mid Season</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Krishnabhog</h3>
+                    <h4>कृष्णभोग</h4>
+                    <p>A heritage variety predominantly conserved across the Mithila region, rendering balanced TSS readings.</p>
+                    <div class="scientific-source">Source: BAU Sabour / Conservation Germplasm</div>
+                </div>
+                <a href="krishnabhog.html" class="view-btn explore-btn-text">Explore Variety →</a>
+            </div>
+        </div>
+
+        <!-- 8. Langra Card -->
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/langra.jpg');">
+                <span class="tag tag-mid">Mid Season</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Langra</h3>
+                    <h4>लंगड़ा</h4>
+                    <p>A prominent mid-season commercial variety characterized by its strong turpene-aroma layer and deep green skin.</p>
+                    <div class="scientific-source">Source: ICAR-CISH / BAU Sabour</div>
+                </div>
+                <a href="langra.html" class="view-btn explore-btn-text">Explore Variety →</a>
+            </div>
+        </div>
+
+        <!-- 9. Sipahiya Card -->
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/sipahiya.jpg');">
+                <span class="tag tag-mid">Mid Season</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Sipahiya</h3>
+                    <h4>सिपाहिया</h4>
+                    <p>A localized heritage strain preserved within regional gene-banks, exhibiting specific pest resistance features.</p>
+                    <div class="scientific-source">Source: RPCAU Pusa Research Station</div>
+                </div>
+                <a href="sipahiya.html" class="view-btn explore-btn-text">Explore Variety →</a>
+            </div>
+        </div>
+
+        <!-- 10. Sukul Card -->
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/sukul.jpg');">
+                <span class="tag tag-mid">Mid Season</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Sukul</h3>
+                    <h4>सुकुल</h4>
+                    <p>A traditional late mid-season local variety primarily utilized for drought tolerance and localized table use.</p>
+                    <div class="scientific-source">Source: Directorate of Horticulture Bihar</div>
+                </div>
+                <a href="sukul.html" class="view-btn explore-btn-text">Explore Variety →</a>
+            </div>
+        </div>
+
+        <!-- 11. Zardalu Card -->
+        <div class="mango-card">
+            <div class="card-img" style="background-image: url('images/zardalu.jpg');">
+                <span class="tag tag-mid">Mid Season</span>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Zardalu</h3>
+                    <h4>जर्दालू</h4>
+                    <p>Bhagalpur's distinct GI-tagged cultivar, globally recognized for its unique golden-yellow post-ripening skin.</p>
+                    <div class="scientific-source">Source: BAU Sabour / GI Registry compliance</div>
+                </div>
+                <a href="zardalu.html" class="view-btn explore-btn-text">Explore Variety →</a>
+            </div>
+        </div>
+
     </div>
+
+    <hr class="section-divider">
+
+    <!-- Digital QR Code Gallery Section - Paths Verified Case-Sensitive Structure -->
+    <h2 class="grid-title">🎙️ Pre-recorded Digital QR Gallery</h2>
+    <div class="mango-grid">
+        <div class="qr-card"><img src="qr/amrapali-qr.png" alt="Amrapali QR"><p>Amrapali</p><span>आम्रपाली स्कैन</span></div>
+        <div class="qr-card"><img src="qr/bombai-qr.png" alt="Bombai QR"><p>Bombai</p><span>बम्बई स्कैन</span></div>
+        <div class="qr-card"><img src="qr/chausa-qr.png" alt="Chausa QR"><p>Chausa</p><span>चौसा स्कैन</span></div>
+        <div class="qr-card"><img src="qr/dudhiya-maldah-qr.png" alt="Dudhiya Maldah QR"><p>Dudhiya Maldah</p><span>दूधिया मालदह स्कैन</span></div>
+        <div class="qr-card"><img src="qr/gulabkhas-qr.png" alt="Gulabkhas QR"><p>Gulabkhas</p><span>गुलाबखास स्कैन</span></div>
+        <div class="qr-card"><img src="qr/kalkatiya-qr.png" alt="Kalkatiya QR"><p>Kalkatiya</p><span>कल्कतिया स्कैन</span></div>
+        <div class="qr-card"><img src="qr/krishnabhog-qr.png" alt="Krishnabhog QR"><p>Krishnabhog</p><span>कृष्णभोग स्कैन</span></div>
+        <div class="qr-card"><img src="qr/langra-qr.png" alt="Langra QR"><p>Langra</p><span>लंगड़ा स्कैन</span></div>
+        <div class="qr-card"><img src="qr/sipahiya-qr.png" alt="Sipahiya QR"><p>Sipahiya</p><span>सिपाहिया स्कैन</span></div>
+        <div class="qr-card"><img src="qr/sukul-qr.png" alt="Sukul QR"><p>Sukul</p><span>सुकुल स्कैन</span></div>
+        <div class="qr-card"><img src="qr/zardalu-qr.png" alt="Zardalu QR"><p>Zardalu</p><span>जर्दालू स्कैन</span></div>
+    </div>
+
 </div>
 
+<!-- Institutional Footer Structural Component -->
 <footer id="footerText">
-    🏛 Government of Bihar
+    🏛️ Directorate of Horticulture, Government of Bihar
     <br>
-    🌿 Department of Horticulture
+    🌿 Technical Partner: Bihar Agricultural University (BAU), Sabour
     <br><br>
     © Aam Mahotsav 2026 | Bihar Smart Mango Knowledge Wall
 </footer>
 
 <script>
-// Global Narration Storage Configuration
-let kioskWelcomeMessage = "";
+// Global Voice Narration Fallback Buffer
+let kioskWelcomeMessage = "Welcome to Bihar Smart Mango Knowledge Wall. Explore heritage mango varieties of Bihar. Select a variety to know more details.";
 
 async function loadLanguage(lang) {
     try {
         const response = await fetch(`lang/${lang}.json`);
-        if (!response.ok) {
-            throw new Error(`HTTP Matrix Interruption! Status: ${response.status}`);
-        }
-        
+        if (!response.ok) throw new Error(`HTTP Matrix Error Status: ${response.status}`);
         const data = await response.json();
 
-        // Kiosk State Persistence Management
         localStorage.setItem("lang", lang);
 
-        // 1. Top Navigation & Institutional Metadata Mapping
-        document.getElementById("siteTitle").innerHTML = "🥭 " + data.siteTitle;
-        document.getElementById("deptText").innerHTML = data.deptText;
-        document.getElementById("audioGuideTrigger").innerHTML = "🎙️ " + data.audioGuideBtn;
+        // Dynamic Text Mapping with String Interpolation Fallbacks
+        document.getElementById("deptText").innerHTML = data.deptText || "Directorate of Horticulture";
+        document.getElementById("audioGuideTrigger").innerHTML = "🎙️ " + (data.audioGuideBtn || "Audio Guide (Pre-recorded)");
+        document.getElementById("heroTitle").innerHTML = data.heroTitle || "Bihar Smart Mango Knowledge Wall";
+        document.getElementById("heroText").innerHTML = data.heroText || "An institutional repository documenting the germplasm and heritage mango cultivars of Bihar.";
+        document.getElementById("galleryTitle").innerHTML = data.galleryTitle || "Featured Exhibition Varieties";
+
+        const earlyText = data.tagEarly || "Early Season";
+        const midText = data.tagMid || "Mid Season";
+        const processingText = data.tagProcessing || "Processing Variety";
+
+        document.querySelectorAll(".tag-early").forEach(el => el.innerHTML = earlyText);
+        document.querySelectorAll(".tag-mid").forEach(el => el.innerHTML = midText);
+        document.querySelectorAll(".tag-processing").forEach(el => el.innerHTML = processingText);
+
+        const btnText = (data.exploreBtn || "Explore Variety") + " →";
+        document.querySelectorAll(".explore-btn-text").forEach(el => el.innerHTML = btnText);
+
+        const govBihar = data.govBihar || "Government of Bihar";
+        const deptHort = data.deptHort || "Directorate of Horticulture";
+        const footerEvent = data.footerEvent || "Aam Mahotsav 2026";
         
-        // 2. Core Branding Hero Engine
-        document.getElementById("heroTitle").innerHTML = data.heroTitle;
-        document.getElementById("heroText").innerHTML = data.heroText;
-        
-        // 3. Exhibition Title Localization
-        document.getElementById("galleryTitle").innerHTML = data.galleryTitle;
-
-        // 4. Content State Badges Optimization
-        document.getElementById("tag1").innerHTML = data.tagEarly;
-        document.getElementById("tag2").innerHTML = data.tagMid;
-        document.getElementById("tag3").innerHTML = data.tagMid;
-        document.getElementById("tag4").innerHTML = data.tagProcessing;
-
-        // 5. Action Target Vectors Allocation (CTA)
-        const arrow = " →";
-        document.getElementById("btn1").innerHTML = data.exploreBtn + arrow;
-        document.getElementById("btn2").innerHTML = data.exploreBtn + arrow;
-        document.getElementById("btn3").innerHTML = data.exploreBtn + arrow;
-        document.getElementById("btn4").innerHTML = data.exploreBtn + arrow;
-
-        // 6. Corporate Footer Structure Rendering
         document.getElementById("footerText").innerHTML = `
-            🏛 ${data.govBihar}
+            🏛️ ${govBihar}
             <br>
-            🌿 ${data.deptHort}
+            🌿 ${deptHort}
             <br><br>
-            © ${data.footerEvent} | ${data.heroTitle}
+            © ${footerEvent} | Bihar Smart Mango Knowledge Wall
         `;
 
-        // Interactive Narration String Generation
-        kioskWelcomeMessage = data.welcomeNarration;
+        kioskWelcomeMessage = data.welcomeNarration || "Welcome to Bihar Smart Mango Knowledge Wall.";
 
     } catch (error) {
-        console.error("Critical Language Sync Interruption:", error);
+        console.error("Language sync execution dropped. Hardcoded structural layers active:", error);
     }
 }
 
-// 🎙️ SpeechSynthesis Engine with Native Browser Verification Layer
+// 🎙️ Native Web Speech API Execution Engine
 document.getElementById("audioGuideTrigger").addEventListener("click", () => {
-    // Technical Guardrail Check: Fail gracefully if browser speech synthesis engine is missing
     if (!('speechSynthesis' in window)) {
-        alert("Voice support is not available in this browser configuration.");
+        alert("Browser configuration lacks native Voice Synthesis layers.");
         return;
     }
 
-    // Terminate existing streams to eliminate overlapping cross-narration
-    window.speechSynthesis.cancel();
+    window.speechSynthesis.cancel(); // Flush previous buffer queues
     
     if (kioskWelcomeMessage) {
         const speech = new SpeechSynthesisUtterance(kioskWelcomeMessage);
         const currentLang = localStorage.getItem("lang") || "en";
 
-        // Native Regional Engine Switching Matrix (Fallback Mapping Strategy)
+        /* 
+           TECHNICAL ARCHITECTURE NOTE (BRD COMPLIANCE):
+           Native browsers lack distinct localized voice engines for 'bho-IN' (Bhojpuri) and 'mai-IN' (Maithili).
+           To ensure structural stability and seamless user experience, both regional dialects are programmatically 
+           mapped to the standard Indian Hindi Voice Synthesis Framework ('hi-IN').
+        */
         switch(currentLang) {
             case "hi":
             case "mai":
             case "bho":
-                speech.lang = "hi-IN"; // Strategic mapping to standard hi-IN voice engine
+                speech.lang = "hi-IN"; 
                 break;
             default:
-                speech.lang = "en-IN"; // Standard Indian English accent articulation
+                speech.lang = "en-IN"; 
         }
 
-        speech.rate = 0.95;  // Regulated pacing for loud public kiosk systems
-        speech.pitch = 1.0;  // Standard tone normalization parameter
+        speech.rate = 0.90; // Optimized delivery speed for acoustic public spaces
+        speech.pitch = 1.0; 
 
         window.speechSynthesis.speak(speech);
     }
 });
 
-// Dropdown Interaction Sync Router
 document.getElementById("languageSwitcher").addEventListener("change", function() {
-    window.speechSynthesis.cancel(); // Terminate audio output immediately upon context switch
+    window.speechSynthesis.cancel(); 
     loadLanguage(this.value);
 });
 
-// Initialization Pipeline & Kiosk Recovery Router
 window.onload = () => {
     const savedLang = localStorage.getItem("lang") || "en";
-    
     const switcherInstance = document.getElementById("languageSwitcher");
-    if (switcherInstance) {
-        switcherInstance.value = savedLang;
-    }
-    
+    if (switcherInstance) switcherInstance.value = savedLang;
     loadLanguage(savedLang);
 };
 </script>

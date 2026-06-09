@@ -1,5 +1,16 @@
 {
-  "siteTitle":"Bihar Smart Mango Knowledge Wall",
-  "heroTitle":"Bihar Smart Mango Knowledge Wall",
-  "heroText":"Celebrating the rich history, exceptional taste, and horticultural heritage varieties of Bihar."
+  "siteTitle": "Bihar Smart Mango Knowledge Wall",
+  "heroTitle": "Bihar Smart Mango Knowledge Wall",
+  "heroText": "Celebrating the rich history, exceptional taste, and horticultural heritage varieties of Bihar.",
+  "deptText": "Department of Horticulture, Government of Bihar",
+  "galleryTitle": "Featured Exhibition Varieties",
+  "tagEarly": "Early Season",
+  "tagMid": "Mid Season",
+  "tagProcessing": "Processing Variety",
+  "exploreBtn": "Explore Variety",
+  "govBihar": "Government of Bihar",
+  "deptHort": "Department of Horticulture",
+  "footerEvent": "Aam Mahotsav 2026",
+  "audioGuideBtn": "Audio Guide",
+  "welcomeNarration": "Welcome to Bihar Smart Mango Knowledge Wall. Explore heritage mango varieties of Bihar. Select a variety to know more details. Use Audio Guide for guidance."
 }

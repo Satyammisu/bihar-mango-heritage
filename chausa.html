@@ -32,7 +32,7 @@
     th, td { padding: 18px; border: 1px solid #eee; text-align: center; }
     th { background: #2e7d32; color: white; }
 
-    /* Disclaimer Section */
+    /* Health Section */
     .health-card { background: #e8f5e9; padding: 40px; border-radius: 25px; margin-bottom: 30px; border: 2px solid #2e7d32; }
     footer { background: #2e7d32; color: white; text-align: center; padding: 40px; margin-top: 40px; line-height: 1.8; }
 </style>
@@ -44,27 +44,56 @@
     <div class="govt">🏛 Government of Bihar<br>🌿 Department of Horticulture</div>
     <div class="hero-content">
         <h1>🥭 Chausa Mango</h1>
-        <h2>चौसा आम</h2>
-        <p style="font-size:1.3rem; font-weight:600; margin-bottom: 15px;">Heritage Mango Variety of Bihar</p>
-        <p style="font-size: 1.1rem;">Known for honey-like sweetness, rich aroma, juicy pulp and premium table quality.</p>
+        <h2>चौसा (Chausa)</h2>
+        <p style="font-size:1.3rem; font-weight:600; margin-bottom: 15px;">The King of Late Season</p>
+        <p style="font-size: 1.1rem;">Globally renowned for its exceptional sweetness, unique aroma, and rich, melting pulp.</p>
+        <p style="font-size:1rem; margin-top:15px; background:rgba(255,255,255,.15); padding:10px 20px; border-radius:30px; display:inline-block;">🌍 Heritage Variety of Bihar</p>
     </div>
 </section>
 
-<div class="container" style="margin-top: 40px;">
+<!-- Quick Facts Section -->
+<div style="max-width:1200px; margin:-60px auto 40px; background:white; padding:25px; border-radius:25px; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; box-shadow:0 10px 35px rgba(0,0,0,.15); position:relative; z-index:100;">
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📍 Origin</h3><p><b>Buxar, Bihar</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📅 Season</h3><p><b>Late June – July</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">🧪 TSS</h3><p><b>21°–23° Brix</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📊 Glycemic Index</h3><p><b>56–58</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">🌱 Market Arrival</h3><p><b>Late Season</b></p></div>
+</div>
+
+<div class="container">
     <div class="card">
         <h2 class="section-title">🥭 Mango Profile</h2>
         <div class="info-grid">
-            <div class="info-box"><h3>Origin</h3><p>Buxar, Bihar</p></div>
-            <div class="info-box"><h3>Season</h3><p>Late June – July</p></div>
-            <div class="info-box"><h3>GI Status</h3><p>Popular Variety</p></div>
-            <div class="info-box"><h3>Glycemic Index</h3><p>58–60</p></div>
-            <div class="info-box"><h3>TSS</h3><p>21°–23° Brix</p></div>
             <div class="info-box"><h3>Sweetness Index</h3><p>10 / 10</p></div>
             <div class="info-box"><h3>Colour</h3><p>Golden Yellow</p></div>
             <div class="info-box"><h3>Pulp</h3><p>Soft & Juicy</p></div>
-            <div class="info-box"><h3>Aroma</h3><p>Strong Fruity Aroma</p></div>
-            <div class="info-box"><h3>Type</h3><p>Premium Table Mango</p></div>
+            <div class="info-box"><h3>Aroma</h3><p>Intense & Fragrant</p></div>
+            <div class="info-box"><h3>Type</h3><p>Premium Dessert</p></div>
             <div class="info-box"><h3>Recommended Use</h3><p>Fresh Consumption</p></div>
+            <div class="info-box"><h3>🩺 Health Advisory</h3><p>Consult Healthcare Professional</p></div>
+        </div>
+    </div>
+
+    <!-- Quality Parameters Card -->
+    <div class="card">
+        <h2 class="section-title">📈 Quality Parameters</h2>
+        <div class="info-grid">
+            <div class="info-box"><h3>🧪 TSS</h3><p>21°–23° Brix</p></div>
+            <div class="info-box"><h3>📊 Glycemic Index</h3><p>56–58</p></div>
+            <div class="info-box"><h3>🍯 Sweetness Index</h3><p>10 / 10</p></div>
+            <div class="info-box"><h3>🌳 Tree Type</h3><p>Large Spreading</p></div>
+        </div>
+    </div>
+
+    <!-- Scientific Highlights Card -->
+    <div class="card">
+        <h2 class="section-title">🔬 Scientific Highlights</h2>
+        <div class="info-grid">
+            <div class="info-box"><h3>Origin District</h3><p>Buxar</p></div>
+            <div class="info-box"><h3>Harvest Window</h3><p>Late June – July</p></div>
+            <div class="info-box"><h3>TSS Range</h3><p>21°–23° Brix</p></div>
+            <div class="info-box"><h3>Fruit Character</h3><p>Exceptionally Sweet & Juicy</p></div>
+            <div class="info-box"><h3>Market Arrival</h3><p>Late Season</p></div>
         </div>
     </div>
 
@@ -72,36 +101,57 @@
         <h2 class="section-title">⚖️ Variety Comparison</h2>
         <table>
             <thead>
-                <tr><th>Variety</th><th>TSS (° Brix)</th><th>Glycemic Index</th></tr>
+                <tr><th>Variety</th><th>TSS (° Brix)</th><th>GI</th><th>Harvest Season</th></tr>
             </thead>
             <tbody>
-                <tr><td><strong>Chausa (Bihar)</strong></td><td>21–23</td><td>58–60</td></tr>
-                <tr><td>Alphonso</td><td>20–22</td><td>58</td></tr>
-                <tr><td>Totapuri</td><td>15–17</td><td>52</td></tr>
+                <tr><td><strong>Chausa</strong></td><td>21–23</td><td>56–58</td><td>Late Jun–Jul</td></tr>
+                <tr><td>Kesar</td><td>19–21</td><td>54</td><td>May–Jun</td></tr>
+                <tr><td>Dashehari</td><td>18–20</td><td>55</td><td>Jun</td></tr>
+                <tr><td>Alphonso</td><td>20–22</td><td>58</td><td>Apr–May</td></tr>
+                <tr><td>Totapuri</td><td>15–17</td><td>52</td><td>Jun–Jul</td></tr>
             </tbody>
         </table>
-        <p style="margin-top:15px; font-size:13px; color:#666;">
-            * Comparative values are indicative and compiled from publicly available horticultural literature and reference sources.
-        </p>
     </div>
 
     <div class="card">
         <h2 class="section-title">🏆 Why Chausa is Special</h2>
         <ul style="line-height:2; font-size:1.05rem; padding-left:25px;">
-            <li>One of Bihar's most popular heritage mango varieties.</li>
-            <li>Known for honey-like sweetness and juicy pulp.</li>
-            <li>High consumer preference for table consumption.</li>
-            <li>Strong aroma and attractive golden-yellow colour.</li>
-            <li>Widely cultivated in Buxar and adjoining regions.</li>
+            <li>One of India's most celebrated mango varieties known for exceptional sweetness.</li>
+            <li>Famous for its unique, intense, and long-lasting aroma.</li>
+            <li>The flesh is remarkably soft, juicy, and nearly fiberless.</li>
+            <li>A late-season variety that marks the grand finale of the mango season.</li>
+            <li>Deeply rooted in the heritage of Buxar, Bihar.</li>
         </ul>
+    </div>
+
+    <!-- Interactive QR Section -->
+    <div class="card">
+        <h2 class="section-title">📱 Learn More</h2>
+        <center>
+            <img src="images/qr-chausa.png" width="180" alt="QR Code">
+            <p style="margin-top:15px;">Scan to explore detailed information about Chausa Mango on the Bihar Smart Mango Knowledge Wall</p>
+        </center>
+    </div>
+
+    <div class="card">
+        <h2 class="section-title">📊 Expert Summary</h2>
+        <p style="line-height:2; font-size:1.05rem;">
+            Chausa is the jewel of Bihar's late-season mango portfolio. Its high sugar content and signature fragrance make it a celebrated dessert mango. As a premium variety from Buxar, it is vital for high-value market positioning and represents the pinnacle of Bihar's mango quality.
+        </p>
     </div>
 
     <div class="health-card">
         <h2 class="section-title" style="color:#2e7d32;">🩺 Nutritional Information</h2>
         <p style="font-size:1.1rem; line-height:2;">
-            Chausa mango contains natural fruit sugars, vitamins, minerals and antioxidants. The Glycemic Index (GI) and Total Soluble Solids (TSS) values presented here are intended for informational and educational purposes. Individuals with diabetes or specific dietary conditions should consult a qualified healthcare professional regarding appropriate fruit consumption.
+            Chausa mango is packed with essential nutrients, antioxidants, and vitamins. The Glycemic Index (GI) and Total Soluble Solids (TSS) values presented here are intended for informational and educational purposes. Individuals with medical or specific dietary conditions should consult a qualified healthcare professional regarding fruit consumption.
         </p>
     </div>
+
+    <center>
+        <a href="index.html" style="display:inline-block; padding:14px 30px; background:#ff9800; color:white; text-decoration:none; border-radius:10px; font-weight:600; margin-top:25px;">
+            ← Back To Mango Gallery
+        </a>
+    </center>
 </div>
 
 <footer>

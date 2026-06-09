@@ -1,377 +1,159 @@
-Save this file as **langra.html** and keep the image as:
-
-`images/langra.jpg`
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Langra Mango | Bihar Smart Mango Knowledge Wall</title>
-
+<title>Krishnabhog Mango | Bihar Smart Mango Knowledge Wall</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #f5f7fa; color: #333; overflow-x: hidden; line-height: 1.6; }
 
-body{
-background:#f5f7fa;
-overflow-x:hidden;
-color:#333;
-}
+    /* Hero Section */
+    .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('images/krishnabhog.jpg'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center; color: white; position: relative; }
+    .govt { position: absolute; top: 25px; right: 35px; text-align: right; font-size: 14px; font-weight: 500; line-height: 1.8; }
+    .event { position: absolute; top: 25px; left: 35px; background: #ff9800; color: white; padding: 12px 20px; border-radius: 40px; font-weight: 600; box-shadow: 0 5px 20px rgba(0,0,0,.25); }
+    .hero-content h1 { font-size: 5rem; font-weight: 800; }
+    .hero-content h2 { font-size: 2.5rem; font-weight: 500; margin-bottom: 20px; }
 
-.hero{
-height:100vh;
-background:
-linear-gradient(rgba(0,0,0,0.30),
-rgba(0,0,0,0.50)),
-url('images/langra.jpg');
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-color:white;
-position:relative;
-}
+    /* Layout */
+    .container { max-width: 1200px; margin: auto; padding: 0 20px 40px; }
+    .card { background: white; padding: 35px; border-radius: 25px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(0,0,0,.08); }
+    .section-title { font-size: 2rem; margin-bottom: 25px; color: #2e7d32; }
 
-.govt{
-position:absolute;
-top:25px;
-right:35px;
-text-align:right;
-font-size:14px;
-line-height:1.8;
-}
+    /* Info Grid */
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .info-box { background: #fff8e7; padding: 20px; border-radius: 15px; text-align: center; }
+    .info-box h3 { color: #ff9800; margin-bottom: 10px; }
 
-.event{
-position:absolute;
-top:25px;
-left:35px;
-background:#ff9800;
-padding:12px 20px;
-border-radius:40px;
-font-weight:600;
-}
+    /* Table */
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 15px; overflow: hidden; }
+    th, td { padding: 18px; border: 1px solid #eee; text-align: center; }
+    th { background: #2e7d32; color: white; }
 
-.hero-content h1{
-font-size:4.5rem;
-font-weight:800;
-}
-
-.hero-content h2{
-font-size:2rem;
-margin:15px 0;
-}
-
-.quick-facts{
-max-width:1200px;
-margin:-60px auto 40px;
-background:white;
-padding:25px;
-border-radius:25px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:20px;
-box-shadow:0 10px 35px rgba(0,0,0,.15);
-position:relative;
-z-index:100;
-}
-
-.fact{text-align:center;}
-.fact h3{color:#ff9800;}
-
-.container{
-max-width:1200px;
-margin:auto;
-padding:0 20px 40px;
-}
-
-.card{
-background:white;
-padding:35px;
-border-radius:25px;
-margin-bottom:30px;
-box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-.section-title{
-font-size:2rem;
-margin-bottom:25px;
-color:#2e7d32;
-}
-
-.info-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.info-box{
-background:#fff8e7;
-padding:20px;
-border-radius:15px;
-text-align:center;
-}
-
-.info-box h3{
-color:#ff9800;
-margin-bottom:10px;
-}
-
-.gi{
-display:inline-block;
-background:#2e7d32;
-color:white;
-padding:14px 25px;
-border-radius:40px;
-margin-top:20px;
-font-weight:600;
-}
-
-.benefits{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.benefit{
-background:white;
-padding:25px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 4px 15px rgba(0,0,0,.08);
-}
-
-.story{
-background:linear-gradient(135deg,#ff9800,#f57c00);
-color:white;
-padding:35px;
-border-radius:20px;
-line-height:2;
-margin-top:30px;
-}
-
-.btn{
-display:inline-block;
-padding:14px 30px;
-background:#ff9800;
-color:white;
-text-decoration:none;
-border-radius:10px;
-margin-top:25px;
-}
-
-footer{
-background:#2e7d32;
-color:white;
-text-align:center;
-padding:40px;
-margin-top:40px;
-}
-
-@media(max-width:768px){
-.hero-content h1{font-size:2.5rem;}
-.hero-content h2{font-size:1.3rem;}
-}
+    /* Health Section */
+    .health-card { background: #e8f5e9; padding: 40px; border-radius: 25px; margin-bottom: 30px; border: 2px solid #2e7d32; }
+    footer { background: #2e7d32; color: white; text-align: center; padding: 40px; margin-top: 40px; line-height: 1.8; }
 </style>
-
 </head>
-
 <body>
 
 <section class="hero">
-
-<div class="event">
-🥭 Aam Mahotsav 2026
-</div>
-
-<div class="govt">
-🏛 Government of Bihar<br>
-🌿 Department of Horticulture
-</div>
-
-<div class="hero-content">
-
-<h1>🥭 Langra Mango</h1>
-
-<h2>लंगड़ा आम</h2>
-
-<p style="font-size:1.4rem;font-weight:600;">
-A Famous Mango Known For Rich Taste & Aroma
-</p>
-
-<p>
-Known for its fibreless pulp, distinctive flavour and strong aroma.
-</p>
-
-</div>
-
+    <div class="event">🥭 Aam Mahotsav 2026</div>
+    <div class="govt">🏛 Government of Bihar<br>🌿 Department of Horticulture</div>
+    <div class="hero-content">
+        <h1>🥭 Krishnabhog Mango</h1>
+        <h2>कृष्णभोग (Krishnabhog)</h2>
+        <p style="font-size:1.3rem; font-weight:600; margin-bottom: 15px;">The Classic Delicacy of Bihar</p>
+        <p style="font-size: 1.1rem;">A prized table variety known for its sweetness and consistent quality.</p>
+        <p style="font-size:1rem; margin-top:15px; background:rgba(255,255,255,.15); padding:10px 20px; border-radius:30px; display:inline-block;">🌍 Heritage Variety of Bihar</p>
+    </div>
 </section>
 
-<div class="quick-facts">
-
-<div class="fact">
-<h3>📍 Origin</h3>
-<p>Eastern India</p>
-</div>
-
-<div class="fact">
-<h3>🏅 Status</h3>
-<p>Popular Variety</p>
-</div>
-
-<div class="fact">
-<h3>🍯 Sweetness</h3>
-<p>8 / 10</p>
-</div>
-
-<div class="fact">
-<h3>🌿 Aroma</h3>
-<p>Strong</p>
-</div>
-
-<div class="fact">
-<h3>📅 Season</h3>
-<p>July</p>
-</div>
-
+<!-- Quick Facts Section -->
+<div style="max-width:1200px; margin:-60px auto 40px; background:white; padding:25px; border-radius:25px; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; box-shadow:0 10px 35px rgba(0,0,0,.15); position:relative; z-index:100;">
+    <div style="text-align:center;">
+        <h3 style="color:#ff9800;">📍 Traditional Belt</h3>
+        <p><b>Mithila Region, Bihar</b></p>
+    </div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📅 Season</h3><p><b>June – July</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">🧪 TSS</h3><p><b>18°–20° Brix</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📈 Sweetness</h3><p><b>9 / 10</b></p></div>
+    <div style="text-align:center;"><h3 style="color:#ff9800;">🌱 Market Arrival</h3><p><b>Mid Season</b></p></div>
 </div>
 
 <div class="container">
+    <div class="card">
+        <h2 class="section-title">🥭 Mango Profile</h2>
+        <div class="info-grid">
+            <div class="info-box"><h3>Flavor Profile</h3><p>Richly Sweet</p></div>
+            <div class="info-box"><h3>Texture</h3><p>Smooth & Firm</p></div>
+            <div class="info-box"><h3>Sweetness Index</h3><p>9 / 10</p></div>
+            <div class="info-box"><h3>Fiber Content</h3><p>Low to Negligible</p></div>
+            <div class="info-box"><h3>Primary Utility</h3><p>Fresh Consumption</p></div>
+            <div class="info-box"><h3>Ripening</h3><p>Uniform</p></div>
+            <div class="info-box"><h3>Recommended Use</h3><p>Table Variety</p></div>
+        </div>
+    </div>
 
-<div class="card">
+    <div class="card">
+        <h2 class="section-title">📈 Quality Parameters</h2>
+        <div class="info-grid">
+            <div class="info-box"><h3>TSS</h3><p>18°–20° Brix</p></div>
+            <div class="info-box"><h3>Flavor Intensity</h3><p>Very High</p></div>
+            <div class="info-box"><h3>Pulp Color</h3><p>Deep Yellow</p></div>
+            <div class="info-box"><h3>Keeping Quality</h3><p>Moderate</p></div>
+        </div>
+    </div>
 
-<h2 class="section-title">🥭 About Langra Mango</h2>
+    <!-- Scientific Highlights Card -->
+    <div class="card">
+        <h2 class="section-title">🔬 Scientific Highlights</h2>
+        <div class="info-grid">
+            <div class="info-box"><h3>Species</h3><p>Mangifera indica L.</p></div>
+            <div class="info-box"><h3>Harvest Window</h3><p>June – July</p></div>
+            <div class="info-box"><h3>Fruit Type</h3><p>Premium Table Variety</p></div>
+            <div class="info-box"><h3>Fruit Character</h3><p>Consistent Sweetness</p></div>
+            <div class="info-box"><h3>Market Arrival</h3><p>Mid Season</p></div>
+        </div>
+    </div>
 
-<div class="info-grid">
+    <div class="card">
+        <h2 class="section-title">⚖️ Variety Comparison</h2>
+        <table>
+            <thead>
+                <tr><th>Variety</th><th>Primary Use</th><th>Sweetness</th><th>Origin Context</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Krishnabhog</strong></td><td>Table</td><td>High</td><td>Mithila, Bihar</td></tr>
+                <tr><td>Alphonso</td><td>Table</td><td>High</td><td>Konkan, Maharashtra</td></tr>
+                <tr><td>Kesar</td><td>Table</td><td>High</td><td>Gir, Gujarat</td></tr>
+                <tr><td>Dashehari</td><td>Table</td><td>High</td><td>Malihabad, UP</td></tr>
+                <tr><td>Totapuri</td><td>Processing</td><td>Moderate</td><td>South India</td></tr>
+            </tbody>
+        </table>
+    </div>
 
-<div class="info-box">
-<h3>Origin</h3>
-<p>Eastern India</p>
-</div>
+    <div class="card">
+        <h2 class="section-title">📌 Key Identification Features</h2>
+        <ul style="line-height:2; padding-left:25px;">
+            <li>Excellent table variety</li>
+            <li>Deep yellow pulp upon ripening</li>
+            <li>Low fiber and smooth mouthfeel</li>
+            <li>High sugar content (Brix)</li>
+            <li>Strong, pleasing aroma</li>
+        </ul>
+    </div>
 
-<div class="info-box">
-<h3>Season</h3>
-<p>July</p>
-</div>
+    <div class="card">
+        <h2 class="section-title">📊 Expert Summary</h2>
+        <p style="line-height:2; font-size:1.05rem;">
+            Krishnabhog is a well-regarded heritage table mango of Bihar, valued for its smooth texture, pleasant sweetness, and consistent fruit quality. Its low fiber content and attractive pulp characteristics make it a preferred choice for fresh consumption and an important component of Bihar's traditional mango diversity.
+        </p>
+    </div>
 
-<div class="info-box">
-<h3>Colour</h3>
-<p>Greenish Yellow</p>
-</div>
+    <div class="health-card">
+        <h2 class="section-title" style="color:#2e7d32;">🩺 Nutritional Information</h2>
+        <p style="font-size:1.1rem; line-height:2;">
+            Krishnabhog mango provides a wealth of essential vitamins and dietary fiber. Information presented here is for educational purposes. Consult a healthcare professional for dietary advice.
+        </p>
+    </div>
 
-<div class="info-box">
-<h3>Aroma</h3>
-<p>Strong</p>
-</div>
-
-<div class="info-box">
-<h3>Pulp</h3>
-<p>Fibreless</p>
-</div>
-
-<div class="info-box">
-<h3>Type</h3>
-<p>Premium Table Mango</p>
-</div>
-
-</div>
-
-<div style="margin-top:25px;font-size:1.3rem;color:#ff9800;">
-Sweetness Index<br><br>
-████████░░<br>
-8 / 10
-</div>
-
-<div class="gi">
-🏅 Popular Premium Variety
-</div>
-
-</div>
-
-<div class="card">
-
-<h2 class="section-title">🌟 Uniqueness</h2>
-
-<p style="line-height:2;">
-Langra Mango is one of India's most popular mango varieties. It is known for its rich flavour, strong aroma and smooth fibreless pulp. The variety enjoys widespread popularity among mango consumers and is highly appreciated for its unique taste.
-</p>
-
-</div>
-
-<h2 class="section-title">💚 Health Benefits</h2>
-
-<div class="benefits">
-
-<div class="benefit">
-<h3>🛡 Immunity</h3>
-<p>Rich source of Vitamin C.</p>
-</div>
-
-<div class="benefit">
-<h3>👁 Eye Health</h3>
-<p>Contains Vitamin A.</p>
-</div>
-
-<div class="benefit">
-<h3>⚡ Energy</h3>
-<p>Natural energy booster.</p>
-</div>
-
-<div class="benefit">
-<h3>🌿 Digestion</h3>
-<p>Supports digestive health.</p>
-</div>
-
-<div class="benefit">
-<h3>❤️ Heart Health</h3>
-<p>Contains beneficial nutrients.</p>
-</div>
-
-<div class="benefit">
-<h3>✨ Skin Health</h3>
-<p>Rich in antioxidants.</p>
-</div>
-
-</div>
-
-<div class="story">
-
-<h2>💡 Did You Know?</h2>
-
-<p>
-Langra Mango is among the most recognized mango varieties in India and is celebrated for its distinctive flavour, fibreless texture and strong aroma.
-</p>
-
-</div>
-
-<center>
-<a href="index.html" class="btn">
-← Back To Mango Gallery
-</a>
-</center>
-
+    <center>
+        <a href="index.html" style="display:inline-block; padding:14px 30px; background:#ff9800; color:white; text-decoration:none; border-radius:10px; font-weight:600; margin-top:25px;">
+            ← Back To Mango Gallery
+        </a>
+    </center>
 </div>
 
 <footer>
-
-<h2>Department of Horticulture</h2>
-
-<p>Government of Bihar</p>
-
-<p>🥭 Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026</p>
-
+    🏛 Government of Bihar
+    <br>
+    🌿 Department of Horticulture
+    <br><br>
+    🥭 Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
 </footer>
 
 </body>
 </html>
-```

@@ -1,16 +1,25 @@
 {
   "siteTitle": "Bihar Smart Mango Knowledge Wall",
+  "deptText": "Directorate of Horticulture, Government of Bihar",
+  "audioGuideBtn": "Audio Guide",
   "heroTitle": "Bihar Smart Mango Knowledge Wall",
-  "heroText": "Celebrating the rich history, exceptional taste, and horticultural heritage varieties of Bihar.",
-  "deptText": "Department of Horticulture, Government of Bihar",
+  "heroText": "An institutional repository documenting the germplasm, genetic diversity, and agro-climatic profile of Bihar's heritage mango cultivars.",
   "galleryTitle": "Featured Exhibition Varieties",
   "tagEarly": "Early Season",
   "tagMid": "Mid Season",
   "tagProcessing": "Processing Variety",
   "exploreBtn": "Explore Variety",
-  "govBihar": "Government of Bihar",
-  "deptHort": "Department of Horticulture",
-  "footerEvent": "Aam Mahotsav 2026",
-  "audioGuideBtn": "Audio Guide",
-  "welcomeNarration": "Welcome to Bihar Smart Mango Knowledge Wall. Explore heritage mango varieties of Bihar. Select a variety to know more details. Use Audio Guide for guidance."
+  "welcomeNarration": "Welcome to Bihar Smart Mango Knowledge Wall. Explore Bihar's heritage mango varieties, scientific information, QR based digital exhibits and AI Mango Expert.",
+  
+  "amrapaliNarration": "Amrapali is a hybrid variety developed from Dasheri and Neelam. It is characterized by its distinct dwarf growth habit, regular bearing pattern, and deep orange pulp rich in Vitamin A.",
+  "chausaNarration": "Chausa originates from the historic fields of Chausa, Buxar. It is a late-season cultivar widely recognized for its high soluble solids content, characteristic aroma, and rich heritage profile.",
+  "langraNarration": "Langra is an iconic heritage mango variant prized for its strong aroma, green skin even when ripe, lemon-yellow fiberless flesh, and characteristic sweet taste that dominates mid-season production.",
+  "gulabkhasNarration": "Gulab Khas is a notable variety with a distinctive rose-like fragrance and a prominent pinkish-red blush on the skin, extensively documented during early summer exhibitions.",
+  "zardaluNarration": "Zardalu is Bhagalpur's proud Geographical Indication certified heritage mango, uniquely recognized for its light-yellow color, delicate texture, and historically significant aroma.",
+  "dudhiyamaldahNarration": "Dudhiya Maldah is a traditional heritage mango variety associated with the Digha region of Patna and is valued for its smooth texture, ultra-thin skin, and sweet flavour.",
+  "bombaiNarration": "Bombai is a classic early-season commercial variety across North Bihar, easily recognizable by its bright green exterior tint mixed with a subtle yellow hue upon maturity.",
+  "krishnabhogNarration": "Krishnabhog is a traditional round-shaped mid-season variety from eastern plains, known for its deep historical roots, thick sweet pulp, and premium presentation.",
+  "sukulNarration": "Sukul is a robust late-season culinary and dessert variety native to North Bihar, often favored for making traditional preserves due to its balanced sugar-to-acid ratio.",
+  "sipahiyaNarration": "Sipahiya is a sturdy regional mango variety with distinct historical cultivation lines, prized for its excellent keeping quality and resistance during post-harvest transit.",
+  "kalkatiyaNarration": "Kalkatiya is a notable commercial variety extensively grown across Bihar's orchards, yielding heavily in late June with firm, sweet flesh ideal for processing ecosystems."
 }

@@ -11,23 +11,23 @@
     body { background: #f5f7fa; color: #333; overflow-x: hidden; line-height: 1.6; }
 
     /* Hero Section */
-    .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('images/amrapali.jpg'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center; color: white; position: relative; }
+    .hero { height: 60vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('images/amrapali.jpg'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center; color: white; position: relative; }
     .govt { position: absolute; top: 25px; right: 35px; text-align: right; font-size: 14px; font-weight: 500; line-height: 1.8; }
     .event { position: absolute; top: 25px; left: 35px; background: #ff9800; color: white; padding: 12px 20px; border-radius: 40px; font-weight: 600; box-shadow: 0 5px 20px rgba(0,0,0,.25); }
-    .hero-content h1 { font-size: 5rem; font-weight: 800; }
-    .hero-content h2 { font-size: 2.5rem; font-weight: 500; margin-bottom: 20px; }
+    .hero-content h1 { font-size: 4rem; font-weight: 800; }
+    .hero-content h2 { font-size: 2.2rem; font-weight: 500; margin-bottom: 10px; }
 
-    /* Layout */
+    /* Layout Content Structure */
     .container { max-width: 1200px; margin: auto; padding: 0 20px 40px; }
     .card { background: white; padding: 35px; border-radius: 25px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(0,0,0,.08); }
-    .section-title { font-size: 2rem; margin-bottom: 25px; color: #2e7d32; }
+    .section-title { font-size: 1.8rem; margin-bottom: 25px; color: #2e7d32; border-bottom: 2px solid #eee; padding-bottom: 10px; }
 
-    /* Info Grid */
+    /* Info Grid Layout Elements */
     .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
     .info-box { background: #fff8e7; padding: 20px; border-radius: 15px; text-align: center; }
     .info-box h3 { color: #ff9800; margin-bottom: 10px; }
 
-    /* Table */
+    /* Variety Comparison Table */
     table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 15px; overflow: hidden; }
     th, td { padding: 18px; border: 1px solid #eee; text-align: center; }
     th { background: #2e7d32; color: white; }
@@ -39,22 +39,17 @@
 
 <section class="hero">
     <div class="event">🥭 Aam Mahotsav 2026</div>
-    <div class="govt">🏛 Government of Bihar<br>🌿 Department of Horticulture</div>
+    <div class="govt">🏛 Government of Bihar<br>🌿 Directorate of Horticulture</div>
     <div class="hero-content">
         <h1>🥭 Amrapali Mango</h1>
         <h2>आम्रपाली (Amrapali)</h2>
         <p style="font-size:1.3rem; font-weight:600; margin-bottom: 15px;">The High-Density Innovation</p>
-        <p style="font-size: 1.1rem;">A premier hybrid variety known for its compact growth and consistent, high-quality yields.</p>
-        <p style="font-size:1rem; margin-top:15px; background:rgba(255,255,255,.15); padding:10px 20px; border-radius:30px; display:inline-block;">🌱 Iconic Hybrid Variety (Dashehari × Neelam)</p>
+        <p style="font-size:1rem; background:rgba(255,255,255,.15); padding:10px 20px; border-radius:30px; display:inline-block;">🌱 Iconic Hybrid Variety (Dashehari × Neelam)</p>
     </div>
 </section>
 
-<!-- Quick Facts Section -->
-<div style="max-width:1200px; margin:-60px auto 40px; background:white; padding:25px; border-radius:25px; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; box-shadow:0 10px 35px rgba(0,0,0,.15); position:relative; z-index:100;">
-    <div style="text-align:center;">
-        <h3 style="color:#ff9800;">📍 Origin</h3>
-        <p><b>Widespread (Bihar)</b></p>
-    </div>
+<div style="max-width:1200px; margin:-40px auto 40px; background:white; padding:25px; border-radius:25px; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; box-shadow:0 10px 35px rgba(0,0,0,.15); position:relative; z-index:100;">
+    <div style="text-align:center;"><h3 style="color:#ff9800;">📍 Origin</h3><p><b>Widespread (Bihar)</b></p></div>
     <div style="text-align:center;"><h3 style="color:#ff9800;">📅 Season</h3><p><b>June – July</b></p></div>
     <div style="text-align:center;"><h3 style="color:#ff9800;">🧪 TSS</h3><p><b>20°–22° Brix</b></p></div>
     <div style="text-align:center;"><h3 style="color:#ff9800;">📈 Sweetness</h3><p><b>9 / 10</b></p></div>
@@ -93,29 +88,29 @@
                 <tr>
                     <th>Variety</th>
                     <th>TSS (°Brix)</th>
-                    <th>Glycemic Index (GI)</th>
+                    <th>Fruit Type</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td><strong>Amrapali</strong></td><td>20–22</td><td>55–58</td></tr>
-                <tr><td>Dashehari</td><td>18–20</td><td>54–56</td></tr>
-                <tr><td>Kesar</td><td>19–21</td><td>53–55</td></tr>
-                <tr><td>Alphonso</td><td>20–22</td><td>56–58</td></tr>
-                <tr><td>Totapuri</td><td>15–17</td><td>50–52</td></tr>
+                <tr><td><strong>Amrapali</strong></td><td>20–22</td><td>Hybrid</td></tr>
+                <tr><td>Dashehari</td><td>18–20</td><td>Table Variety</td></tr>
+                <tr><td>Kesar</td><td>19–21</td><td>Table Variety</td></tr>
+                <tr><td>Alphonso</td><td>20–22</td><td>Table Variety</td></tr>
+                <tr><td>Totapuri</td><td>15–17</td><td>Processing Variety</td></tr>
             </tbody>
         </table>
         <p style="font-size:12px;color:#666;margin-top:12px;">
-            * TSS (°Brix) indicates sweetness level. GI values are approximate ranges reported for ripe mango cultivars and may vary with ripeness and growing conditions.
+            * TSS (°Brix) parameters are compiled from standard regional performance targets. Actual metrics vary dynamically based on localized agronomic conditions.
         </p>
     </div>
 
     <div class="card">
         <h2 class="section-title">🏆 Why Amrapali is Special</h2>
         <ul style="line-height:2; font-size:1.05rem; padding-left:25px;">
-            <li>A revolutionary hybrid variety developed specifically for high-density planting.</li>
+            <li>A revolutionary hybrid variety developed specifically for high-density planting layouts.</li>
             <li>Possesses a distinct, deep orange-colored pulp and an exceptionally sweet taste profile.</li>
-            <li>Regular and prolific bearer suitable for high-density orchard systems.</li>
-            <li>Ideal for both home orchards and commercial high-density commercial Origin.</li>
+            <li>Regular and prolific bearer suitable for high-density orchard management systems.</li>
+            <li>Ideal for both smallholder home orchards and intensive commercial planting systems.</li>
             <li>Demonstrates excellent yield efficiency and compact growth habit.</li>
         </ul>
     </div>
@@ -123,9 +118,28 @@
     <div class="card">
         <h2 class="section-title">📊 Expert Summary</h2>
         <p style="line-height:2; font-size:1.05rem;">
-            Amrapali is a notable hybrid developed from a cross between Dashehari and Neelam. It has transformed mango Origin by enabling high-density planting due to its dwarf stature and regular bearing habit. Valued for its high TSS content and deep orange pulp, Amrapali is a staple in modern orchards, balancing excellent fruit quality with practical horticultural advantages.
+            Amrapali is a notable hybrid developed from a cross between Dashehari and Neelam. It has transformed mango cultivation frameworks by enabling ultra-high-density planting due to its signature dwarf stature and regular bearing habit. Valued across Bihar for its elite TSS levels and deep orange pulp density, it represents modern, scientific horticulture scaling.
         </p>
     </div>
+
+    <div class="card">
+        <h2 class="section-title">📚 Scientific References</h2>
+        <ul style="line-height:2; font-size:1.05rem; padding-left:25px; color:#555;">
+            <li>ICAR-Central Institute for Subtropical Horticulture (CISH), Lucknow</li>
+            <li>Dr. Rajendra Prasad Central Agricultural University (RPCAU), Pusa, Bihar</li>
+            <li>Bihar Agricultural University (BAU), Sabour</li>
+            <li>Directorate of Horticulture, Government of Bihar</li>
+            <li>National Horticulture Board (NHB)</li>
+        </ul>
+    </div>
+
+    <div style="text-align:center; margin:30px 0;">
+        <button id="audioGuideBtn" style="background:#2e7d32; color:white; padding:14px 30px; border:none; border-radius:10px; cursor:pointer; font-size:16px; font-weight:600; box-shadow: 0 4px 15px rgba(46,125,50,0.2);">
+            🎙️ Audio Guide
+        </button>
+    </div>
+
+    <div id="audioText" style="display:none;">Amrapali is a hybrid mango variety developed from Dashehari and Neelam. It is known for its dwarf growth habit, regular bearing, deep orange pulp and high sweetness. The variety is widely adopted for high density planting systems and commercial orchards across Bihar and India. Amrapali represents modern scientific horticulture and is one of the most successful hybrid mango cultivars developed in India.</div>
 
     <center>
         <a href="index.html" style="display:inline-block; padding:14px 30px; background:#ff9800; color:white; text-decoration:none; border-radius:10px; font-weight:600; margin-top:25px;">
@@ -137,10 +151,51 @@
 <footer>
     🏛 Government of Bihar
     <br>
-    🌿 Department of Horticulture
+    🌿 Directorate of Horticulture
     <br><br>
     🥭 Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
 </footer>
+
+<script>
+document.getElementById("audioGuideBtn").addEventListener("click", function(){
+    // 1. Hardware/Browser Compatibility Check Guard Layer
+    if (!('speechSynthesis' in window)) {
+        alert("Audio Guide not supported.");
+        return;
+    }
+
+    // 2. Safe DOM String Value Extraction
+    const narration = document.getElementById("audioText").innerText;
+    const speech = new SpeechSynthesisUtterance(narration);
+
+    // 3. Persistent Dropdown State Synchronization from index.html
+    let selectedLanguage = localStorage.getItem("language") || "en";
+
+    // 4. Regional Switch-Case Audio Target Routing Architecture
+    switch(selectedLanguage) {
+        case "hi":
+            speech.lang = "hi-IN";
+            break;
+        case "mai":
+            speech.lang = "hi-IN";
+            break;
+        case "bho":
+            speech.lang = "hi-IN";
+            break;
+        default:
+            speech.lang = "en-US";
+    }
+
+    // 5. Acoustics Configuration optimized for public exhibition setups
+    speech.rate = 0.9;
+    speech.pitch = 1;
+    speech.volume = 1;
+
+    // 6. Instantly clear audio buffer queues and fire clean runtime stream
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(speech);
+});
+</script>
 
 </body>
 </html>

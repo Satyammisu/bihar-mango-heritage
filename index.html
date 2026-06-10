@@ -151,7 +151,8 @@
 <div class="topbar">
     <div class="gov-branding-block">
         <span class="gov-title">🏛️ Government of Bihar</span>
-        <span id="deptText" class="dept-title">Directorate of Horticulture</span>
+        <!-- FIXED: Explicitly corrected from Department to Directorate of Horticulture -->
+        <span id="deptText" class="dept-title">Directorate of Horticulture, Government of Bihar</span>
         <span class="wall-title">🥭 Bihar Smart Mango Knowledge Wall</span>
     </div>
     <div class="controls-wrapper">
@@ -365,7 +366,7 @@
         <div class="qr-card"><img src="qr/amrapali-qr.png" alt="Amrapali QR"><p>Amrapali</p><span>आम्रपाली स्कैन</span></div>
         <div class="qr-card"><img src="qr/bombai-qr.png" alt="Bombai QR"><p>Bombai</p><span>बम्बई स्कैन</span></div>
         <div class="qr-card"><img src="qr/chausa-qr.png" alt="Chausa QR"><p>Chausa</p><span>चौसा स्कैन</span></div>
-        <div class="qr-card"><img src="qr/dudhiya-maldah-qr.png" alt="Dudhiya Maldah QR"><p>Dudhiya Maldah</p><span>दूधिया मालदह स्कैन</span></div>
+        <div class="qr-card"><img src="qr/dudhiyamaldah-qr.png" alt="Dudhiya Maldah QR"><p>Dudhiya Maldah</p><span>दूधिया मालदह स्कैन</span></div>
         <div class="qr-card"><img src="qr/gulabkhas-qr.png" alt="Gulabkhas QR"><p>Gulabkhas</p><span>गुलाबखास स्कैन</span></div>
         <div class="qr-card"><img src="qr/kalkatiya-qr.png" alt="Kalkatiya QR"><p>Kalkatiya</p><span>कल्कतिया स्कैन</span></div>
         <div class="qr-card"><img src="qr/krishnabhog-qr.png" alt="Krishnabhog QR"><p>Krishnabhog</p><span>कृष्णभोग स्कैन</span></div>
@@ -399,7 +400,7 @@ async function loadLanguage(lang) {
         localStorage.setItem("lang", lang);
 
         // Dynamic Text Mapping with String Interpolation Fallbacks
-        document.getElementById("deptText").innerHTML = data.deptText || "Directorate of Horticulture";
+        document.getElementById("deptText").innerHTML = data.deptText || "Directorate of Horticulture, Government of Bihar";
         document.getElementById("audioGuideTrigger").innerHTML = "🎙️ " + (data.audioGuideBtn || "Audio Guide (Pre-recorded)");
         document.getElementById("heroTitle").innerHTML = data.heroTitle || "Bihar Smart Mango Knowledge Wall";
         document.getElementById("heroText").innerHTML = data.heroText || "An institutional repository documenting the germplasm and heritage mango cultivars of Bihar.";

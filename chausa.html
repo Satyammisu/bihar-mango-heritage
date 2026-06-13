@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chausa Mango | Bihar Smart Mango Knowledge Wall</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     html { scroll-behavior: smooth; }
@@ -118,15 +119,10 @@
     </div>
 
     <div class="card">
-        <h2 class="section-title" id="lblSpecialTitle">🏆 Why Chausa is Special</h2>
-        <ul id="listSpecial" style="line-height:2; font-size:1.05rem; padding-left:25px;">
-            </ul>
-    </div>
-
-    <div class="card">
-        <h2 class="section-title" id="lblExpertTitle">📊 Expert Summary</h2>
-        <p id="pExpertSummary" style="line-height:2; font-size:1.05rem;">
-            </p>
+        <h2 class="section-title" id="lblChartTitle">📊 Nutritional Comparison Chart</h2>
+        <div style="position: relative; width: 100%; height: auto;">
+            <canvas id="comparisonChart"></canvas>
+        </div>
     </div>
 
     <div style="text-align:center; margin:30px 0;">
@@ -152,6 +148,61 @@
 <script>
 const varietyKey = "chausa"; 
 let currentLanguageData = {};
+let comparisonChartInstance = null;
+
+/**
+ * Initializes and dynamically updates ChartJS layout configuration
+ */
+function renderChart(tssLabel, giLabel) {
+    const ctx = document.getElementById('comparisonChart').getContext('2d');
+    
+    // Safety check to handle dynamic configuration reloads cleanly
+    if (comparisonChartInstance) {
+        comparisonChartInstance.destroy();
+    }
+
+    comparisonChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Chausa', 'Alphonso', 'Dashehari', 'Kesar', 'Totapuri'],
+            datasets: [{
+                label: tssLabel || 'TSS (°Brix)',
+                data: [23, 21, 19, 20, 16],
+                backgroundColor: '#ff9800',
+                borderWidth: 0,
+                borderRadius: 6
+            }, {
+                label: giLabel || 'Glycemic Index (GI)',
+                data: [56.5, 57, 55, 54, 51], // Averaged targets derived precisely from localized matrix bounds
+                backgroundColor: '#2e7d32',
+                borderWidth: 0,
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 70,
+                    grid: { color: '#f0f0f0' },
+                    ticks: { font: { family: 'Poppins', size: 12 } }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { family: 'Poppins', size: 13, weight: '600' } }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { font: { family: 'Poppins', size: 13, weight: '500' } }
+                }
+            }
+        }
+    });
+}
 
 /**
  * Executes core DOM text modifications utilizing localization matrix layers
@@ -165,8 +216,7 @@ function applyLocalization(data) {
     if(data.lblProfileTitle) document.getElementById("lblProfileTitle").innerHTML = "🥭 " + data.lblProfileTitle;
     if(data.lblScientificTitle) document.getElementById("lblScientificTitle").innerHTML = "🔬 " + data.lblScientificTitle;
     if(data.lblTableTitle) document.getElementById("lblTableTitle").innerHTML = "⚖️ " + data.lblTableTitle;
-    if(data.lblSpecialTitle) document.getElementById("lblSpecialTitle").innerHTML = "🏆 " + data.lblSpecialTitle;
-    if(data.lblExpertTitle) document.getElementById("lblExpertTitle").innerHTML = "📊 " + data.lblExpertTitle;
+    if(data.lblChartTitle) document.getElementById("lblChartTitle").innerHTML = "📊 " + (data.lblChartTitle || "Nutritional Comparison Chart");
     
     // Technical Metric Sub-Grid Labels
     if(data.lblFlavor) document.getElementById("lblFlavor").innerHTML = data.lblFlavor;
@@ -182,7 +232,7 @@ function applyLocalization(data) {
     if(data.lblHarvest) document.getElementById("lblHarvest").innerHTML = data.lblHarvest;
     if(data.lblPulp) document.getElementById("lblPulp").innerHTML = data.lblPulp;
     
-    // Nutritional Comparison Data Subheaders (GI Implemented)
+    // Nutritional Comparison Data Subheaders
     if(data.thVariety) document.getElementById("thVariety").innerHTML = data.thVariety;
     if(data.thTss) document.getElementById("thTss").innerHTML = data.thTss;
     if(data.thGi) document.getElementById("thGi").innerHTML = data.thGi;
@@ -226,18 +276,9 @@ function applyLocalization(data) {
     if(v.fruitTypeVal) document.getElementById("lblFruitTypeVal").innerHTML = v.fruitTypeVal;
     if(v.harvestVal) document.getElementById("lblHarvestVal").innerHTML = v.harvestVal;
     if(v.pulpVal) document.getElementById("lblPulpVal").innerHTML = v.pulpVal;
-    if(v.expertSummary) document.getElementById("pExpertSummary").innerHTML = v.expertSummary;
 
-    // Build Premium Bullet Layout Points Dynamically
-    if(v.specialPoints && Array.isArray(v.specialPoints)) {
-        const listContainer = document.getElementById("listSpecial");
-        listContainer.innerHTML = ""; 
-        v.specialPoints.forEach(point => {
-            const li = document.createElement("li");
-            li.textContent = point;
-            listContainer.appendChild(li);
-        });
-    }
+    // Trigger chart translation binding
+    renderChart(data.thTss, data.thGi);
 }
 
 /**
@@ -254,6 +295,8 @@ async function loadLocalizationData() {
         applyLocalization(currentLanguageData);
     } catch(error) {
         console.error("Critical Asset Resolution Failure:", error);
+        // Fallback execution to prevent chart break if local asset file fetching halts
+        renderChart('TSS (°Brix)', 'Glycemic Index (GI)');
     }
 }
 

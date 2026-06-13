@@ -1,5 +1,3 @@
-1. 🇬🇧 English Dictionary Matrix (lang/en.json)
-JSON
 {
   "lblMainTitle": "Bihar Smart Mango Knowledge Wall",
   "lblSubTitle": "Explore the Rich Horticultural Heritage & Elite Indigenous Cultivars of Bihar",
@@ -44,7 +42,7 @@ JSON
       "title": "Dudhiya Malda",
       "localName": "दूधिया मालदह (Dudhiya Malda)",
       "tagline": "The ultimate connoisseur variety of Digha, Patna",
-      "subTag": "Exceptionall fiberless with a translucent skin and divine sweet scent",
+      "subTag": "Exceptionally fiberless with a translucent skin and divine sweet scent",
       "origin": "Digha (Patna) & Gangetic Terraces",
       "season": "Early June – Mid June",
       "sweetValue": "9.7 / 10",
@@ -137,7 +135,7 @@ JSON
       "season": "Late June – Mid July",
       "sweetValue": "9.8 / 10",
       "plantType": "Vigorous, Upright Trunk with Pyramidal Crown",
-      "flavorVal": "Pure Honey Honeyed Sugar Syrup Density",
+      "flavorVal": "Pure Honeyed Sugar Syrup Density",
       "textureVal": "Highly Juicy, Meltingly Soft, Soft Sucking Pulp Type",
       "sweetIndexVal": "9.8 / 10",
       "fiberVal": "Minimal, Confined purely around the inner seed wall",
@@ -167,7 +165,7 @@ JSON
       "ripeningVal": "Slow, Reliable Shelf Aging Without Internal Quality Degradation",
       "growthVal": "Highly Prolific Regular Annual Bearer (No Alternate Bearing)",
       "goalVal": "Maximum Yield per Hectare via Advanced Intensive Cultivation",
-      "fruitTypeVal": "Small to Medium Oblong, Deep Green Exterior Armor",
+      "fruitTypeVal": "Small to Medium Oblong, Deep Green Exterior Skin",
       "harvestVal": "June 20th – July 10th",
       "pulpVal": "Deep Burnt Orange Saffron Red",
       "narration": "This is the brilliant hybrid Amrapali. Specially engineered for high-density orchards, its dwarf stature yields magnificent clusters containing deep orange-red pulp that boasts the highest beta-carotene content."

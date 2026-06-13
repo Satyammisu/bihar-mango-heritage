@@ -50,7 +50,7 @@
     <div class="hero-content">
         <h1 id="lblVarietyTitle">Bombai Mango</h1>
         <h2 id="lblLocalName">बम्बई (Bombai)</h2>
-        <p id="lblTagline" style="font-size:1.3rem; font-weight:600; margin-bottom: 15px;">The Vibrant Early-Season Commercial Emperor of North Bihar</p>
+        <p id="lblTagline" style="font-size:1.3rem; font-weight:600; margin-bottom: 15px;">The Pride of Early Season Mangoes of Bihar</p>
         <p id="lblSubTag" style="font-size:1rem; background:rgba(255,255,255,.15); padding:10px 20px; border-radius:30px; display:inline-block;">🌱 Highly Valued Early Harvest | Striking Yellow-Green Hue with Crimson Blush</p>
     </div>
 </section>
@@ -236,7 +236,6 @@ function applyLocalization(data) {
     if(data.lblTaxonomyTitle) document.getElementById("lblTaxonomyTitle").innerHTML = data.lblTaxonomyTitle;
     if(data.lblGoal) document.getElementById("lblGoal").innerHTML = data.lblGoal;
     
-    // FIX #2: Corrected matching conditional key evaluation bounds check
     if(data.lblFruitType) document.getElementById("lblFruitType").innerHTML = data.lblFruitType;
     if(data.lblHarvest) document.getElementById("lblHarvest").innerHTML = data.lblHarvest;
     if(data.lblPulp) document.getElementById("lblPulp").innerHTML = data.lblPulp;
@@ -277,7 +276,9 @@ function applyLocalization(data) {
     if(v.ripeningVal) document.getElementById("lblRipeningVal").innerHTML = v.ripeningVal;
     if(v.growthVal) document.getElementById("lblGrowthVal").innerHTML = v.growthVal;
     if(v.goalVal) document.getElementById("lblGoalVal").innerHTML = v.goalVal;
-    if(v.fruitTypeVal) document.getElementById("fruitTypeVal").innerHTML = v.fruitTypeVal;
+    
+    /* FIX: Critical Bug Mismatch Patched Safely */
+    if(v.fruitTypeVal) document.getElementById("lblFruitTypeVal").innerHTML = v.fruitTypeVal;
     if(v.harvestVal) document.getElementById("lblHarvestVal").innerHTML = v.harvestVal;
     if(v.pulpVal) document.getElementById("lblPulpVal").innerHTML = v.pulpVal;
 
@@ -291,7 +292,6 @@ function applyLocalization(data) {
 async function loadLocalizationData() {
     const selectedLanguage = localStorage.getItem("language") || "en";
     
-    // FIX #1: Clean sweep assignment of active states across the language bar deck element set
     document.querySelectorAll(".language-bar button").forEach(btn => {
         btn.classList.remove("active");
     });
@@ -303,7 +303,6 @@ async function loadLocalizationData() {
     
     try {
         const response = await fetch(`lang/${selectedLanguage}.json`);
-        // FIX #4: Throws error to fallback engine if the resource returns 404/500 streams
         if (!response.ok) throw new Error(`HTTP network error. Status: ${response.status}`);
         
         currentLanguageData = await response.json();
@@ -314,9 +313,6 @@ async function loadLocalizationData() {
     }
 }
 
-/**
- * Triggered by button interface row interaction directly
- */
 function changeLanguage(langCode) {
     localStorage.setItem("language", langCode);
     window.speechSynthesis.cancel(); 
@@ -330,7 +326,6 @@ document.getElementById("audioGuideBtn").addEventListener("click", function(){
         return;
     }
     
-    // FIX #5: Added deep optional chain checks to stop execution safely if narration block properties are missing
     const v = currentLanguageData.varieties ? currentLanguageData.varieties[varietyKey] : null;
     const narration = v ? v.narration : null;
     
@@ -361,33 +356,3 @@ window.addEventListener("DOMContentLoaded", loadLocalizationData);
 </script>
 </body>
 </html>
-📋 JSON Translation Blocks for bombai
-Append these complete localization data models into your matching language translation assets directory:
-
-lang/en.json
-JSON
-"chartLabelsBombai": ["Bombai", "Alphonso", "Dashehari", "Kesar", "Totapuri"],
-"varieties": {
-  "bombai": {
-    "title": "Bombai",
-    "localName": "बम्बई (Bombai)",
-    "tagline": "The Vibrant Early-Season Commercial Emperor of North Bihar",
-    "subTag": "Highly Valued Early Harvest | Striking Yellow-Green Hue with Crimson Blush",
-    "origin": "Saran, Muzaffarpur & Darbhanga Belts",
-    "season": "Mid May – Early June",
-    "sweetValue": "8.5 / 10",
-    "plantType": "Large, Spreading Erect Architecture",
-    "flavorVal": "Richly Sweet with a Distinctive, Pleasing Tangy Subtone",
-    "textureVal": "Firm, Meaty, and Free of Coarse Fiber",
-    "sweetIndexVal": "8.5 / 10",
-    "fiberVal": "Very Low, Clean Pulp Experience",
-    "utilityVal": "Excellent Early Table Variety & Top Commercial Shipper",
-    "ripeningVal": "Uniform Early Season Natural Ripener",
-    "growthVal": "Vigorous Growth with Massive Spreading Branch Structure",
-    "goalVal": "High Early-Market Catch & Superior Post-Harvest Transportability",
-    "fruitTypeVal": "Medium-Sized, Ovate-Oblong Distinctive Ecotype",
-    "harvestVal": "May 15th – June 10th Primary Trade Window",
-    "pulpVal": "Attractive Deep Primrose Yellow to Light Orange",
-    "narration": "Welcome to the Smart Mango Knowledge Wall. You are discovering the legendary Bombai Mango, also called Bambai across Bihar. Landing as one of the very first premium varieties to hit North Bihar markets in May, it is distinguished by its unique green-yellow thick skin showing a signature crimson blush at the shoulder. It is exceptionally firm, pleasantly sweet with a balanced tang, making it highly commercial and an exceptional traveler for domestic trade."
-  }
-}

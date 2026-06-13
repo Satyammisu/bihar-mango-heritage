@@ -17,6 +17,10 @@
     .hero-content h1 { font-size: 4rem; font-weight: 800; }
     .hero-content h2 { font-size: 2.2rem; font-weight: 500; margin-bottom: 10px; }
 
+    /* Hidden Language Selector Overlay for System Sync */
+    .lang-bar-hidden { text-align: center; margin: -25px auto 40px; position: relative; z-index: 110; }
+    .lang-bar-hidden select { background: #2e7d32; color: white; padding: 12px 25px; border: none; border-radius: 30px; font-size: 15px; font-weight: 600; cursor:pointer; box-shadow: 0 5px 15px rgba(46,125,50,0.3); outline: none; appearance: none; }
+
     /* Layout Content Structure */
     .container { max-width: 1200px; margin: auto; padding: 0 20px 40px; }
     .card { background: white; padding: 35px; border-radius: 25px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(0,0,0,.08); }
@@ -39,21 +43,29 @@
 
 <section class="hero">
     <div class="event" id="lblEvent">🥭 Aam Mahotsav 2026</div>
-    <div class="govt">🏛 Government of Bihar<br>🌿 Directorate of Horticulture</div>
+    <div class="govt" id="lblGovtHeading">🏛 Government of Bihar<br>🌿 Directorate of Horticulture</div>
     <div class="hero-content">
-        <h1>🥭 Chausa Mango</h1>
+        <h1 id="lblVarietyTitle">🥭 Chausa Mango</h1>
         <h2 id="lblLocalName">चौसा (Chausa)</h2>
         <p id="lblTagline" style="font-size:1.3rem; font-weight:600; margin-bottom: 15px;">The Emperor of Sweetness</p>
         <p id="lblSubTag" style="font-size:1rem; background:rgba(255,255,255,.15); padding:10px 20px; border-radius:30px; display:inline-block;">🌱 Premium Late-Season Heirloom Cultivar</p>
     </div>
 </section>
 
-<!-- Quick Facts Section Dashboard Elements -->
+<div class="lang-bar-hidden">
+    <select id="languageSelector">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="mai">मैथिली</option>
+        <option value="bho">भोजपुरी</option>
+    </select>
+</div>
+
 <div style="max-width:1200px; margin:-40px auto 40px; background:white; padding:25px; border-radius:25px; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; box-shadow:0 10px 35px rgba(0,0,0,.15); position:relative; z-index:100;">
     <div style="text-align:center;"><h3 id="lblOriginTitle" style="color:#ff9800;">📍 Origin</h3><p id="lblOriginValue"><b>Widespread (Bihar)</b></p></div>
     <div style="text-align:center;"><h3 id="lblSeasonTitle" style="color:#ff9800;">📅 Season</h3><p id="lblSeasonValue"><b>July – August</b></p></div>
     <div style="text-align:center;"><h3 id="lblTssTitle" style="color:#ff9800;">🧪 TSS</h3><p><b>22°–24° Brix</b></p></div>
-    <div style="text-align:center;"><h3 id="lblSweetTitle" style="color:#ff9800;">📈 Sweetness</h3><p><b>10 / 10</b></p></div>
+    <div style="text-align:center;"><h3 id="lblSweetTitle" style="color:#ff9800;">📈 Sweetness</h3><p id="lblSweetValue"><b>10 / 10</b></p></div>
     <div style="text-align:center;"><h3 id="lblTypeTitle" style="color:#ff9800;">🌱 Plant Type</h3><p id="lblTypeValue"><b>Vigorous / Tall Canopy</b></p></div>
 </div>
 
@@ -63,7 +75,7 @@
         <div class="info-grid">
             <div class="info-box"><h3 id="lblFlavor">Flavor Profile</h3><p id="lblFlavorVal">Honey-like Extra Sweet</p></div>
             <div class="info-box"><h3 id="lblTexture">Texture</h3><p id="lblTextureVal">Very Juicy & Melting</p></div>
-            <div class="info-box"><h3 id="lblSweetIndex">Sweetness Index</h3><p>10 / 10</p></div>
+            <div class="info-box"><h3 id="lblSweetIndex">Sweetness Index</h3><p id="lblSweetIndexVal">10 / 10</p></div>
             <div class="info-box"><h3 id="lblFiber">Fiber Content</h3><p id="lblFiberVal">Extremely Low</p></div>
             <div class="info-box"><h3 id="lblUtility">Primary Utility</h3><p id="lblUtilityVal">Table & Sucking Purpose</p></div>
             <div class="info-box"><h3 id="lblRipening">Ripening</h3><p id="lblRipeningVal">Late Season</p></div>
@@ -74,7 +86,7 @@
     <div class="card">
         <h2 class="section-title" id="lblScientificTitle">🔬 Scientific Highlights</h2>
         <div class="info-grid">
-            <div class="info-box"><h3>Taxonomy</h3><p>Mangifera indica L.</p></div>
+            <div class="info-box"><h3 id="lblTaxonomyTitle">Taxonomy</h3><p>Mangifera indica L.</p></div>
             <div class="info-box"><h3 id="lblGoal">Selection Goal</h3><p id="lblGoalVal">High Brix Accumulation</p></div>
             <div class="info-box"><h3 id="lblFruitType">Fruit Type</h3><p id="lblFruitTypeVal">Traditional Table Variety</p></div>
             <div class="info-box"><h3 id="lblHarvest">Harvest Window</h3><p id="lblHarvestVal">July – Early August</p></div>
@@ -82,23 +94,22 @@
         </div>
     </div>
 
-    <!-- Verified Nutritional & Physical Properties Matrix -->
     <div class="card">
         <h2 class="section-title" id="lblTableTitle">⚖️ Variety Comparison: Nutritional Profile</h2>
         <table>
             <thead>
                 <tr>
                     <th id="thVariety">Variety</th>
-                    <th>TSS (°Brix)</th>
-                    <th id="thType">Fruit Type</th>
+                    <th id="thTss">TSS (°Brix)</th>
+                    <th id="thGi">Glycemic Index (GI)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td><strong id="tdCurrent">Chausa</strong></td><td>22–24</td><td id="tdCurrentType">Traditional Table Variety</td></tr>
-                <tr><td>Amrapali</td><td>20–22</td><td>Hybrid</td></tr>
-                <tr><td>Dashehari</td><td>18–20</td><td>Table Variety</td></tr>
-                <tr><td>Kesar</td><td>19–21</td><td>Table Variety</td></tr>
-                <tr><td>Totapuri</td><td>15–17</td><td>Processing Variety</td></tr>
+                <tr><td><strong id="tdCurrent">Chausa</strong></td><td>22–24</td><td>55–58</td></tr>
+                <tr><td>Alphonso</td><td>20–22</td><td>56–58</td></tr>
+                <tr><td>Dashehari</td><td>18–20</td><td>54–56</td></tr>
+                <tr><td>Kesar</td><td>19–21</td><td>53–55</td></tr>
+                <tr><td>Totapuri</td><td>15–17</td><td>50–52</td></tr>
             </tbody>
         </table>
         <p id="lblTableNote" style="font-size:12px;color:#666;margin-top:12px;">
@@ -109,34 +120,15 @@
     <div class="card">
         <h2 class="section-title" id="lblSpecialTitle">🏆 Why Chausa is Special</h2>
         <ul id="listSpecial" style="line-height:2; font-size:1.05rem; padding-left:25px;">
-            <li>Extends the mango marketing calendar significantly by dominant performance deep into July and August.</li>
-            <li>Universally acknowledged for hitting among the absolute highest natural TSS levels recorded in commercial lineages.</li>
-            <li>Historically backed by rich regional folklore, retaining massive consumer demand across both domestic and export channels.</li>
-            <li>Presents an uniform, fiberless bright yellow pulp structure that delivers an intensely rich, honeyed aftertaste.</li>
-            <li>Displays strong, enduring vegetative field vigor that withstands changing weather patterns.</li>
-        </ul>
+            </ul>
     </div>
 
     <div class="card">
         <h2 class="section-title" id="lblExpertTitle">📊 Expert Summary</h2>
         <p id="pExpertSummary" style="line-height:2; font-size:1.05rem;">
-            Chausa serves as the definitive anchor for the late-season mango window across Bihar. Characterized by its brilliant golden-yellow skin upon ripening and an exceptionally low-fiber matrix, this variety ensures sustained economic returns to orchard owners well after mid-season varieties close production. It remains one of the most commercially important late-season mango cultivars cultivated across Bihar and northern India.
-        </p>
+            </p>
     </div>
 
-    <!-- Authenticated Institutional References Container Block -->
-    <div class="card">
-        <h2 class="section-title" id="lblRefTitle">📚 Scientific References</h2>
-        <ul style="line-height:2; font-size:1.05rem; padding-left:25px; color:#555;">
-            <li>ICAR-Central Institute for Subtropical Horticulture (CISH), Lucknow</li>
-            <li>Dr. Rajendra Prasad Central Agricultural University (RPCAU), Pusa, Bihar</li>
-            <li>Bihar Agricultural University (BAU), Sabour</li>
-            <li id="liGovtRef">Directorate of Horticulture, Government of Bihar</li>
-            <li>National Horticulture Board (NHB)</li>
-        </ul>
-    </div>
-
-    <!-- Dynamic Audio Guide Control Area -->
     <div style="text-align:center; margin:30px 0;">
         <button id="audioGuideBtn" style="background:#2e7d32; color:white; padding:14px 30px; border:none; border-radius:10px; cursor:pointer; font-size:16px; font-weight:600;">
             🎙️ Audio Guide
@@ -153,59 +145,142 @@
     </center>
 </div>
 
-<footer>
-    🏛 Government of Bihar
-    <br>
-    🌿 Directorate of Horticulture
-    <br><br>
-    🥭 Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
+<footer id="lblFooterText">
+    🏛 Government of Bihar<br>🌿 Directorate of Horticulture<br><br>🥭 Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
 </footer>
 
-<!-- Production Ready Web Speech Engine Script Block -->
 <script>
+const varietyKey = "chausa"; 
 let currentLanguageData = {};
 
-async function loadLocalizationData() {
-    const selectedLanguage = localStorage.getItem("language") || "en";
-    try {
-        const response = await fetch(`lang/${selectedLanguage}.json`);
-        currentLanguageData = await response.json();
-    } catch(error){
-        // Safe exhibition kiosk fallback layer
-        currentLanguageData = {
-            chausaNarration: "Chausa is one of the most famous late season mango varieties cultivated in Bihar. It is known for its exceptionally sweet taste, bright yellow pulp, low fibre content and strong market demand."
-        };
-        console.error(error);
+/**
+ * Executes core DOM text modifications utilizing localization matrix layers
+ */
+function applyLocalization(data) {
+    if (!data) return;
+    
+    // Core Layout Branding Framework Injection
+    if(data.lblEvent) document.getElementById("lblEvent").innerHTML = "🥭 " + data.lblEvent;
+    if(data.lblGovtHeading) document.getElementById("lblGovtHeading").innerHTML = data.lblGovtHeading;
+    if(data.lblProfileTitle) document.getElementById("lblProfileTitle").innerHTML = "🥭 " + data.lblProfileTitle;
+    if(data.lblScientificTitle) document.getElementById("lblScientificTitle").innerHTML = "🔬 " + data.lblScientificTitle;
+    if(data.lblTableTitle) document.getElementById("lblTableTitle").innerHTML = "⚖️ " + data.lblTableTitle;
+    if(data.lblSpecialTitle) document.getElementById("lblSpecialTitle").innerHTML = "🏆 " + data.lblSpecialTitle;
+    if(data.lblExpertTitle) document.getElementById("lblExpertTitle").innerHTML = "📊 " + data.lblExpertTitle;
+    
+    // Technical Metric Sub-Grid Labels
+    if(data.lblFlavor) document.getElementById("lblFlavor").innerHTML = data.lblFlavor;
+    if(data.lblTexture) document.getElementById("lblTexture").innerHTML = data.lblTexture;
+    if(data.lblSweetIndex) document.getElementById("lblSweetIndex").innerHTML = data.lblSweetIndex;
+    if(data.lblFiber) document.getElementById("lblFiber").innerHTML = data.lblFiber;
+    if(data.lblUtility) document.getElementById("lblUtility").innerHTML = data.lblUtility;
+    if(data.lblRipening) document.getElementById("lblRipening").innerHTML = data.lblRipening;
+    if(data.lblGrowth) document.getElementById("lblGrowth").innerHTML = data.lblGrowth;
+    if(data.lblTaxonomyTitle) document.getElementById("lblTaxonomyTitle").innerHTML = data.lblTaxonomyTitle;
+    if(data.lblGoal) document.getElementById("lblGoal").innerHTML = data.lblGoal;
+    if(data.lblFruitType) document.getElementById("lblFruitType").innerHTML = data.lblFruitType;
+    if(data.lblHarvest) document.getElementById("lblHarvest").innerHTML = data.lblHarvest;
+    if(data.lblPulp) document.getElementById("lblPulp").innerHTML = data.lblPulp;
+    
+    // Nutritional Comparison Data Subheaders (GI Implemented)
+    if(data.thVariety) document.getElementById("thVariety").innerHTML = data.thVariety;
+    if(data.thTss) document.getElementById("thTss").innerHTML = data.thTss;
+    if(data.thGi) document.getElementById("thGi").innerHTML = data.thGi;
+    if(data.lblTableNote) document.getElementById("lblTableNote").innerHTML = data.lblTableNote;
+    
+    // Interactive User Control Element Strings
+    if(data.audioGuideBtn) document.getElementById("audioGuideBtn").innerHTML = "🎙️ " + data.audioGuideBtn;
+    if(data.stopAudioBtn) document.getElementById("stopAudioBtn").innerHTML = "⏹ " + data.stopAudioBtn;
+    if(data.btnBack) document.getElementById("btnBack").innerHTML = "← " + data.btnBack;
+    if(data.lblFooterText) document.getElementById("lblFooterText").innerHTML = data.lblFooterText;
+
+    // Resolve Context Map for Target Cultivar Record
+    const v = data.varieties ? data.varieties[varietyKey] : null;
+    if (!v) return;
+
+    if(v.title) document.getElementById("lblVarietyTitle").innerHTML = "🥭 " + v.title;
+    if(v.title) document.getElementById("tdCurrent").innerHTML = v.title;
+    if(v.localName) document.getElementById("lblLocalName").innerHTML = v.localName;
+    if(v.tagline) document.getElementById("lblTagline").innerHTML = v.tagline;
+    if(v.subTag) document.getElementById("lblSubTag").innerHTML = "🌱 " + v.subTag;
+    
+    // Dashboard Core Overview Value Maps
+    if(data.lblOriginTitle) document.getElementById("lblOriginTitle").innerHTML = "📍 " + data.lblOriginTitle;
+    if(v.origin) document.getElementById("lblOriginValue").innerHTML = "<b>" + v.origin + "</b>";
+    if(data.lblSeasonTitle) document.getElementById("lblSeasonTitle").innerHTML = "📅 " + data.lblSeasonTitle;
+    if(v.season) document.getElementById("lblSeasonValue").innerHTML = "<b>" + v.season + "</b>";
+    if(data.lblSweetTitle) document.getElementById("lblSweetTitle").innerHTML = "📈 " + data.lblSweetTitle;
+    if(v.sweetValue) document.getElementById("lblSweetValue").innerHTML = "<b>" + v.sweetValue + "</b>";
+    if(data.lblTypeTitle) document.getElementById("lblTypeTitle").innerHTML = "🌱 " + data.lblTypeTitle;
+    if(v.plantType) document.getElementById("lblTypeValue").innerHTML = "<b>" + v.plantType + "</b>";
+
+    // Value Metrics Context Injection
+    if(v.flavorVal) document.getElementById("lblFlavorVal").innerHTML = v.flavorVal;
+    if(v.textureVal) document.getElementById("lblTextureVal").innerHTML = v.textureVal;
+    if(v.sweetIndexVal) document.getElementById("lblSweetIndexVal").innerHTML = v.sweetIndexVal;
+    if(v.fiberVal) document.getElementById("lblFiberVal").innerHTML = v.fiberVal;
+    if(v.utilityVal) document.getElementById("lblUtilityVal").innerHTML = v.utilityVal;
+    if(v.ripeningVal) document.getElementById("lblRipeningVal").innerHTML = v.ripeningVal;
+    if(v.growthVal) document.getElementById("lblGrowthVal").innerHTML = v.growthVal;
+    if(v.goalVal) document.getElementById("lblGoalVal").innerHTML = v.goalVal;
+    if(v.fruitTypeVal) document.getElementById("lblFruitTypeVal").innerHTML = v.fruitTypeVal;
+    if(v.harvestVal) document.getElementById("lblHarvestVal").innerHTML = v.harvestVal;
+    if(v.pulpVal) document.getElementById("lblPulpVal").innerHTML = v.pulpVal;
+    if(v.expertSummary) document.getElementById("pExpertSummary").innerHTML = v.expertSummary;
+
+    // Build Premium Bullet Layout Points Dynamically
+    if(v.specialPoints && Array.isArray(v.specialPoints)) {
+        const listContainer = document.getElementById("listSpecial");
+        listContainer.innerHTML = ""; 
+        v.specialPoints.forEach(point => {
+            const li = document.createElement("li");
+            li.textContent = point;
+            listContainer.appendChild(li);
+        });
     }
 }
 
+/**
+ * Fetches Local State Database configuration configuration mapping 
+ */
+async function loadLocalizationData() {
+    const selectedLanguage = localStorage.getItem("language") || "en";
+    const dropdown = document.getElementById("languageSelector");
+    if(dropdown) dropdown.value = selectedLanguage;
+    
+    try {
+        const response = await fetch(`lang/${selectedLanguage}.json`);
+        currentLanguageData = await response.json();
+        applyLocalization(currentLanguageData);
+    } catch(error) {
+        console.error("Critical Asset Resolution Failure:", error);
+    }
+}
+
+// Live Select Interface Mutation Handler
+document.getElementById("languageSelector").addEventListener("change", function(){
+    localStorage.setItem("language", this.value);
+    window.speechSynthesis.cancel(); // Stop any legacy audio threads instantly
+    location.reload();
+});
+
+// Production-Grade Web Speech Utterance Interface Execution Pipeline
 document.getElementById("audioGuideBtn").addEventListener("click", function(){
     if(!('speechSynthesis' in window)){
-        alert("Audio Guide not supported.");
+        alert("Audio Guide narration channels are not supported on this device's browser.");
         return;
     }
-
-    const narration = currentLanguageData.chausaNarration;
-    if(!narration){
-        // Silent warning handling to safeguard exhibition kiosk infrastructure
-        console.warn("Narration data missing.");
-        return;
-    }
+    const v = currentLanguageData.varieties ? currentLanguageData.varieties[varietyKey] : null;
+    const narration = v ? v.narration : null;
+    if(!narration) return;
 
     const speech = new SpeechSynthesisUtterance(narration);
     const selectedLanguage = localStorage.getItem("language") || "en";
-
-    // Locale-aware regional hardware voice routing
-    speech.lang =
-        selectedLanguage === "hi" ? "hi-IN" :
-        selectedLanguage === "mai" ? "hi-IN" :
-        selectedLanguage === "bho" ? "hi-IN" :
-        "en-US";
-
-    speech.rate = 0.9;
-    speech.pitch = 1;
-    speech.volume = 1;
-
+    
+    // Intelligent Voice Pipeline Assignment Layer
+    speech.lang = (selectedLanguage === "en") ? "en-US" : "hi-IN";
+    speech.rate = 0.9; // Lowered slightly to ensure absolute clarity inside busy exhibition environments
+    
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(speech);
 });
@@ -214,13 +289,10 @@ document.getElementById("stopAudioBtn").addEventListener("click", function(){
     window.speechSynthesis.cancel();
 });
 
-// Clear active audio channels prior to interface view switches
 window.addEventListener("beforeunload", () => {
     window.speechSynthesis.cancel();
 });
-
 window.addEventListener("DOMContentLoaded", loadLocalizationData);
 </script>
-
 </body>
 </html>

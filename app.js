@@ -1,13 +1,8 @@
-/**
- * Bihar Smart Mango Knowledge Wall - Kiosk Application Core Engine
- * Manages translation file fetching, secure UI building, and modal mapping.
- */
-
 let currentLanguageData = {};
 const DEFAULT_LANG = 'en';
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Boot the system up with default English localization matrices
+    // Render setup using standard default English translation sets on load
     switchLanguage(DEFAULT_LANG);
     
     const closeBtn = document.getElementById('close-modal-btn');
@@ -17,18 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * Parses and maps UI dictionary keys from current locale payload safely
+ * Handles dictionary mapping and interface translations safely
  */
 async function switchLanguage(langCode) {
     try {
         const response = await fetch(`lang/${langCode}.json`);
         if (!response.ok) {
-            throw new Error(`HTTP error status: ${response.status} reading lang/${langCode}.json`);
+            throw new Error(`HTTP error status: ${response.status} finding lang/${langCode}.json`);
         }
         
         currentLanguageData = await response.json();
         
-        // Target dynamic UI elements cleanly without triggering a total container rebuild
+        // Loop and isolate text string assignments safely using data attribute selectors
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (currentLanguageData[key]) {
@@ -40,20 +35,20 @@ async function switchLanguage(langCode) {
             }
         });
 
-        // Regenerate the interactive cards grid layout
+        // Trigger dynamic gallery card factory rebuild
         buildInteractiveGallery();
         
     } catch (error) {
-        console.error("Critical error loading translation matrix:", error);
+        console.error("Critical error mapping locale updates:", error);
         if (langCode !== DEFAULT_LANG) {
-            console.warn("Deploying safety fallback back to baseline English...");
+            console.warn("Attempting safety fallback strategy back to English baseline...");
             switchLanguage(DEFAULT_LANG);
         }
     }
 }
 
 /**
- * Dynamically builds structural nodes and maps image components securely
+ * Builds cards dynamically combining static image variables and translation records
  */
 function buildInteractiveGallery() {
     const gridContainer = document.getElementById('gallery-grid');
@@ -65,20 +60,17 @@ function buildInteractiveGallery() {
         const structuralData = MANGO_MASTER_DATA[id];
         const translationData = currentLanguageData.varieties?.[id];
 
-        if (!structuralData || !translationData) {
-            console.warn(`Data sync mismatch or omission observed for token key: ${id}`);
-            return;
-        }
+        if (!structuralData || !translationData) return;
 
         const card = document.createElement('div');
         card.className = 'mango-card';
         card.setAttribute('role', 'button');
         card.onclick = () => openDetailedProfile(id);
 
-        // SECURE INJECTION: Image source calls rely directly on defined metadata variables
+        // SECURE PROPERTY INJECTION: Sourced from structuralData.image variable
         card.innerHTML = `
             <div class="card-image-frame">
-                <img src="${structuralData.image}" class="mango-thumb" alt="${translationData.title}" onerror="this.src='images/placeholder.jpg'">
+                <img src="${structuralData.image}" class="mango-thumb" alt="${translationData.title}">
             </div>
             <div class="card-body">
                 <h3>${translationData.title}</h3>
@@ -93,7 +85,7 @@ function buildInteractiveGallery() {
 }
 
 /**
- * Handles modal deployment mapping data straight from static reference structures
+ * Maps and reveals selected variety metrics safely within detail modals
  */
 function openDetailedProfile(id) {
     const structuralData = MANGO_MASTER_DATA[id];
@@ -101,7 +93,7 @@ function openDetailedProfile(id) {
     
     if (!structuralData || !translationData) return;
     
-    // Explicit binding to avoid any 'undefined' image bugs
+    // Explicit binding to avoid any 'undefined' path bugs
     document.getElementById('modal-variety-img').src = structuralData.image;
     document.getElementById('modal-qr-img').src = structuralData.qrCode;
     

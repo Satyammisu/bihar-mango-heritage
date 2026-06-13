@@ -1,3 +1,9 @@
+/**
+ * Bihar Smart Mango Knowledge Wall - Master Application Structural Config
+ * Source of Truth: Structural asset relative paths, ID tokens, and laboratory metrics.
+ * Decoupled from translation strings to safeguard cross-origin asset loads on GitHub Pages.
+ */
+
 const MANGO_MASTER_DATA = {
   "dudhiyamaldah": {
     "id": "dudhiyamaldah",
@@ -13,8 +19,8 @@ const MANGO_MASTER_DATA = {
   },
   "jardalu": {
     "id": "jardalu",
-    "image": "./images/zardalu.jpg",
-    "qrCode": "./qr/zardalu-qr.png",
+    "image": "./images/zardalu.jpg", // Pointing directly to your zardalu.jpg file
+    "qrCode": "./qr/zardalu-qr.png",  // Pointing directly to your zardalu-qr.png file
     "metrics": { "tss": 20.2, "gi": 50.0 }
   },
   "langra": {
@@ -35,6 +41,12 @@ const MANGO_MASTER_DATA = {
     "qrCode": "./qr/amrapali-qr.png",
     "metrics": { "tss": 21.2, "gi": 46.0 }
   },
+  "fazli": {
+    "id": "fazli",
+    "image": "./images/fazli.jpg",
+    "qrCode": "./qr/fazli-qr.png",
+    "metrics": { "tss": 17.0, "gi": 55.0 }
+  },
   "gulabkhas": {
     "id": "gulabkhas",
     "image": "./images/gulabkhas.jpg",
@@ -43,7 +55,7 @@ const MANGO_MASTER_DATA = {
   },
   "maldah": {
     "id": "maldah",
-    "image": "./images/dudhiyamaldah.jpg", 
+    "image": "./images/dudhiyamaldah.jpg", // Redirected directly to your valid dudhiyamaldah image
     "qrCode": "./qr/dudhiyamaldah-qr.png",
     "metrics": { "tss": 20.8, "gi": 49.5 }
   },
@@ -61,5 +73,5 @@ const MANGO_MASTER_DATA = {
   }
 };
 
-// Freeze the object to prevent accidental runtime modifications
+// Freeze the object structure to ensure property definitions are read-only at runtime
 Object.freeze(MANGO_MASTER_DATA);

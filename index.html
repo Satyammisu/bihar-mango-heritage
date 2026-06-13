@@ -1,326 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bihar Smart Mango Knowledge Wall | Kiosk Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background: #f5f7fa; color: #333; overflow-x: hidden; line-height: 1.6; }
-
-    /* Section 1: Welcome Hero Banner Deck */
-    .hero { height: 40vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('images/mango_orchard_banner.jpg'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center; color: white; position: relative; }
-    .govt { position: absolute; top: 25px; right: 35px; text-align: right; font-size: 14px; font-weight: 500; line-height: 1.8; }
-    .event { position: absolute; top: 25px; left: 35px; background: #ff9800; color: white; padding: 12px 20px; border-radius: 40px; font-weight: 600; box-shadow: 0 5px 20px rgba(0,0,0,.25); }
-    .hero-content h1 { font-size: 3.2rem; font-weight: 800; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-    .hero-content p { font-size: 1.2rem; font-weight: 400; margin-top: 10px; }
-
-    /* Section 2: High-Visibility Horizontal Language Switcher */
-    .language-bar { text-align: center; margin: -25px auto 30px; position: relative; z-index: 110; display: flex; justify-content: center; gap: 12px; max-width: 600px; padding: 0 20px; }
-    .language-bar button { background: white; color: #2e7d32; padding: 12px 24px; border: 2px solid #2e7d32; border-radius: 30px; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.2s ease; }
-    .language-bar button.active { background: #2e7d32; color: white; box-shadow: 0 5px 15px rgba(46,125,50,0.3); }
-    .language-bar button:hover { transform: translateY(-2px); }
-
-    .container { max-width: 1400px; margin: auto; padding: 0 20px 60px; }
-    
-    .intro-card { background: white; padding: 30px; border-radius: 25px; margin-bottom: 35px; box-shadow: 0 8px 25px rgba(0,0,0,.06); text-align: center; }
-    .intro-card h2 { color: #2e7d32; margin-bottom: 12px; font-size: 2rem; }
-
-    /* Section 3: High-Priority Kiosk Home Audio Guide Deck Layout */
-    .audio-kiosk-panel { background: #fff8e7; border: 2px dashed #ff9800; padding: 25px; border-radius: 20px; margin-bottom: 40px; text-align: center; }
-    .audio-kiosk-panel p { font-size: 1.1rem; font-weight: 600; color: #b78103; margin-bottom: 15px; }
-    .audio-btn { background: #2e7d32; color: white; padding: 14px 35px; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: 700; box-shadow: 0 4px 15px rgba(46,125,50,0.2); }
-    .audio-btn-stop { background: #c62828; color: white; padding: 14px 35px; border: none; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: 700; margin-left: 15px; box-shadow: 0 4px 15px rgba(198,40,40,0.2); }
-    .audio-btn:hover, .audio-btn-stop:hover { transform: translateY(-2px); }
-
-    /* Section 4: All 11 Mango Grid Layout Matrix Cards */
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 25px; }
-    .gallery-item { background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; display: flex; flex-direction: column; position: relative; border: 1px solid rgba(0,0,0,0.02); }
-    .gallery-item:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
-    
-    .item-image { height: 200px; background-size: cover; background-position: center; position: relative; background-color: #eaeaea; }
-    .item-tag { position: absolute; top: 15px; right: 15px; background: rgba(46, 125, 50, 0.95); color: white; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-    
-    .item-content { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .item-content h3 { font-size: 1.4rem; color: #2e7d32; margin-bottom: 4px; font-weight: 700; }
-    .item-content h4 { font-size: 1.05rem; color: #666; margin-bottom: 10px; font-weight: 500; }
-    .item-content p { font-size: 0.9rem; color: #555; margin-bottom: 15px; line-height: 1.5; height: 70px; overflow: hidden; }
-    
-    /* Section 5: QR Code Kiosk Instructions */
-    .qr-instruction { margin-top: 15px; background: #f9f9f9; padding: 10px; border-radius: 12px; text-align: center; border: 1px solid #eee; font-size: 13px; font-weight: 500; color: #666; display: flex; align-items: center; justify-content: center; gap: 8px; }
-
-    .btn-explore { display: block; text-align: center; background: #ff9800; color: white; text-decoration: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; margin-top: 10px; box-shadow: 0 4px 10px rgba(255,152,0,0.15); }
-    .btn-explore:hover { background: #e65100; }
-
-    /* Section 6: Official Admin Footer Block */
-    footer { background: #2e7d32; color: white; text-align: center; padding: 40px; margin-top: 50px; line-height: 1.8; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="lblMainTitle">Bihar Smart Mango Knowledge Wall</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<section class="hero">
-    <div class="event" id="lblEvent">Aam Mahotsav 2026</div>
-    <div class="govt" id="lblGovtHeading">Government of Bihar<br>Directorate of Horticulture</div>
-    <div class="hero-content">
-        <h1 id="lblMainTitle">Bihar Smart Mango Knowledge Wall</h1>
-        <p id="lblSubTitle">Explore the Rich Horticultural Heritage & Elite Indigenous Cultivars of Bihar</p>
-    </div>
-</section>
-
-<div class="language-bar">
-    <button id="btn-lang-en" onclick="changeLanguage('en')">English</button>
-    <button id="btn-lang-hi" onclick="changeLanguage('hi')">हिन्दी</button>
-    <button id="btn-lang-mai" onclick="changeLanguage('mai')">मैथिली</button>
-    <button id="btn-lang-bho" onclick="changeLanguage('bho')">भोजपुरी</button>
-</div>
-
-<div class="container">
-    <div class="intro-card">
-        <h2 id="lblWelcomeHeader">Welcome Exhibition Visitors</h2>
-        <p id="lblWelcomeBody">Touch any mango variety below to open its rich, interactive digital profile dashboard. Discover scientific highlights, accurate nutritional metrics, and regional audio guide narrations spoken in your preferred language.</p>
-    </div>
-
-    <div class="audio-kiosk-panel">
-        <p id="lblKioskAudioText">🎙️ Press for Exhibition Hall Overview Audio Guide / प्रदर्शिनी कक्ष विवरण हेतु यहाँ दबाएं:</p>
-        <button id="audioGuideBtn" class="audio-btn">🎙️ Audio Guide</button>
-        <button id="stopAudioBtn" class="audio-btn-stop">⏹ Stop Audio</button>
-    </div>
-
-    <div class="gallery-grid">
+    <header class="exhibition-header">
+        <div class="gov-branding">
+            <p data-i18n="lblGovtHeading">Government of Bihar<br>Directorate of Horticulture</p>
+            <span class="event-tag" data-i18n="lblEvent">Aam Mahotsav 2026</span>
+        </div>
+        <h1 data-i18n="lblMainTitle">Bihar Smart Mango Knowledge Wall</h1>
+        <p class="subtitle" data-i18n="lblSubTitle">Explore the Rich Horticultural Heritage & Elite Indigenous Cultivars of Bihar</p>
         
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/dudhiyamaldah.jpg');"><span class="item-tag">Premium</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_dudhiyamaldah">Dudhiya Malda</h3><h4 id="local_dudhiyamaldah">दूधिया मालदह</h4>
-                    <p id="desc_dudhiyamaldah">The ultimate connoisseur variety of Digha, Patna. Exceptionally fiberless with a translucent skin and divine sweet scent.</p>
-                </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="dudhiyamaldah.html" class="btn-explore">Explore Variety →</a>
-            </div>
+        <div class="lang-selector-hub">
+            <button onclick="switchLanguage('en')">English</button>
+            <button onclick="switchLanguage('hi')">हिन्दी</button>
+            <button onclick="switchLanguage('bho')">भोजपुरी</button>
+            <button onclick="switchLanguage('mai')">मैथिली</button>
         </div>
+    </header>
 
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/bombai.jpg');"><span class="item-tag">Early Season</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_bombai">Bombai</h3><h4 id="local_bombai">बम्बई</h4>
-                    <p id="desc_bombai">The early-season market favorite of North Bihar. Known for its distinct green-yellow peel and highly aromatic tangy sweetness.</p>
-                </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="bombai.html" class="btn-explore">Explore Variety →</a>
-            </div>
+    <section class="welcome-container">
+        <h2 data-i18n="lblWelcomeHeader">Welcome Exhibition Visitors</h2>
+        <p data-i18n="lblWelcomeBody">Touch any mango variety below to open its rich, interactive digital profile dashboard.</p>
+        <div class="kiosk-audio-bar">
+            <span data-i18n="lblKioskAudioText">🎙️ Press for Exhibition Hall Overview Audio Guide:</span>
+            <button id="btn-kiosk-audio" data-i18n="audioGuideBtn">Audio Guide</button>
         </div>
+    </section>
 
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/jardalu.jpg');"><span class="item-tag">GI Tagged</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_jardalu">Jardalu</h3><h4 id="local_jardalu">जर्दालू</h4>
-                    <p id="desc_jardalu">Bhagalpur's certified pride. Famous for its bright light golden color and unique, alluring aroma layout properties.</p>
-                </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="jardalu.html" class="btn-explore">Explore Variety →</a>
+    <main class="gallery-wrapper">
+        <div id="gallery-grid" class="grid-container">
             </div>
-        </div>
+    </main>
 
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/langra.jpg');"><span class="item-tag">Mid-Season</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_langra">Langra</h3><h4 id="local_langra">लंगड़ा</h4>
-                    <p id="desc_langra">Intensely sweet with a sharp, unforgettable flavor. Retains its green skin even when fully mature and ready to slice.</p>
+    <div id="variety-modal" class="modal-layer hidden">
+        <div class="modal-content">
+            <button id="close-modal-btn" data-i18n="btnBack">← Back To Mango Gallery</button>
+            
+            <div class="modal-hero-section">
+                <img id="modal-variety-img" src="" alt="Mango Variety Image">
+                <div class="modal-header-text">
+                    <h2 id="modal-title"></h2>
+                    <h4 id="modal-local-name"></h4>
+                    <p id="modal-tagline"></p>
+                    <p id="modal-subtag"></p>
                 </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="langra.html" class="btn-explore">Explore Variety →</a>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/chausa.jpg');"><span class="item-tag">Late Season</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_chausa">Chausa</h3><h4 id="local_chausa">चौसा</h4>
-                    <p id="desc_chausa">The golden, sweet late-summer jewel. Exceptionally juicy pulp with a high brix sweetness index valued everywhere.</p>
+                <div class="modal-qr-zone">
+                    <img id="modal-qr-img" src="" alt="QR Code">
+                    <p data-i18n="lblQrText">Scan QR Code to explore variety profile</p>
                 </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="chausa.html" class="btn-explore">Explore Variety →</a>
             </div>
-        </div>
 
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/amrapali.jpg');"><span class="item-tag">Hybrid Elite</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_amrapali">Amrapali</h3><h4 id="local_amrapali">आम्रपाली</h4>
-                    <p id="desc_amrapali">High-density dwarf hybrid. Known for its intense, deep orange pulp and extraordinarily rich beta-carotene value markers.</p>
-                </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="amrapali.html" class="btn-explore">Explore Variety →</a>
-            </div>
+            <fieldset class="taxonomy-panel">
+                <legend data-i18n="lblTaxonomyTitle">Taxonomy</legend>
+                <div class="meta-row"><strong>Origin:</strong> <span id="modal-origin"></span></div>
+                <div class="meta-row"><strong>Harvest Window:</strong> <span id="modal-harvest"></span></div>
+                <div class="meta-row"><strong>Growth Habit:</strong> <span id="modal-growth"></span></div>
+            </fieldset>
         </div>
-
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/fazli.jpg');"><span class="item-tag">Late Giant</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_fazli">Fazli</h3><h4 id="local_fazli">फजली</h4>
-                    <p id="desc_fazli">A majestic, large-sized late variety extensively utilized in commercial food processing processing pipelines.</p>
-                </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="fazli.html" class="btn-explore">Explore Variety →</a>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/gulabkhas.jpg');"><span class="item-tag">Aromatic Elite</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_gulabkhas">Gulabkhas</h3><h4 id="local_gulabkhas">गुलाबखास</h4>
-                    <p id="desc_gulabkhas">Prized for its gorgeous rosy-pink skin blush and a unique, light rose-water flavor note across its juicy pulp.</p>
-                </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="gulabkhas.html" class="btn-explore">Explore Variety →</a>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/maldah.jpg');"><span class="item-tag">Commercial King</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_maldah">Maldah</h3><h4 id="local_maldah">मालदह</h4>
-                    <p id="desc_maldah">The widespread benchmark commercial variety of Bihar plantations. Deeply sweet, meat-heavy pulp with reliable yields.</p>
-                </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="maldah.html" class="btn-explore">Explore Variety →</a>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/sipahiya.jpg');"><span class="item-tag">Indigenous Rare</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_sipahiya">Sipahiya</h3><h4 id="local_sipahiya">सिपहिया</h4>
-                    <p id="desc_sipahiya">A unique, resilient regional variety holding an exceptional local legacy value among heritage orchards.</p>
-                </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="sipahiya.html" class="btn-explore">Explore Variety →</a>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <div class="item-image" style="background-image: url('images/thumbnails/sukul.jpg');"><span class="item-tag">Traditional Favorite</span></div>
-            <div class="item-content">
-                <div>
-                    <h3 id="title_sukul">Sukul</h3><h4 id="local_sukul">सुकुल</h4>
-                    <p id="desc_sukul">A popular local favorite prized for its thirst-quenching juice quality and reliable home-processing properties.</p>
-                </div>
-                <div class="qr-instruction">📱 <span class="lblQrText">Scan QR Code to explore variety profile</span></div>
-                <a href="sukul.html" class="btn-explore">Explore Variety →</a>
-            </div>
-        </div>
-
     </div>
-</div>
 
-<footer id="lblFooterText">
-    Government of Bihar<br>Directorate of Horticulture<br><br>Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
-</footer>
+    <footer class="exhibition-footer" data-i18n="lblFooterText">
+        Government of Bihar<br>Directorate of Horticulture<br><br>Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
+    </footer>
 
-<script>
-let currentLanguageData = {};
-const loopKeys = ["amrapali", "bombai", "chausa", "dudhiyamaldah", "jardalu", "langra", "sipahiya", "sukul", "fazli", "gulabkhas", "maldah"];
-
-function applyLocalization(data) {
-    if (!data) return;
-    
-    // Core Layout Bindings
-    if(data.lblEvent) document.getElementById("lblEvent").innerHTML = "🥭 " + data.lblEvent;
-    if(data.lblGovtHeading) document.getElementById("lblGovtHeading").innerHTML = data.lblGovtHeading;
-    if(data.lblMainTitle) document.getElementById("lblMainTitle").innerHTML = data.lblMainTitle;
-    if(data.lblSubTitle) document.getElementById("lblSubTitle").innerHTML = data.lblSubTitle;
-    if(data.lblWelcomeHeader) document.getElementById("lblWelcomeHeader").innerHTML = data.lblWelcomeHeader;
-    if(data.lblWelcomeBody) document.getElementById("lblWelcomeBody").innerHTML = data.lblWelcomeBody;
-    if(data.lblFooterText) document.getElementById("lblFooterText").innerHTML = data.lblFooterText;
-    
-    if(data.lblKioskAudioText) document.getElementById("lblKioskAudioText").innerHTML = data.lblKioskAudioText;
-    if(data.audioGuideBtn) document.getElementById("audioGuideBtn").innerHTML = "🎙️ " + data.audioGuideBtn;
-    if(data.stopAudioBtn) document.getElementById("stopAudioBtn").innerHTML = "⏹ " + data.stopAudioBtn;
-
-    // Apply Localized Scan Messages across components
-    const qrLabelText = data.lblQrText || "Scan QR Code to explore variety profile";
-    document.querySelectorAll(".lblQrText").forEach(el => el.innerHTML = qrLabelText);
-
-    const exploreLabelText = data.btnExplore || "Explore Variety →";
-    document.querySelectorAll(".btn-explore").forEach(el => el.innerHTML = exploreLabelText);
-
-    // CRITICAL FIX: Safe, defensive structural check over all 11 varieties to prevent rendering crashes
-    loopKeys.forEach(key => {
-        const titleEl = document.getElementById(`title_${key}`);
-        const localEl = document.getElementById(`local_${key}`);
-        const descEl = document.getElementById(`desc_${key}`);
-        
-        if (data.varieties && data.varieties[key]) {
-            const v = data.varieties[key];
-            if (titleEl && v.title) titleEl.innerHTML = v.title;
-            if (localEl && v.localName) localEl.innerHTML = v.localName;
-            if (descEl && v.tagline) descEl.innerHTML = v.tagline + ". " + (v.subTag || "");
-        }
-    });
-}
-
-async function loadLocalizationData() {
-    const selectedLanguage = localStorage.getItem("language") || "en";
-    
-    document.querySelectorAll(".language-bar button").forEach(btn => {
-        btn.classList.remove("active");
-    });
-    
-    const activeBtn = document.getElementById(`btn-lang-${selectedLanguage}`);
-    if (activeBtn) activeBtn.classList.add("active");
-    
-    try {
-        const response = await fetch(`lang/${selectedLanguage}.json`);
-        if (!response.ok) throw new Error(`Status: ${response.status}`);
-        currentLanguageData = await response.json();
-        applyLocalization(currentLanguageData);
-    } catch(error) {
-        console.error("Localization engine asset pipeline failed:", error);
-    }
-}
-
-function changeLanguage(langCode) {
-    localStorage.setItem("language", langCode);
-    window.speechSynthesis.cancel();
-    location.reload();
-}
-
-// Master Exhibition Hall Narrative Controller Pipeline
-document.getElementById("audioGuideBtn").addEventListener("click", function(){
-    if(!('speechSynthesis' in window)){
-        alert("Audio engine narration channels not supported.");
-        return;
-    }
-    
-    const narrationText = currentLanguageData.lblKioskNarration || "Welcome to the Bihar Smart Mango Knowledge Wall Exhibition Hub. Touch any native cultivar card below or scan its custom QR code using your mobile device to view comprehensive laboratory profiles, analytical sugar brix scales, and target nutritional values.";
-    const speech = new SpeechSynthesisUtterance(narrationText);
-    const selectedLanguage = localStorage.getItem("language") || "en";
-    
-    speech.lang = (selectedLanguage === "en") ? "en-US" : "hi-IN";
-    speech.rate = 0.9;
-    
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(speech);
-});
-
-document.getElementById("stopAudioBtn").addEventListener("click", function() {
-    window.speechSynthesis.cancel();
-});
-
-window.addEventListener("beforeunload", () => { window.speechSynthesis.cancel(); });
-window.addEventListener("DOMContentLoaded", loadLocalizationData);
-</script>
+    <script src="mangoes.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

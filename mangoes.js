@@ -1,10 +1,7 @@
 /**
  * Bihar Smart Mango Knowledge Wall - Master Application Structural Config
  * Source of Truth: Structural asset relative paths, ID tokens, and laboratory metrics.
- * * FIXES APPLIED:
- * 1. Diverted path directory from './qrcodes/' to './qr/'
- * 2. Appended the '-qr.png' suffix to match the physical repository asset names.
- * 3. Resolved 'jardalu' assets to point directly to 'zardalu.jpg' and 'zardalu-qr.png'.
+ * Decoupled from translation strings to safeguard asset loads on GitHub Pages.
  */
 
 const MANGO_MASTER_DATA = {
@@ -21,9 +18,9 @@ const MANGO_MASTER_DATA = {
     "metrics": { "tss": 18.5, "gi": 52.0 }
   },
   "jardalu": {
-    "id": "jardalu", // Keep the programmatic ID key consistent with your translation JSON keys
-    "image": "./images/zardalu.jpg", // Corrected to match your physical filename
-    "qrCode": "./qr/zardalu-qr.png", // Corrected directory, spelling, and suffix
+    "id": "jardalu",
+    "image": "./images/zardalu.jpg", // Pointing directly to your zardalu.jpg asset
+    "qrCode": "./qr/zardalu-qr.png",  // Pointing directly to your zardalu-qr.png asset
     "metrics": { "tss": 20.2, "gi": 50.0 }
   },
   "langra": {
@@ -58,8 +55,8 @@ const MANGO_MASTER_DATA = {
   },
   "maldah": {
     "id": "maldah",
-    "image": "./images/maldah.jpg",
-    "qrCode": "./qr/maldah-qr.png",
+    "image": "./images/dudhiyamaldah.jpg", // Redirected to your valid repository asset file
+    "qrCode": "./qr/dudhiyamaldah-qr.png",
     "metrics": { "tss": 20.8, "gi": 49.5 }
   },
   "sipahiya": {
@@ -76,5 +73,5 @@ const MANGO_MASTER_DATA = {
   }
 };
 
-// Freeze the object to protect structural matrix properties at runtime
+// Protect properties from inadvertent script modifications
 Object.freeze(MANGO_MASTER_DATA);

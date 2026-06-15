@@ -1,363 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sukul Mango | Bihar Smart Mango Knowledge Wall</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="js/chart.umd.min.js"></script>
-<style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background: #f5f7fa; color: #333; overflow-x: hidden; line-height: 1.6; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sukul - Bihar Smart Mango Knowledge Wall</title>
+    <style>
+        :root {
+            --primary-green: #0F5132;
+            --accent-gold: #FFC107;
+            --dark-charcoal: #212529;
+            --soft-cream: #F8F9FA;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            margin: 0; background-color: var(--soft-cream); color: var(--dark-charcoal); padding: 1.5rem;
+        }
+        .container { max-width: 850px; margin: 0 auto; background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .back-btn { display: inline-block; padding: 0.5rem 1rem; font-weight: bold; cursor: pointer; background: #e9ecef; border: none; border-radius: 4px; text-decoration: none; color: black; margin-bottom: 1.5rem; }
+        .hero-section { display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 1.5rem; }
+        .hero-image { width: 250px; height: 250px; object-fit: cover; border-radius: 8px; background-color: #e9ecef; }
+        .header-text { flex: 1; min-width: 250px; }
+        .qr-zone { text-align: center; background: #f1f3f5; padding: 1rem; border-radius: 8px; width: 180px; margin: 0 auto; }
+        .qr-zone img { width: 150px; height: 150px; display: block; margin: 0 auto 0.5rem auto; }
+        
+        .taxonomy-panel { border: 1px solid #ccc; border-radius: 8px; padding: 1.25rem; background-color: #fbfbfb; margin-bottom: 1.5rem; }
+        .taxonomy-panel legend { font-weight: bold; padding: 0 0.5rem; color: var(--primary-green); font-size: 1.1rem; }
+        
+        .comparison-section, .chart-section { background: #fff; padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid #e9ecef; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .comparison-table th { background: var(--primary-green); color: white; padding: 12px; font-size: 0.95rem; }
+        .comparison-table td { padding: 14px 10px; text-align: center; border: 1px solid #dee2e6; font-size: 0.95rem; }
+        .table-note { font-size: 0.8rem; color: #6c757d; margin-top: 8px; }
+        .chart-container-wrapper { position: relative; width: 100%; height: 350px; }
 
-    /* Hero Section */
-    .hero { height: 60vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('images/sukul.jpg'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center; color: white; position: relative; }
-    .govt { position: absolute; top: 25px; right: 35px; text-align: right; font-size: 14px; font-weight: 500; line-height: 1.8; }
-    .event { position: absolute; top: 25px; left: 35px; background: #ff9800; color: white; padding: 12px 20px; border-radius: 40px; font-weight: 600; box-shadow: 0 5px 20px rgba(0,0,0,.25); }
-    .hero-content h1 { font-size: 4rem; font-weight: 800; }
-    .hero-content h2 { font-size: 2.2rem; font-weight: 500; margin-bottom: 10px; }
-
-    /* High-Visibility Horizontal Language Bar Deck matching index.html */
-    .language-bar { text-align: center; margin: -25px auto 40px; position: relative; z-index: 110; display: flex; justify-content: center; gap: 12px; max-width: 600px; padding: 0 20px; }
-    .language-bar button { background: white; color: #2e7d32; padding: 12px 24px; border: 2px solid #2e7d32; border-radius: 30px; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.2s ease; font-family: 'Poppins', sans-serif; }
-    .language-bar button.active { background: #2e7d32; color: white; box-shadow: 0 5px 15px rgba(46,125,50,0.3); }
-    .language-bar button:hover { transform: translateY(-2px); }
-
-    /* Layout Content Structure */
-    .container { max-width: 1200px; margin: auto; padding: 0 20px 40px; }
-    .card { background: white; padding: 35px; border-radius: 25px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(0,0,0,.08); }
-    .section-title { font-size: 1.8rem; margin-bottom: 25px; color: #2e7d32; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-
-    /* Info Grid Layout Elements */
-    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .info-box { background: #fff8e7; padding: 20px; border-radius: 15px; text-align: center; }
-    .info-box h3 { color: #ff9800; margin-bottom: 10px; }
-
-    /* Variety Comparison Table */
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 15px; overflow: hidden; }
-    th, td { padding: 18px; border: 1px solid #eee; text-align: center; }
-    th { background: #2e7d32; color: white; }
-
-    footer { background: #2e7d32; color: white; text-align: center; padding: 40px; margin-top: 40px; line-height: 1.8; }
-</style>
+        .gi-legend-container {
+            display: flex; gap: 1.5rem; margin: 0.5rem 0 1.25rem 0; flex-wrap: wrap;
+            background: #f8f9fa; padding: 10px 15px; border-radius: 6px; border-left: 4px solid var(--primary-green);
+        }
+        .legend-pill { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: bold; color: #495057; }
+        
+        /* Executive Badge Styling */
+        .badge-value { padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; display: inline-block; }
+        .badge-target { background: #e8f5e9; color: #1b5e20; border: 1px solid #c8e6c9; }
+        .badge-amber { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; }
+        .badge-red { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+        .badge-gray { background: #f5f5f5; color: #424242; border: 1px solid #e0e0e0; }
+    </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
 <body>
 
-<section class="hero">
-    <div class="event" id="lblEvent">Aam Mahotsav 2026</div>
-    <div class="govt" id="lblGovtHeading">Government of Bihar<br>Directorate of Horticulture</div>
-    <div class="hero-content">
-        <h1 id="lblVarietyTitle">Sukul Mango</h1>
-        <h2 id="lblLocalName">सुकुल (Sukul)</h2>
-        <p id="lblTagline" style="font-size:1.3rem; font-weight:600; margin-bottom: 15px;">The Classic Honeyed Delight of North Bihar</p>
-        <p id="lblSubTag" style="font-size:1rem; background:rgba(255,255,255,.15); padding:10px 20px; border-radius:30px; display:inline-block;">🌱 Traditional Mid-Season Favorite | Delicate Sweet Sub-acid Blend</p>
-    </div>
-</section>
-
-<div class="language-bar">
-    <button id="btn-lang-en" onclick="changeLanguage('en')">English</button>
-    <button id="btn-lang-hi" onclick="changeLanguage('hi')">हिन्दी</button>
-    <button id="btn-lang-mai" onclick="changeLanguage('mai')">मैथिली</button>
-    <button id="btn-lang-bho" onclick="changeLanguage('bho')">भोजपुरी</button>
-</div>
-
-<div style="max-width:1200px; margin:-40px auto 40px; background:white; padding:25px; border-radius:25px; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; box-shadow:0 10px 35px rgba(0,0,0,.15); position:relative; z-index:100;">
-    <div style="text-align:center;"><h3 id="lblOriginTitle" style="color:#ff9800;">Origin</h3><p id="lblOriginValue"><b>Muzaffarpur & Darbhanga Belts</b></p></div>
-    <div style="text-align:center;"><h3 id="lblSeasonTitle" style="color:#ff9800;">Season</h3><p id="lblSeasonValue"><b>Mid June – Early July</b></p></div>
-    <div style="text-align:center;"><h3 id="lblTssTitle" style="color:#ff9800;">TSS</h3><p><b>18.2°–19.8° Brix</b></p></div>
-    <div style="text-align:center;"><h3 id="lblSweetTitle" style="color:#ff9800;">Sweetness</h3><p id="lblSweetValue"><b>8.8 / 10</b></p></div>
-    <div style="text-align:center;"><h3 id="lblTypeTitle" style="color:#ff9800;">Plant Type</h3><p id="lblTypeValue"><b>Vigorous, Dense Spherical Canopy</b></p></div>
-</div>
-
 <div class="container">
-    <div class="card">
-        <h2 class="section-title" id="lblProfileTitle">Mango Profile</h2>
-        <div class="info-grid">
-            <div class="info-box"><h3 id="lblFlavor">Flavor Profile</h3><p id="lblFlavorVal">Pleasantly Sweet with Mild Refreshing Tart Notes</p></div>
-            <div class="info-box"><h3 id="lblTexture">Texture</h3><p id="lblTextureVal">Soft, Juicy & Moderately Fibrous Near Stone</p></div>
-            <div class="info-box"><h3 id="lblSweetIndex">Sweetness Index</h3><p id="lblSweetIndexVal">8.8 / 10</p></div>
-            <div class="info-box"><h3 id="lblFiber">Fiber Content</h3><p id="lblFiberVal">Fine, Soft Fiber Structure</p></div>
-            <div class="info-box"><h3 id="lblUtility">Primary Utility</h3><p id="lblUtilityVal">Excellent Table Choice & Household Juicing</p></div>
-            <div class="info-box"><h3 id="lblRipening">Ripening</h3><p id="lblRipeningVal">Mid Season Uniform Ripener</p></div>
-            <div class="info-box"><h3 id="lblGrowth">Growth Habit</h3><p id="lblGrowthVal">Large, Symmetrical, Round Umbrella Canopy</p></div>
+    <a href="index.html" class="back-btn">← Back To Gallery</a>
+    
+    <div class="hero-section">
+        <img class="hero-image" src="./images/sukul.jpg" alt="Sukul" onerror="this.src='./images/placeholder.jpg'">
+        <div class="header-text">
+            <h2 style="margin: 0 0 0.5rem 0; font-size: 2rem;">Sukul ⭐</h2>
+            <h4 style="color: var(--primary-green); margin: 0 0 1rem 0; font-size: 1.2rem;">सुकुल (Sukul)</h4>
+            <p style="font-weight: bold; margin: 0 0 0.5rem 0; line-height: 1.4;">A robust, traditional late-season cultivar highly prized for its large size, remarkable juice yielding properties, and classic heritage flavor matrix.</p>
+            <p style="font-style: italic; color: #555; margin: 0 0 1rem 0; line-height: 1.4;">A staple across North Bihar's household orchards, this variety is deeply favored for traditional pulping, summer beverages, and local farm economy sustainability.</p>
+        </div>
+        <div class="qr-zone">
+            <img src="./qr/sukul-qr.png" alt="QR Code" onerror="this.src='./images/placeholder-qr.png'">
+            <p style="font-size: 0.8rem; margin: 0; font-weight: 500; color: #495057;">Scan QR Code</p>
         </div>
     </div>
 
-    <div class="card">
-        <h2 class="section-title" id="lblScientificTitle">Scientific Highlights</h2>
-        <div class="info-grid">
-            <div class="info-box"><h3 id="lblTaxonomyTitle">Taxonomy</h3><p>Mangifera indica L.</p></div>
-            <div class="info-box"><h3 id="lblGoal">Selection Goal</h3><p id="lblGoalVal">High Yielding Regular Bearer Clone</p></div>
-            <div class="info-box"><h3 id="lblFruitType">Fruit Type</h3><p id="lblFruitTypeVal">Ovalish-Round Flattened Base Ecotype</p></div>
-            <div class="info-box"><h3 id="lblHarvest">Harvest Window</h3><p id="lblHarvestVal">June 12th – July 2nd Optimal Window</p></div>
-            <div class="info-box"><h3 id="lblPulp">Pulp Color</h3><p id="lblPulpVal">Golden Yellowish Orange</p></div>
-        </div>
-    </div>
+    <fieldset class="taxonomy-panel">
+        <legend>Taxonomy</legend>
+        <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong>Origin:</strong> Traditional mango tracts of Bihar, India</div>
+        <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong>Harvest Window:</strong> Late June to Mid July (Late Season)</div>
+        <div style="font-size: 1.05rem;"><strong>Growth Habit:</strong> Heavy vigorous branches, vast spreading canopy, high late-season wind tolerance</div>
+    </fieldset>
 
-    <div class="card">
-        <h2 class="section-title" id="lblTableTitle">Variety Comparison: Nutritional Profile</h2>
-        <table>
+    <section class="comparison-section">
+        <h3 style="margin: 0 0 10px 0; color: var(--primary-green);">⚖️ Variety Comparison: Nutritional Profile</h3>
+        <table class="comparison-table">
             <thead>
                 <tr>
-                    <th id="thVariety">Variety</th>
-                    <th id="thTss">TSS (°Brix)</th>
-                    <th id="thGi">Glycemic Index (GI)</th>
+                    <th>Variety</th>
+                    <th>TSS Range (°Brix)</th>
+                    <th>Glycemic Index (GI)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td><strong id="tdCurrent">Sukul</strong></td><td>18.2–19.8</td><td>53–55</td></tr>
-                <tr><td>Alphonso</td><td>20–22</td><td>56–58</td></tr>
-                <tr><td>Dashehari</td><td>18–20</td><td>54–56</td></tr>
-                <tr><td>Kesar</td><td>19–21</td><td>53–55</td></tr>
-                <tr><td>Totapuri</td><td>15–17</td><td>50–52</td></tr>
+                <tr style="background-color: #f4f9f6; font-weight: bold; border-left: 5px solid var(--primary-green);">
+                    <td style="color: var(--primary-green);">Sukul ⭐</td>
+                    <td><span class="badge-value badge-target">18.0–20.0</span></td>
+                    <td><span class="badge-value badge-amber">53</span></td>
+                </tr>
+                <tr>
+                    <td>Alphonso</td>
+                    <td><span class="badge-value badge-gray">20.0–22.0</span></td>
+                    <td><span class="badge-value badge-red">56</span></td>
+                </tr>
+                <tr>
+                    <td>Dashehari</td>
+                    <td><span class="badge-value badge-gray">18.0–20.0</span></td>
+                    <td><span class="badge-value badge-amber">54</span></td>
+                </tr>
+                <tr>
+                    <td>Kesar</td>
+                    <td><span class="badge-value badge-gray">19.0–21.0</span></td>
+                    <td><span class="badge-value badge-amber">53</span></td>
+                </tr>
+                <tr>
+                    <td>Totapuri</td>
+                    <td><span class="badge-value badge-gray">15.0–17.0</span></td>
+                    <td><span class="badge-value badge-amber">51</span></td>
+                </tr>
             </tbody>
         </table>
-        <p id="lblTableNote" style="font-size:12px;color:#666;margin-top:12px;">
-            * Parameters compiled from standard regional performance targets. Actual metrics vary dynamically based on agronomic conditions.
-        </p>
-    </div>
+        <p class="table-note">* Parameters compiled from standard regional performance targets.</p>
+    </section>
 
-    <div class="card">
-        <h2 class="section-title" id="lblChartTitle">Nutritional Comparison Chart</h2>
-        <div style="position: relative; width: 100%; height: 500px;">
-            <canvas id="comparisonChart"></canvas>
+    <section class="chart-section">
+        <h3 style="margin: 0 0 5px 0; color: var(--primary-green);">📊 TSS & Glycemic Index Comparison Analysis</h3>
+        
+        <div class="gi-legend-container">
+            <div class="legend-pill">🟢 <span>Low GI (≤50)</span></div>
+            <div class="legend-pill">🟡 <span>Moderate GI (51–55)</span></div>
+            <div class="legend-pill">🔴 <span>High GI (>55)</span></div>
         </div>
-    </div>
 
-    <div style="text-align:center; margin:30px 0;">
-        <button id="audioGuideBtn" style="background:#2e7d32; color:white; padding:14px 30px; border:none; border-radius:10px; cursor:pointer; font-size:16px; font-weight:600;">
-            🎙️ Audio Guide
-        </button>
-        <button id="stopAudioBtn" style="background:#c62828; color:white; padding:14px 30px; border:none; border-radius:10px; cursor:pointer; font-size:16px; font-weight:600; margin-left:10px;">
-            ⏹ Stop Audio
-        </button>
-    </div>
+        <div class="chart-container-wrapper">
+            <canvas id="isolatedNutritionChart"></canvas>
+        </div>
 
-    <center>
-        <a href="index.html" id="btnBack" style="display:inline-block; padding:14px 30px; background:#ff9800; color:white; text-decoration:none; border-radius:10px; font-weight:600; margin-top:25px;">
-            ← Back To Mango Gallery
-        </a>
-    </center>
+        <div style="background:#f8f9fa; padding:15px; border-left:5px solid #0F5132; margin-top:25px; border-radius:5px; line-height: 1.6; font-size: 0.95rem;">
+            <strong>Health Insight:</strong>
+            Sukul delivers an exceptionally balanced late-season performance, maintaining a moderate Glycemic Index (53) that paces securely below Alphonso (56) while matching Kesar. Generating a steady **19.00 °Brix midpoint**, it stands as a premium option for high-volume juice processing and culinary value without triggering extreme postprandial glucose surges.
+        </div>
+    </section>
 </div>
 
-<footer id="lblFooterText">
-    Government of Bihar<br>Directorate of Horticulture<br><br>Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
-</footer>
-
 <script>
-const varietyKey = "sukul"; 
-let currentLanguageData = {};
-let comparisonChartInstance = null;
-
-/**
- * Initializes and dynamically updates ChartJS layout configuration with localized labels
- */
-function renderChart(tssLabel, giLabel, localizedLabels) {
-    const canvasElement = document.getElementById('comparisonChart');
-    if (!canvasElement) return;
-    const ctx = canvasElement.getContext('2d');
-    
-    if (comparisonChartInstance) {
-        comparisonChartInstance.destroy();
-    }
-
-    const defaultLabels = ['Sukul', 'Alphonso', 'Dashehari', 'Kesar', 'Totapuri'];
-    const finalLabels = (localizedLabels && localizedLabels.length === 5) ? localizedLabels : defaultLabels;
-
-    if (typeof Chart === 'undefined') {
-        console.error("Chart engine asset missing from execution stream.");
-        return;
-    }
-
-    comparisonChartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: finalLabels,
-            datasets: [{
-                label: tssLabel || 'TSS (°Brix)',
-                data: [19.0, 21, 19, 20, 16],
-                backgroundColor: '#ff9800',
-                borderWidth: 0,
-                borderRadius: 6
-            }, {
-                label: giLabel || 'Glycemic Index (GI)',
-                data: [54, 57, 55, 54, 51], 
-                backgroundColor: '#2e7d32',
-                borderWidth: 0,
-                borderRadius: 6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false, 
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 70,
-                    grid: { color: '#f0f0f0' },
-                    ticks: { font: { family: 'Poppins', size: 12 } }
-                },
-                x: {
-                    grid: { display: false },
-                    ticks: { font: { family: 'Poppins', size: 13, weight: '600' } }
-                }
+    window.addEventListener('DOMContentLoaded', () => {
+        const ctx = document.getElementById('isolatedNutritionChart').getContext('2d');
+        
+        Chart.register(ChartDataLabels);
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Sukul ⭐', 'Alphonso', 'Dashehari', 'Kesar', 'Totapuri'],
+                datasets: [
+                    {
+                        label: 'Glycemic Index (GI)',
+                        data: [53, 56, 54, 53, 51], // Calibrated for Sukul
+                        backgroundColor: [
+                            '#0F5132', // Sukul (Target Cultivar Highlight)
+                            '#DC3545', // Alphonso (High GI Reference)
+                            '#FFB100', // Dashehari (Moderate)
+                            '#FFB100', // Kesar (Moderate)
+                            '#FFB100'  // Totapuri (Moderate)
+                        ],
+                        borderColor: [
+                            '#0A3622', '#A71D2A', '#B88000', '#B88000', '#B88000'
+                        ],
+                        borderWidth: 1.5,
+                        yAxisID: 'y',
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top',
+                            offset: 2,
+                            font: { weight: 'bold', size: 11 },
+                            formatter: (value) => value
+                        }
+                    },
+                    {
+                        label: 'TSS Midpoint (°Brix)',
+                        data: [19.00, 21.0, 19.0, 20.0, 16.0], // Aligned midpoint parameters
+                        backgroundColor: 'rgba(212, 175, 55, 0.5)', 
+                        borderColor: '#DAA520',
+                        borderWidth: 1.5,
+                        yAxisID: 'y1',
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top',
+                            offset: 2,
+                            font: { weight: 'bold', size: 11 },
+                            formatter: (value) => value.toFixed(2)
+                        }
+                    }
+                ]
             },
-            plugins: {
-                legend: {
-                    position: 'top',
-                    labels: { font: { family: 'Poppins', size: 13, weight: '500' } }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: { top: 25 }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        title: { display: true, text: 'Glycemic Index (GI)', font: { weight: 'bold' } },
+                        min: 0,
+                        max: 70
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        title: { display: true, text: 'TSS Midpoint (°Brix)', font: { weight: 'bold' } },
+                        min: 0,
+                        max: 25,
+                        grid: { drawOnChartArea: false }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: { 
+                        enabled: true,
+                        backgroundColor: 'rgba(33, 37, 41, 0.95)',
+                        titleFont: { weight: 'bold' },
+                        bodyFont: { size: 13 },
+                        padding: 10,
+                        cornerRadius: 6,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed.y !== null) { label += context.parsed.y; }
+                                return label;
+                            }
+                        }
+                    }
                 }
             }
-        }
+        });
     });
-}
-
-/**
- * Executes core DOM text modifications utilizing localization matrix layers
- */
-function applyLocalization(data) {
-    if (!data) return;
-    
-    if(data.lblEvent) document.getElementById("lblEvent").innerHTML = "🥭 " + data.lblEvent;
-    if(data.lblGovtHeading) document.getElementById("lblGovtHeading").innerHTML = data.lblGovtHeading;
-    if(data.lblProfileTitle) document.getElementById("lblProfileTitle").innerHTML = "🥭 " + data.lblProfileTitle;
-    if(data.lblScientificTitle) document.getElementById("lblScientificTitle").innerHTML = "🔬 " + data.lblScientificTitle;
-    if(data.lblTableTitle) document.getElementById("lblTableTitle").innerHTML = "⚖️ " + data.lblTableTitle;
-    if(data.lblChartTitle) document.getElementById("lblChartTitle").innerHTML = "📊 " + (data.lblChartTitle || "Nutritional Comparison Chart");
-    
-    if(data.lblFlavor) document.getElementById("lblFlavor").innerHTML = data.lblFlavor;
-    if(data.lblTexture) document.getElementById("lblTexture").innerHTML = data.lblTexture;
-    if(data.lblSweetIndex) document.getElementById("lblSweetIndex").innerHTML = data.lblSweetIndex;
-    if(data.lblFiber) document.getElementById("lblFiber").innerHTML = data.lblFiber;
-    if(data.lblUtility) document.getElementById("lblUtility").innerHTML = data.lblUtility;
-    if(data.lblRipening) document.getElementById("lblRipening").innerHTML = data.lblRipening;
-    if(data.lblGrowth) document.getElementById("lblGrowth").innerHTML = data.lblGrowth;
-    if(data.lblTaxonomyTitle) document.getElementById("lblTaxonomyTitle").innerHTML = data.lblTaxonomyTitle;
-    if(data.lblGoal) document.getElementById("lblGoal").innerHTML = data.lblGoal;
-    
-    // FIX #2: Corrected matching conditional key evaluation bounds check
-    if(data.lblFruitType) document.getElementById("lblFruitType").innerHTML = data.lblFruitType;
-    if(data.lblHarvest) document.getElementById("lblHarvest").innerHTML = data.lblHarvest;
-    if(data.lblPulp) document.getElementById("lblPulp").innerHTML = data.lblPulp;
-    
-    if(data.thVariety) document.getElementById("thVariety").innerHTML = data.thVariety;
-    if(data.thTss) document.getElementById("thTss").innerHTML = data.thTss;
-    if(data.thGi) document.getElementById("thGi").innerHTML = data.thGi;
-    if(data.lblTableNote) document.getElementById("lblTableNote").innerHTML = data.lblTableNote;
-    
-    if(data.audioGuideBtn) document.getElementById("audioGuideBtn").innerHTML = "🎙️ " + data.audioGuideBtn;
-    if(data.stopAudioBtn) document.getElementById("stopAudioBtn").innerHTML = "⏹ " + data.stopAudioBtn;
-    if(data.btnBack) document.getElementById("btnBack").innerHTML = "← " + data.btnBack;
-    if(data.lblFooterText) document.getElementById("lblFooterText").innerHTML = data.lblFooterText;
-
-    const v = data.varieties ? data.varieties[varietyKey] : null;
-    if (!v) return;
-
-    if(v.title) document.getElementById("lblVarietyTitle").innerHTML = "🥭 " + v.title;
-    if(v.title) document.getElementById("tdCurrent").innerHTML = v.title;
-    if(v.localName) document.getElementById("lblLocalName").innerHTML = v.localName;
-    if(v.tagline) document.getElementById("lblTagline").innerHTML = v.tagline;
-    if(v.subTag) document.getElementById("lblSubTag").innerHTML = "🌱 " + v.subTag;
-    
-    if(data.lblOriginTitle) document.getElementById("lblOriginTitle").innerHTML = "📍 " + data.lblOriginTitle;
-    if(v.origin) document.getElementById("lblOriginValue").innerHTML = "<b>" + v.origin + "</b>";
-    if(data.lblSeasonTitle) document.getElementById("lblSeasonTitle").innerHTML = "📅 " + data.lblSeasonTitle;
-    if(v.season) document.getElementById("lblSeasonValue").innerHTML = "<b>" + v.season + "</b>";
-    if(data.lblSweetTitle) document.getElementById("lblSweetTitle").innerHTML = "📈 " + data.lblSweetTitle;
-    if(v.sweetValue) document.getElementById("lblSweetValue").innerHTML = "<b>" + v.sweetValue + "</b>";
-    if(data.lblTypeTitle) document.getElementById("lblTypeTitle").innerHTML = "🌱 " + data.lblTypeTitle;
-    if(v.plantType) document.getElementById("lblTypeValue").innerHTML = "<b>" + v.plantType + "</b>";
-
-    if(v.flavorVal) document.getElementById("lblFlavorVal").innerHTML = v.flavorVal;
-    if(v.textureVal) document.getElementById("lblTextureVal").innerHTML = v.textureVal;
-    if(v.sweetIndexVal) document.getElementById("lblSweetIndexVal").innerHTML = v.sweetIndexVal;
-    if(v.fiberVal) document.getElementById("lblFiberVal").innerHTML = v.fiberVal;
-    if(v.utilityVal) document.getElementById("lblUtilityVal").innerHTML = v.utilityVal;
-    if(v.ripeningVal) document.getElementById("lblRipeningVal").innerHTML = v.ripeningVal;
-    if(v.growthVal) document.getElementById("lblGrowthVal").innerHTML = v.growthVal;
-    if(v.goalVal) document.getElementById("lblGoalVal").innerHTML = v.goalVal;
-    if(v.fruitTypeVal) document.getElementById("lblFruitTypeVal").innerHTML = v.fruitTypeVal;
-    if(v.harvestVal) document.getElementById("lblHarvestVal").innerHTML = v.harvestVal;
-    if(v.pulpVal) document.getElementById("lblPulpVal").innerHTML = v.pulpVal;
-
-    console.log("Chart Loaded Successfully");
-    renderChart(data.thTss, data.thGi, data.chartLabelsSukul || ["Sukul", "Alphonso", "Dashehari", "Kesar", "Totapuri"]);
-}
-
-/**
- * Fetches Local State Database configuration files & handles interface active-class toggle tracking
- */
-async function loadLocalizationData() {
-    const selectedLanguage = localStorage.getItem("language") || "en";
-    
-    // FIX #1: Clean sweep assignment of active states across the language bar deck element set
-    document.querySelectorAll(".language-bar button").forEach(btn => {
-        btn.classList.remove("active");
-    });
-    
-    const activeBtn = document.getElementById(`btn-lang-${selectedLanguage}`);
-    if (activeBtn) {
-        activeBtn.classList.add("active");
-    }
-    
-    try {
-        const response = await fetch(`lang/${selectedLanguage}.json`);
-        // FIX #4: Throws error to fallback engine if the resource returns 404/500 streams
-        if (!response.ok) throw new Error(`HTTP network error. Status: ${response.status}`);
-        
-        currentLanguageData = await response.json();
-        applyLocalization(currentLanguageData);
-    } catch(error) {
-        console.error("Critical Asset Resolution Failure:", error);
-        renderChart('TSS (°Brix)', 'Glycemic Index (GI)', null);
-    }
-}
-
-/**
- * Triggered by button interface row interaction directly
- */
-function changeLanguage(langCode) {
-    localStorage.setItem("language", langCode);
-    window.speechSynthesis.cancel(); 
-    location.reload();
-}
-
-// Web Speech Utterance Interface Pipeline
-document.getElementById("audioGuideBtn").addEventListener("click", function(){
-    if(!('speechSynthesis' in window)){
-        alert("Audio Guide narration channels are not supported on this device's browser.");
-        return;
-    }
-    
-    // FIX #5: Added deep optional chain checks to stop execution safely if narration block properties are missing
-    const v = currentLanguageData.varieties ? currentLanguageData.varieties[varietyKey] : null;
-    const narration = v ? v.narration : null;
-    
-    if(!narration) {
-        console.warn(`Narration dataset target mapping missing for structural node: varieties.${varietyKey}.narration`);
-        alert("Selected audio guide translation matrix track is still processing.");
-        return;
-    }
-
-    const speech = new SpeechSynthesisUtterance(narration);
-    const selectedLanguage = localStorage.getItem("language") || "en";
-    
-    speech.lang = (selectedLanguage === "en") ? "en-US" : "hi-IN";
-    speech.rate = 0.9; 
-    
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(speech);
-});
-
-document.getElementById("stopAudioBtn").addEventListener("click", function(){
-    window.speechSynthesis.cancel();
-});
-
-window.addEventListener("beforeunload", () => {
-    window.speechSynthesis.cancel();
-});
-window.addEventListener("DOMContentLoaded", loadLocalizationData);
 </script>
 </body>
 </html>

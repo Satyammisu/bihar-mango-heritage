@@ -49,12 +49,6 @@ const MANGO_MASTER_DATA = {
     "qrCode": "./qr/amrapali-qr.png",
     "selfMetrics": { "name": "Amrapali", "tss": "20.5–22.0", "tssMid": 21.25, "gi": 54 }
   },
-  "fazli": {
-    "id": "fazli",
-    "image": "./images/fazli.jpg",
-    "qrCode": "./qr/fazli-qr.png",
-    "selfMetrics": { "name": "Fazli", "tss": "16.0–18.0", "tssMid": 17.0, "gi": 52 }
-  },
   "gulabkhas": {
     "id": "gulabkhas",
     "image": "./images/gulabkhas.jpg",
@@ -78,6 +72,18 @@ const MANGO_MASTER_DATA = {
     "image": "./images/sukul.jpg",
     "qrCode": "./qr/sukul-qr.png",
     "selfMetrics": { "name": "Sukul", "tss": "18.5–19.5", "tssMid": 19.0, "gi": 52 }
+  },
+  "krishnabhog": {
+    "id": "krishnabhog",
+    "image": "./images/krishnabhog.jpg",
+    "qrCode": "./qr/krishnabhog-qr.png",
+    "selfMetrics": { "name": "Krishna Bhog", "tss": "19.0–20.5", "tssMid": 19.75, "gi": 55 }
+  },
+  "kalkatiya": {
+    "id": "kalkatiya",
+    "image": "./images/kalkatiya.jpg",
+    "qrCode": "./qr/kalkatiya-qr.png",
+    "selfMetrics": { "name": "Kalkatiya", "tss": "18.0–19.5", "tssMid": 18.75, "gi": 52 }
   }
 };
 

@@ -1,77 +1,85 @@
 /**
- * Bihar Smart Mango Knowledge Wall - Master Application Structural Config
- * Source of Truth: Structural asset relative paths, ID tokens, and laboratory metrics.
- * Decoupled from translation strings to safeguard cross-origin asset loads on GitHub Pages.
+ * Bihar Smart Mango Knowledge Wall - Centralized Horticultural Database
+ * Architecture: Normalized Master-Detail Relationship
+ * Calibrated: 2026 Lab Metrics & Centralized Commercial Benchmarks
  */
+
+// Centralized reference cultivars for standard market comparison
+const BENCHMARK_VARIETIES = [
+  { "name": "Alphonso", "tss": "20.0–22.0", "tssMid": 21.0, "gi": 56 },
+  { "name": "Kesar", "tss": "19.0–21.0", "tssMid": 20.0, "gi": 53 },
+  { "name": "Dashehari", "tss": "18.0–20.0", "tssMid": 19.0, "gi": 54 },
+  { "name": "Totapuri", "tss": "15.0–17.0", "tssMid": 16.0, "gi": 51 }
+];
 
 const MANGO_MASTER_DATA = {
   "dudhiyamaldah": {
     "id": "dudhiyamaldah",
     "image": "./images/dudhiyamaldah.jpg",
     "qrCode": "./qr/dudhiyamaldah-qr.png",
-    "metrics": { "tss": 21.0, "gi": 49.0 }
+    "selfMetrics": { "name": "Dudhiya Maldah", "tss": "20.5–22.0", "tssMid": 21.25, "gi": 51 }
   },
   "bombai": {
     "id": "bombai",
     "image": "./images/bombai.jpg",
     "qrCode": "./qr/bombai-qr.png",
-    "metrics": { "tss": 18.5, "gi": 52.0 }
+    "selfMetrics": { "name": "Bombai", "tss": "18.0–19.0", "tssMid": 18.5, "gi": 55 }
   },
   "jardalu": {
     "id": "jardalu",
-    "image": "./images/zardalu.jpg", // Pointing directly to your zardalu.jpg file
-    "qrCode": "./qr/zardalu-qr.png",  // Pointing directly to your zardalu-qr.png file
-    "metrics": { "tss": 20.2, "gi": 50.0 }
+    "image": "./images/zardalu.jpg",
+    "qrCode": "./qr/zardalu-qr.png",
+    "selfMetrics": { "name": "Jardalu", "tss": "19.5–21.0", "tssMid": 20.25, "gi": 45 }
   },
   "langra": {
     "id": "langra",
     "image": "./images/langra.jpg",
     "qrCode": "./qr/langra-qr.png",
-    "metrics": { "tss": 21.5, "gi": 48.0 }
+    "selfMetrics": { "name": "Langra", "tss": "21.0–22.0", "tssMid": 21.5, "gi": 54 }
   },
   "chausa": {
     "id": "chausa",
     "image": "./images/chausa.jpg",
     "qrCode": "./qr/chausa-qr.png",
-    "metrics": { "tss": 22.0, "gi": 47.0 }
+    "selfMetrics": { "name": "Chausa", "tss": "21.5–23.0", "tssMid": 22.25, "gi": 55 }
   },
   "amrapali": {
     "id": "amrapali",
     "image": "./images/amrapali.jpg",
     "qrCode": "./qr/amrapali-qr.png",
-    "metrics": { "tss": 21.2, "gi": 46.0 }
+    "selfMetrics": { "name": "Amrapali", "tss": "20.5–22.0", "tssMid": 21.25, "gi": 54 }
   },
   "fazli": {
     "id": "fazli",
     "image": "./images/fazli.jpg",
     "qrCode": "./qr/fazli-qr.png",
-    "metrics": { "tss": 17.0, "gi": 55.0 }
+    "selfMetrics": { "name": "Fazli", "tss": "16.0–18.0", "tssMid": 17.0, "gi": 52 }
   },
   "gulabkhas": {
     "id": "gulabkhas",
     "image": "./images/gulabkhas.jpg",
     "qrCode": "./qr/gulabkhas-qr.png",
-    "metrics": { "tss": 19.8, "gi": 51.0 }
+    "selfMetrics": { "name": "Gulabkhas", "tss": "19.0–20.5", "tssMid": 19.75, "gi": 50 }
   },
   "maldah": {
     "id": "maldah",
-    "image": "./images/dudhiyamaldah.jpg", // Redirected directly to your valid dudhiyamaldah image
+    "image": "./images/dudhiyamaldah.jpg",
     "qrCode": "./qr/dudhiyamaldah-qr.png",
-    "metrics": { "tss": 20.8, "gi": 49.5 }
+    "selfMetrics": { "name": "Maldah", "tss": "20.0–21.5", "tssMid": 20.75, "gi": 51 }
   },
   "sipahiya": {
     "id": "sipahiya",
     "image": "./images/sipahiya.jpg",
     "qrCode": "./qr/sipahiya-qr.png",
-    "metrics": { "tss": 18.0, "gi": 53.0 }
+    "selfMetrics": { "name": "Sipahiya", "tss": "17.5–18.5", "tssMid": 18.0, "gi": 52 }
   },
   "sukul": {
     "id": "sukul",
     "image": "./images/sukul.jpg",
     "qrCode": "./qr/sukul-qr.png",
-    "metrics": { "tss": 19.0, "gi": 52.5 }
+    "selfMetrics": { "name": "Sukul", "tss": "18.5–19.5", "tssMid": 19.0, "gi": 52 }
   }
 };
 
-// Freeze the object structure to ensure property definitions are read-only at runtime
+Object.freeze(BENCHMARK_VARIETIES);
 Object.freeze(MANGO_MASTER_DATA);

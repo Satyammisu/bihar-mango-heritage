@@ -1,7 +1,7 @@
 /**
- * Bihar Smart Mango Knowledge Wall - Enterprise Data Merging Engine
- * Logic: Merges standalone cultivar nodes with central benchmarks at runtime.
- * Visuals: Dynamically flags bar charts using clinical green/amber/red parameters.
+ * Bihar Smart Mango Knowledge Wall - Kiosk Application Core Engine
+ * Logic: Merges micro standalone records with central baselines at runtime via getComparisonData().
+ * Visuals: Intercepts canvas creation to apply custom color vectors based on health indicators.
  */
 
 let currentLanguageData = {};
@@ -73,13 +73,12 @@ function buildInteractiveGallery() {
 let activeVarietyIdInModal = null;
 
 /**
- * Dynamic Pipeline Function: Re-unifies localized record nodes with core baselines
+ * Enterprise Production Helper: Dynamically hooks target variety to benchmarks
  */
 function getComparisonData(varietyId) {
-    const mainVariety = MANGO_MASTER_DATA[varietyId];
-    if (!mainVariety) return [...BENCHMARK_VARIETIES];
-    // Place target Bihar variant on top of the list, then unpack global benchmark arrays
-    return [mainVariety.selfMetrics, ...BENCHMARK_VARIETIES];
+    const variety = MANGO_MASTER_DATA[varietyId];
+    if (!variety) return [];
+    return [variety.selfMetrics, ...BENCHMARK_VARIETIES];
 }
 
 function openDetailedProfile(id) {
@@ -100,9 +99,7 @@ function openDetailedProfile(id) {
     document.getElementById('modal-harvest').textContent = translationData.harvestVal;
     document.getElementById('modal-growth').textContent = translationData.growthVal;
     
-    // Execute Dynamic Merging Calculations
     const unifiedDataset = getComparisonData(id);
-    
     populateComparisonTable(unifiedDataset);
     renderNutritionChart(unifiedDataset);
 
@@ -128,7 +125,6 @@ function populateComparisonTable(dataMatrix) {
     if (!body) return;
     body.innerHTML = "";
     dataMatrix.forEach((item, index) => {
-        // Visually bold the primary targeted cultivar inside row elements
         const textWeightStyle = (index === 0) ? "font-weight: 700; color: #0F5132; background-color: #f1f8f5;" : "";
         body.innerHTML += `
             <tr style="${textWeightStyle}">
@@ -148,11 +144,10 @@ function renderNutritionChart(dataMatrix) {
     const tssLabel = currentLanguageData.thTss || 'TSS (°Brix)';
     const giLabel = currentLanguageData.thGi || 'Glycemic Index';
 
-    // Algorithmic Color Assignment Framework mapped out per item data token values
     const assignedColors = dataMatrix.map(item => {
-        if (item.gi <= 50) return '#198754';      // Green (Low Risk)
-        if (item.gi <= 55) return '#ffc107';      // Amber (Moderate Risk)
-        return '#dc3545';                         // Red (High Risk)
+        if (item.gi <= 50) return '#198754';      
+        if (item.gi <= 55) return '#ffc107';      
+        return '#dc3545';                         
     });
 
     currentChartInstance = new Chart(ctx, {
@@ -169,7 +164,7 @@ function renderNutritionChart(dataMatrix) {
                 {
                     label: giLabel,
                     data: dataMatrix.map(x => x.gi),
-                    backgroundColor: assignedColors, // Maps conditional colors dynamically
+                    backgroundColor: assignedColors, 
                     borderWidth: 0
                 }
             ]

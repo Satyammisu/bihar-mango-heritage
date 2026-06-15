@@ -4,7 +4,6 @@
  * Calibrated: 2026 Lab Metrics & Centralized Commercial Benchmarks
  */
 
-// Centralized reference cultivars for standard market comparison
 const BENCHMARK_VARIETIES = [
   { "name": "Alphonso", "tss": "20.0–22.0", "tssMid": 21.0, "gi": 56 },
   { "name": "Kesar", "tss": "19.0–21.0", "tssMid": 20.0, "gi": 53 },

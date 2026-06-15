@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="lblMainTitle">Bihar Smart Mango Knowledge Wall</title>
     <style>
-        /* Embedded Core Structural Layout & Kiosk Protection Overrides */
         :root {
             --primary-green: #0F5132;
             --accent-gold: #FFC107;
@@ -18,15 +17,13 @@
             background-color: var(--soft-cream); 
             color: var(--dark-charcoal); 
         }
-        .hidden { display: none !important; } /* Prevents modal structure memory leakage */
+        .hidden { display: none !important; }
         
-        /* Layout Typography & Header Navigation Panels */
         .exhibition-header { 
             background: linear-gradient(135deg, var(--primary-green), #0a3622); 
             color: white; 
             padding: 2rem; 
             text-align: center; 
-            position: relative; 
         }
         .gov-branding { margin-bottom: 1rem; }
         .event-tag { 
@@ -50,12 +47,8 @@
             margin: 0.25rem; 
             transition: all 0.2s; 
         }
-        .lang-selector-hub button:hover { 
-            background: var(--accent-gold); 
-            color: var(--dark-charcoal); 
-        }
+        .lang-selector-hub button:hover { background: var(--accent-gold); color: var(--dark-charcoal); }
         
-        /* Grid Container Layout Factory */
         .grid-container { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
@@ -71,71 +64,54 @@
             overflow: hidden; 
             cursor: pointer; 
             transition: transform 0.2s; 
-            position: relative; 
         }
         .mango-card:hover { transform: translateY(-5px); }
         .card-image-frame { height: 200px; width: 100%; background-color: #e9ecef; overflow: hidden; }
         .card-image-frame img { width: 100%; height: 100%; object-fit: cover; }
         .card-body { padding: 1.5rem; }
         
-        /* Modal Popup Layer Layout Architecture */
         .modal-layer { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.7); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            z-index: 1000; 
-            overflow-y: auto; 
-            padding: 1rem; 
-            box-sizing: border-box; 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.7); display: flex; align-items: center; 
+            justify-content: center; z-index: 1000; overflow-y: auto; padding: 1rem; box-sizing: border-box; 
         }
         .modal-content { 
-            background: white; 
-            padding: 2rem; 
-            border-radius: 16px; 
-            max-width: 800px; 
-            width: 100%; 
-            max-height: 90vh; 
-            overflow-y: auto; 
-            position: relative; 
+            background: white; padding: 2rem; border-radius: 16px; 
+            max-width: 850px; width: 100%; max-height: 92vh; overflow-y: auto; position: relative; 
         }
         .modal-hero-section { display: flex; flex-wrap: wrap; gap: 2rem; margin: 1.5rem 0; }
         #modal-variety-img { width: 250px; height: 250px; object-fit: cover; border-radius: 8px; background-color: #e9ecef; }
         .modal-header-text { flex: 1; min-width: 250px; }
         
-        /* QR Code Matrix Constraints */
         .modal-qr-zone { text-align: center; background: #f1f3f5; padding: 1rem; border-radius: 8px; width: 180px; margin: 0 auto; }
         .modal-qr-zone img { width: 150px; height: 150px; display: block; margin: 0 auto 0.5rem auto; }
         
-        /* Native Audio Guide Button Cluster Styles */
         .audio-control-cluster { 
-            background: #e8f5e9; 
-            padding: 1rem; 
-            border-radius: 8px; 
-            margin: 1rem 0; 
-            display: flex; 
-            gap: 1rem; 
-            align-items: center; 
+            background: #e8f5e9; padding: 1rem; border-radius: 8px; margin: 1rem 0; display: flex; gap: 1rem; align-items: center; 
         }
-        .audio-btn { 
-            padding: 0.6rem 1.2rem; 
-            font-weight: bold; 
-            border: none; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.5rem; 
-        }
+        .audio-btn { padding: 0.6rem 1.2rem; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
         .btn-play { background-color: var(--primary-green); color: white; }
-        .btn-play:hover { opacity: 0.9; }
         .btn-stop { background-color: #dc3545; color: white; }
-        .btn-stop:hover { opacity: 0.9; }
+
+        .comparison-section, .chart-section { background: #fff; padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid #e9ecef; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .comparison-table th { background: var(--primary-green); color: white; padding: 12px; font-size: 0.95rem; }
+        .comparison-table td { padding: 10px; text-align: center; border: 1px solid #dee2e6; font-size: 0.95rem; }
+        .table-note { font-size: 0.8rem; color: #6c757d; margin-top: 8px; }
+        .chart-container-wrapper { position: relative; width: 100%; height: 320px; }
+
+        /* Health Indicator Visual Legends CSS */
+        .gi-legend-container {
+            display: flex;
+            gap: 1.5rem;
+            margin: 0.5rem 0 1.25rem 0;
+            flex-wrap: wrap;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-green);
+        }
+        .legend-pill { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: bold; color: #495057; }
     </style>
 </head>
 <body>
@@ -159,18 +135,14 @@
     <section style="background: white; padding: 2rem; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
         <h2 data-i18n="lblWelcomeHeader">Welcome Exhibition Visitors</h2>
         <p data-i18n="lblWelcomeBody">Touch any mango variety below to open its rich, interactive digital profile dashboard.</p>
-        
         <div class="audio-control-cluster" style="justify-content: center; max-width: 650px; margin: 1rem auto;">
             <span data-i18n="lblKioskAudioText" style="font-weight: 500;">🎙️ Exhibition Overview Audio Guide:</span>
-            <button id="btn-kiosk-audio" class="audio-btn btn-play" aria-label="Play General Audio Guide" data-i18n="audioGuideBtn">🎙️ Audio Guide</button>
-            <button id="btn-kiosk-stop" class="audio-btn btn-stop" aria-label="Stop General Audio Guide" data-i18n="stopAudioBtn">⏹️ Stop Audio</button>
+            <button id="btn-kiosk-audio" class="audio-btn btn-play" data-i18n="audioGuideBtn">🎙️ Audio Guide</button>
+            <button id="btn-kiosk-stop" class="audio-btn btn-stop" data-i18n="stopAudioBtn">⏹️ Stop Audio</button>
         </div>
     </section>
 
-    <main class="gallery-wrapper">
-        <div id="gallery-grid" class="grid-container">
-            </div>
-    </main>
+    <main class="gallery-wrapper"><div id="gallery-grid" class="grid-container"></div></main>
 
     <div id="variety-modal" class="modal-layer hidden">
         <div class="modal-content">
@@ -178,38 +150,63 @@
             
             <div class="modal-hero-section">
                 <img id="modal-variety-img" src="" alt="Mango Variety Image" onerror="this.src='./images/placeholder.jpg'">
-                
                 <div class="modal-header-text">
                     <h2 id="modal-title" style="margin: 0 0 0.5rem 0; font-size: 2rem;"></h2>
                     <h4 id="modal-local-name" style="color: var(--primary-green); margin: 0 0 1rem 0; font-size: 1.2rem;"></h4>
                     <p id="modal-tagline" style="font-weight: bold; margin: 0 0 0.5rem 0; line-height: 1.4;"></p>
                     <p id="modal-subtag" style="font-style: italic; color: #555; margin: 0 0 1rem 0; line-height: 1.4;"></p>
-                    
                     <div class="audio-control-cluster">
-                        <button id="btn-modal-audio" class="audio-btn btn-play" aria-label="Play Variety Profile Audio" data-i18n="audioGuideBtn">🎙️ Audio Guide</button>
-                        <button id="btn-modal-stop" class="audio-btn btn-stop" aria-label="Stop Variety Profile Audio" data-i18n="stopAudioBtn">⏹️ Stop Audio</button>
+                        <button id="btn-modal-audio" class="audio-btn btn-play" data-i18n="audioGuideBtn">🎙️ Audio Guide</button>
+                        <button id="btn-modal-stop" class="audio-btn btn-stop" data-i18n="stopAudioBtn">⏹️ Stop Audio</button>
                     </div>
                 </div>
-
                 <div class="modal-qr-zone">
                     <img id="modal-qr-img" src="" alt="QR Code" onerror="this.src='./images/placeholder-qr.png'">
-                    <p style="font-size: 0.8rem; margin: 0; font-weight: 500; color: #495057;" data-i18n="lblQrText">Scan QR Code to explore variety profile</p>
+                    <p style="font-size: 0.8rem; margin: 0; font-weight: 500; color: #495057;" data-i18n="lblQrText">Scan QR Code</p>
                 </div>
             </div>
 
-            <fieldset class="taxonomy-panel" style="border: 1px solid #ccc; border-radius: 8px; padding: 1.25rem; margin-top: 1.5rem; background-color: #fbfbfb;">
+            <fieldset class="taxonomy-panel" style="border: 1px solid #ccc; border-radius: 8px; padding: 1.25rem; background-color: #fbfbfb;">
                 <legend style="font-weight: bold; padding: 0 0.5rem; color: var(--primary-green); font-size: 1.1rem;" data-i18n="lblTaxonomyTitle">Taxonomy</legend>
                 <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong data-i18n="lblOrigin">Origin:</strong> <span id="modal-origin"></span></div>
                 <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong data-i18n="lblHarvest">Harvest Window:</strong> <span id="modal-harvest"></span></div>
                 <div style="font-size: 1.05rem;"><strong data-i18n="lblGrowth">Growth Habit:</strong> <span id="modal-growth"></span></div>
             </fieldset>
+
+            <section class="comparison-section">
+                <h3 style="margin: 0 0 10px 0; color: var(--primary-green);" data-i18n="lblComparisonTitle">⚖️ Variety Comparison: Nutritional Profile</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="thVariety">Variety</th>
+                            <th data-i18n="thTss">TSS (°Brix)</th>
+                            <th data-i18n="thGi">Glycemic Index (GI)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparison-body"></tbody>
+                </table>
+                <p class="table-note" data-i18n="lblTableNote">* Parameters compiled from standard regional performance targets.</p>
+            </section>
+
+            <section class="chart-section">
+                <h3 style="margin: 0 0 5px 0; color: var(--primary-green);" data-i18n="lblChartTitle">📊 TSS (°Brix) & Glycemic Index Comparison</h3>
+                
+                <div class="gi-legend-container">
+                    <div class="legend-pill">🟢 <span data-i18n="giLow">Low GI (≤50)</span></div>
+                    <div class="legend-pill">🟡 <span data-i18n="giMod">Moderate GI (51–55)</span></div>
+                    <div class="legend-pill">🔴 <span data-i18n="giHigh">High GI (>55)</span></div>
+                </div>
+
+                <div class="chart-container-wrapper"><canvas id="nutritionChart"></canvas></div>
+            </section>
         </div>
     </div>
 
     <footer class="exhibition-footer" style="background: var(--dark-charcoal); color: white; padding: 2.5rem 1rem; text-align: center; margin-top: 4rem; line-height: 1.6; font-size: 0.95rem;" data-i18n="lblFooterText">
-        Government of Bihar<br>Directorate of Horticulture<br><br>Bihar Smart Mango Knowledge Wall | Aam Mahotsav 2026
+        Government of Bihar | Directorate of Horticulture | Aam Mahotsav 2026
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="mangoes.js"></script>
     <script src="app.js"></script>
 </body>

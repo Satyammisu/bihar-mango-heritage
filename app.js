@@ -1,19 +1,17 @@
-
 /**
- * Bihar Smart Mango Knowledge Wall - Kiosk Application Core Engine
- * Incorporates: Multi-Locale Translation Fetching, Dynamic Card Factories, & Native Speech Synthesis.
+ * Bihar Smart Mango Knowledge Wall - Enterprise Data Merging Engine
+ * Logic: Merges standalone cultivar nodes with central benchmarks at runtime.
+ * Visuals: Dynamically flags bar charts using clinical green/amber/red parameters.
  */
 
 let currentLanguageData = {};
 let activeSpeechUtterance = null;
+let currentChartInstance = null;
 const DEFAULT_LANG = 'en';
 const SUPPORTED_LOCALES = ['en', 'hi', 'bho', 'mai'];
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Initialize Kiosk Core with baseline English dictionaries
     switchLanguage(DEFAULT_LANG);
-    
-    // Explicit Binding for Kiosk Operational Input Events
     document.getElementById('close-modal-btn')?.addEventListener('click', closeDetailedProfile);
     document.getElementById('btn-kiosk-audio')?.addEventListener('click', () => triggerNarration('kiosk'));
     document.getElementById('btn-kiosk-stop')?.addEventListener('click', stopAllNarration);
@@ -21,69 +19,40 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('btn-modal-stop')?.addEventListener('click', stopAllNarration);
 });
 
-/**
- * Parses and maps translation dictionaries safely across network request layers
- */
 async function switchLanguage(langCode) {
     if (!SUPPORTED_LOCALES.includes(langCode)) langCode = DEFAULT_LANG;
-
     try {
-        stopAllNarration(); // Terminate any open speech synthesis lines on language switch
+        stopAllNarration(); 
         const response = await fetch(`lang/${langCode}.json`);
-        
-        // Fail-safe interceptor for file load exceptions (e.g., 404 or missing files)
-        if (!response.ok) {
-            throw new Error(`HTTP network error! Status: ${response.status} reading lang/${langCode}.json`);
-        }
-        
+        if (!response.ok) throw new Error(`HTTP error reading lang/${langCode}.json`);
         currentLanguageData = await response.json();
         
-        // Select and update translated values into tagged data attribute DOM containers
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (currentLanguageData[key]) {
-                if (currentLanguageData[key].includes('<br>')) {
-                    element.innerHTML = currentLanguageData[key];
-                } else {
-                    element.textContent = currentLanguageData[key];
-                }
+                element.innerHTML = currentLanguageData[key].includes('<br>') ? currentLanguageData[key] : currentLanguageData[key];
             }
         });
-
-        // Trigger interactive gallery card grid assembly loop
         buildInteractiveGallery();
-        
     } catch (error) {
-        console.error("Critical error parsing target locale translation dictionary:", error);
-        // Secondary Fallback: Cascade back to English data sheets if language files drop
-        if (langCode !== DEFAULT_LANG) {
-            console.warn("Initiating recovery strategy to restore baseline English configurations...");
-            switchLanguage(DEFAULT_LANG);
-        }
+        console.error("Language loader failed:", error);
+        if (langCode !== DEFAULT_LANG) switchLanguage(DEFAULT_LANG);
     }
 }
 
-/**
- * Dynamic Card Layout Construction Module using validated asset paths
- */
 function buildInteractiveGallery() {
     const gridContainer = document.getElementById('gallery-grid');
     if (!gridContainer) return;
-    
-    gridContainer.innerHTML = ""; // Clear existing grid cards to rebuild safely
+    gridContainer.innerHTML = ""; 
 
     Object.keys(MANGO_MASTER_DATA).forEach(id => {
         const structuralData = MANGO_MASTER_DATA[id];
         const translationData = currentLanguageData.varieties?.[id];
-
         if (!structuralData || !translationData) return;
 
         const card = document.createElement('div');
         card.className = 'mango-card';
-        card.setAttribute('role', 'button');
         card.onclick = () => openDetailedProfile(id);
-
-        // Card Template Engine: Image targets map directly from master configuration variables
         card.innerHTML = `
             <div class="card-image-frame">
                 <img src="${structuralData.image}" class="mango-thumb" alt="${translationData.title}" onerror="this.src='./images/placeholder.jpg'">
@@ -97,31 +66,32 @@ function buildInteractiveGallery() {
                 </button>
             </div>
         `;
-        
         gridContainer.appendChild(card);
     });
 }
 
-// Global active indicator tracking node for modal overview voice lookups
 let activeVarietyIdInModal = null;
 
 /**
- * Variety Detailed Modal Interface Controller
+ * Dynamic Pipeline Function: Re-unifies localized record nodes with core baselines
  */
+function getComparisonData(varietyId) {
+    const mainVariety = MANGO_MASTER_DATA[varietyId];
+    if (!mainVariety) return [...BENCHMARK_VARIETIES];
+    // Place target Bihar variant on top of the list, then unpack global benchmark arrays
+    return [mainVariety.selfMetrics, ...BENCHMARK_VARIETIES];
+}
+
 function openDetailedProfile(id) {
     const structuralData = MANGO_MASTER_DATA[id];
     const translationData = currentLanguageData.varieties?.[id];
-    
     if (!structuralData || !translationData) return;
     
     stopAllNarration(); 
     activeVarietyIdInModal = id; 
 
-    // Match image element sources directly from static structural variables
     document.getElementById('modal-variety-img').src = structuralData.image;
     document.getElementById('modal-qr-img').src = structuralData.qrCode;
-    
-    // Pass translation metadata strings smoothly
     document.getElementById('modal-title').textContent = translationData.title;
     document.getElementById('modal-local-name').textContent = translationData.localName;
     document.getElementById('modal-tagline').textContent = translationData.tagline;
@@ -130,10 +100,16 @@ function openDetailedProfile(id) {
     document.getElementById('modal-harvest').textContent = translationData.harvestVal;
     document.getElementById('modal-growth').textContent = translationData.growthVal;
     
+    // Execute Dynamic Merging Calculations
+    const unifiedDataset = getComparisonData(id);
+    
+    populateComparisonTable(unifiedDataset);
+    renderNutritionChart(unifiedDataset);
+
     const modal = document.getElementById('variety-modal');
     if (modal) {
         modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Lock scrolling on the kiosk screen background
+        document.body.style.overflow = 'hidden'; 
     }
 }
 
@@ -143,45 +119,87 @@ function closeDetailedProfile() {
     const modal = document.getElementById('variety-modal');
     if (modal) {
         modal.classList.add('hidden');
-        document.body.style.overflow = ''; // Unlock screen scrolling parameters
+        document.body.style.overflow = ''; 
     }
 }
 
-/**
- * Native Kiosk Audio Speech Synthesis Engine Management
- */
+function populateComparisonTable(dataMatrix) {
+    const body = document.getElementById("comparison-body");
+    if (!body) return;
+    body.innerHTML = "";
+    dataMatrix.forEach((item, index) => {
+        // Visually bold the primary targeted cultivar inside row elements
+        const textWeightStyle = (index === 0) ? "font-weight: 700; color: #0F5132; background-color: #f1f8f5;" : "";
+        body.innerHTML += `
+            <tr style="${textWeightStyle}">
+                <td style="font-weight: 600; text-align: left;">${item.name} ${index === 0 ? '⭐' : ''}</td>
+                <td>${item.tss}</td>
+                <td>${item.gi}</td>
+            </tr>
+        `;
+    });
+}
+
+function renderNutritionChart(dataMatrix) {
+    const ctx = document.getElementById('nutritionChart');
+    if (!ctx) return;
+    if (currentChartInstance) currentChartInstance.destroy();
+
+    const tssLabel = currentLanguageData.thTss || 'TSS (°Brix)';
+    const giLabel = currentLanguageData.thGi || 'Glycemic Index';
+
+    // Algorithmic Color Assignment Framework mapped out per item data token values
+    const assignedColors = dataMatrix.map(item => {
+        if (item.gi <= 50) return '#198754';      // Green (Low Risk)
+        if (item.gi <= 55) return '#ffc107';      // Amber (Moderate Risk)
+        return '#dc3545';                         // Red (High Risk)
+    });
+
+    currentChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: dataMatrix.map(x => x.name),
+            datasets: [
+                {
+                    label: tssLabel,
+                    data: dataMatrix.map(x => x.tssMid),
+                    backgroundColor: '#0F5132',
+                    borderWidth: 0
+                },
+                {
+                    label: giLabel,
+                    data: dataMatrix.map(x => x.gi),
+                    backgroundColor: assignedColors, // Maps conditional colors dynamically
+                    borderWidth: 0
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'top' } },
+            scales: { y: { beginAtZero: true, max: 60 } }
+        }
+    });
+}
+
 function triggerNarration(contextType) {
     if (!window.speechSynthesis) return;
-    window.speechSynthesis.cancel(); // Force clear parallel channels to avoid speech layering
-
+    window.speechSynthesis.cancel(); 
     let textToSpeak = "";
-
     if (contextType === 'kiosk') {
         textToSpeak = currentLanguageData.lblKioskNarration || "";
     } else if (contextType === 'modal' && activeVarietyIdInModal) {
         textToSpeak = currentLanguageData.varieties?.[activeVarietyIdInModal]?.narration || "";
     }
-
     if (!textToSpeak) return;
 
     activeSpeechUtterance = new SpeechSynthesisUtterance(textToSpeak);
-    
-    // Automatically match voice accents based on string characters
-    if (currentLanguageData.lblMainTitle.includes("दबार") || textToSpeak.match(/[\u0900-\u097F]/)) {
-        activeSpeechUtterance.lang = 'hi-IN'; // Uses Hindi engine voice parameters for local dialects
-    } else {
-        activeSpeechUtterance.lang = 'en-IN'; // Uses regional Indian English voice profile
-    }
-
-    activeSpeechUtterance.rate = 0.95; // Slightly slower speed optimized for high-traffic public installations
+    activeSpeechUtterance.lang = (currentLanguageData.lblMainTitle.includes("दबार") || textToSpeak.match(/[\u0900-\u097F]/)) ? 'hi-IN' : 'en-IN';
+    activeSpeechUtterance.rate = 0.95; 
     window.speechSynthesis.speak(activeSpeechUtterance);
 }
 
-/**
- * Universal Audio Stop Action Loop
- */
 function stopAllNarration() {
-    if (window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-    }
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
 }

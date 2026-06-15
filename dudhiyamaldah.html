@@ -29,17 +29,26 @@
         .comparison-section, .chart-section { background: #fff; padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid #e9ecef; }
         .comparison-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         .comparison-table th { background: var(--primary-green); color: white; padding: 12px; font-size: 0.95rem; }
-        .comparison-table td { padding: 10px; text-align: center; border: 1px solid #dee2e6; font-size: 0.95rem; }
+        .comparison-table td { padding: 14px 10px; text-align: center; border: 1px solid #dee2e6; font-size: 0.95rem; }
         .table-note { font-size: 0.8rem; color: #6c757d; margin-top: 8px; }
-        .chart-container-wrapper { position: relative; width: 100%; height: 320px; }
+        .chart-container-wrapper { position: relative; width: 100%; height: 350px; }
 
         .gi-legend-container {
             display: flex; gap: 1.5rem; margin: 0.5rem 0 1.25rem 0; flex-wrap: wrap;
             background: #f8f9fa; padding: 10px 15px; border-radius: 6px; border-left: 4px solid var(--primary-green);
         }
         .legend-pill { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: bold; color: #495057; }
+        
+        /* Executive Badge Styling */
+        .badge-value { padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; display: inline-block; }
+        .badge-target { background: #e8f5e9; color: #1b5e20; border: 1px solid #c8e6c9; }
+        .badge-amber { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; }
+        .badge-red { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+        .badge-gray { background: #f5f5f5; color: #424242; border: 1px solid #e0e0e0; }
     </style>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
 <body>
 
@@ -49,7 +58,7 @@
     <div class="hero-section">
         <img class="hero-image" src="./images/dudhiyamaldah.jpg" alt="Dudhiya Maldah" onerror="this.src='./images/placeholder.jpg'">
         <div class="header-text">
-            <h2 style="margin: 0 0 0.5rem 0; font-size: 2rem;">Dudhiya Maldah</h2>
+            <h2 style="margin: 0 0 0.5rem 0; font-size: 2rem;">Dudhiya Maldah ⭐</h2>
             <h4 style="color: var(--primary-green); margin: 0 0 1rem 0; font-size: 1.2rem;">दूधिया मालदह (Dudhiya Maldah)</h4>
             <p style="font-weight: bold; margin: 0 0 0.5rem 0; line-height: 1.4;">The undisputed King of Mangoes in Bihar, legendary for its unique milky aroma, exceptionally thin skin, and melt-in-the-mouth pulp texture.</p>
             <p style="font-style: italic; color: #555; margin: 0 0 1rem 0; line-height: 1.4;">Highly prized cultivar exclusively originating from the fertile gangetic tracts of Digha, Patna.</p>
@@ -73,32 +82,35 @@
             <thead>
                 <tr>
                     <th>Variety</th>
-                    <th>TSS (°Brix)</th>
+                    <th>TSS Range (°Brix)</th>
                     <th>Glycemic Index (GI)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr style="background-color: #fff9e6; font-weight: bold; border: 2px solid var(--primary-green);">
-                    <td>Dudhiya Maldah (Current Selection)</td>
-                    <td>21.25</td>
-                    <td>51</td>
+                <tr style="background-color: #f4f9f6; font-weight: bold; border-left: 5px solid var(--primary-green);">
+                    <td style="color: var(--primary-green);">Dudhiya Maldah ⭐</td>
+                    <td><span class="badge-value badge-target">20.5–22.0</span></td>
+                    <td><span class="badge-value badge-amber">51</span></td>
                 </tr>
                 <tr>
-                    <td>Alphonso (Commercial Benchmark)</td>
-                    <td>21.0</td> </tr>
-                <tr>
-                    <td>Kesar (Commercial Benchmark)</td>
-                    <td>20.0</td>
-                    <td>53</td>
+                    <td>Alphonso</td>
+                    <td><span class="badge-value badge-gray">20.0–22.0</span></td>
+                    <td><span class="badge-value badge-red">56</span></td>
                 </tr>
                 <tr>
-                    <td>Dashehari (Commercial Benchmark)</td>
-                    <td>19.0</td> <td>54</td>
+                    <td>Dashehari</td>
+                    <td><span class="badge-value badge-gray">18.0–20.0</span></td>
+                    <td><span class="badge-value badge-amber">54</span></td>
                 </tr>
                 <tr>
-                    <td>Totapuri (Commercial Benchmark)</td>
-                    <td>16.0</td>
-                    <td>51</td>
+                    <td>Kesar</td>
+                    <td><span class="badge-value badge-gray">19.0–21.0</span></td>
+                    <td><span class="badge-value badge-amber">53</span></td>
+                </tr>
+                <tr>
+                    <td>Totapuri</td>
+                    <td><span class="badge-value badge-gray">15.0–17.0</span></td>
+                    <td><span class="badge-value badge-amber">51</span></td>
                 </tr>
             </tbody>
         </table>
@@ -106,7 +118,7 @@
     </section>
 
     <section class="chart-section">
-        <h3 style="margin: 0 0 5px 0; color: var(--primary-green);">📊 TSS (°Brix) & Glycemic Index Comparison Analysis</h3>
+        <h3 style="margin: 0 0 5px 0; color: var(--primary-green);">📊 TSS & Glycemic Index Comparison Analysis</h3>
         
         <div class="gi-legend-container">
             <div class="legend-pill">🟢 <span>Low GI (≤50)</span></div>
@@ -118,72 +130,112 @@
             <canvas id="isolatedNutritionChart"></canvas>
         </div>
 
-        <div style="background:#f8f9fa; padding:15px; border-left:5px solid #0F5132; margin-top:15px; border-radius:5px; line-height: 1.5; font-size: 0.95rem;">
+        <div style="background:#f8f9fa; padding:15px; border-left:5px solid #0F5132; margin-top:25px; border-radius:5px; line-height: 1.6; font-size: 0.95rem;">
             <strong>Health Insight:</strong>
-            Dudhiya Maldah demonstrates a moderate Glycemic Index (GI 51) while maintaining a high Total Soluble Solids (21.25 °Brix), indicating an excellent balance of sweetness and controlled sugar release compared with commercial benchmark cultivars.
+            Dudhiya Maldah exhibits a moderate Glycemic Index (51), lower than Alphonso (56) and comparable to Totapuri (51), while maintaining high sweetness levels (20.5–22.0 °Brix). This proves it offers an elite balance of premium sweetness paired with controlled carbohydrate release.
         </div>
     </section>
 </div>
 
 <script>
-    // Completely isolated micro-engine configuration mapping calibrated data parameters
     window.addEventListener('DOMContentLoaded', () => {
         const ctx = document.getElementById('isolatedNutritionChart').getContext('2d');
+        
+        Chart.register(ChartDataLabels);
         
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Dudhiya Maldah', 'Alphonso', 'Kesar', 'Dashehari', 'Totapuri'],
+                // Array Mapping Order: [ Target, Reference 1, Reference 2, Reference 3, Reference 4 ]
+                labels: ['Dudhiya Maldah ⭐', 'Alphonso', 'Dashehari', 'Kesar', 'Totapuri'],
                 datasets: [
                     {
-                        label: 'TSS (°Brix)',
-                        data: [21.25, 21.0, 20.0, 19.0, 16.0], // Calibrated values synchronized with the table
-                        backgroundColor: 'rgba(15, 81, 50, 0.85)', 
-                        borderColor: 'rgba(15, 81, 50, 1)',
-                        borderWidth: 1,
-                        yAxisID: 'y'
-                    },
-                    {
                         label: 'Glycemic Index (GI)',
-                        data: [51, 56, 53, 54, 51],
-                        // Color Code Matrix: 51/53/54 = Amber (Moderate), 56 = Red (High Reference)
+                        data: [51, 56, 54, 53, 51], // Perfectly synchronized data nodes
+                        // Visual Color Coding: Position [0] is Department Green; others follow GI rules
                         backgroundColor: [
-                            '#FFB100', // Dudhiya Maldah (51)
-                            '#DC3545', // Alphonso (56)
-                            '#FFB100', // Kesar (53)
-                            '#FFB100', // Dashehari (54)
-                            '#FFB100'  // Totapuri (51)
+                            '#0F5132', // Dudhiya Maldah (Target Cultivar Highlight)
+                            '#DC3545', // Alphonso (High GI Reference)
+                            '#FFB100', // Dashehari (Moderate)
+                            '#FFB100', // Kesar (Moderate)
+                            '#FFB100'  // Totapuri (Moderate)
                         ],
                         borderColor: [
-                            '#B88000', '#A71D2A', '#B88000', '#B88000', '#B88000'
+                            '#0A3622', '#A71D2A', '#B88000', '#B88000', '#B88000'
                         ],
-                        borderWidth: 1,
-                        yAxisID: 'y1'
+                        borderWidth: 1.5,
+                        yAxisID: 'y',
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top',
+                            offset: 2,
+                            font: { weight: 'bold', size: 11 },
+                            formatter: (value) => value
+                        }
+                    },
+                    {
+                        label: 'TSS Midpoint (°Brix)',
+                        data: [21.25, 21.0, 19.0, 20.0, 16.0], // Matched index alignment
+                        backgroundColor: 'rgba(212, 175, 55, 0.5)', // Transparent Gold for visual distinction
+                        borderColor: '#DAA520',
+                        borderWidth: 1.5,
+                        yAxisID: 'y1',
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top',
+                            offset: 2,
+                            font: { weight: 'bold', size: 11 },
+                            formatter: (value) => value.toFixed(2)
+                        }
                     }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                layout: {
+                    padding: { top: 25 }
+                },
                 scales: {
                     y: {
                         type: 'linear',
                         position: 'left',
-                        title: { display: true, text: 'TSS (°Brix)', font: { weight: 'bold' } },
+                        title: { display: true, text: 'Glycemic Index (GI)', font: { weight: 'bold' } },
                         min: 0,
-                        max: 25
+                        max: 70
                     },
                     y1: {
                         type: 'linear',
                         position: 'right',
-                        title: { display: true, text: 'Glycemic Index (GI)', font: { weight: 'bold' } },
+                        title: { display: true, text: 'TSS Midpoint (°Brix)', font: { weight: 'bold' } },
                         min: 0,
-                        max: 65,
+                        max: 25,
                         grid: { drawOnChartArea: false }
                     }
                 },
                 plugins: {
-                    legend: { position: 'top' }
+                    legend: { position: 'top' },
+                    // High-Impact Tooltip Engine Callback Adjustments
+                    tooltip: { 
+                        enabled: true,
+                        backgroundColor: 'rgba(33, 37, 41, 0.95)',
+                        titleFont: { weight: 'bold' },
+                        bodyFont: { size: 13 },
+                        padding: 10,
+                        cornerRadius: 6,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y;
+                                }
+                                return label;
+                            }
+                        }
+                    }
                 }
             }
         });

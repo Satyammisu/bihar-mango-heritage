@@ -11,13 +11,11 @@
         .mango-card:hover { transform: translateY(-5px); }
         .mango-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; }
         
-        /* Modal Window Core Overlay Styles */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
         .modal.hidden { display: none !important; }
         .modal-box { background: white; width: 92%; max-width: 850px; border-radius: 12px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #6c757d; border: none; background: none; z-index: 10; }
         
-        /* Table Layout Specification */
         table { width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 0.95rem; }
         th { background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; padding: 10px; font-weight: 600; text-align: center; }
         th:first-child { text-align: left; }
@@ -27,7 +25,6 @@
 
     <h1 style="text-align: center; color: #0F5132; margin-bottom: 30px; font-weight: 700;">🥭 Bihar Smart Mango Knowledge Wall</h1>
     
-    <!-- GRID CONTAINER: ALL CARDS IMMUTABLY BOUND WITH PRECISE data-id ATTRIBUTES -->
     <div class="grid-container">
         <div class="mango-card" data-id="dudhiyamaldah">
             <img src="./images/dudhiyamaldah.jpg" alt="Dudhiya Maldah">
@@ -58,7 +55,6 @@
     <!-- MAIN INTERACTIVE MODAL OVERLAY -->
     <div id="variety-modal" class="modal hidden">
         <div class="modal-box">
-            <!-- Explicit matching close button trigger ID matching app.js -->
             <button id="close-modal-btn" class="close-btn">&times;</button>
             
             <div style="display: flex; gap: 25px; padding: 30px;">
@@ -66,7 +62,6 @@
                 <div style="flex: 1; text-align: center; border-right: 1px solid #dee2e6; padding-right: 20px;">
                     <img id="modal-variety-img" src="" alt="Mango Profile View" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                     <div style="margin-top: 25px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
-                        <!-- QR Target Node with verified ID -->
                         <img id="modal-qr-img" src="" alt="Scan Node" style="width: 130px; height: 130px; margin: 0 auto; display: block;">
                         <p style="font-size: 0.8rem; margin: 10px 0 0 0; font-weight: 600; color: #495057; text-transform: uppercase; letter-spacing: 0.5px;">Scan for Analytics</p>
                     </div>
@@ -75,9 +70,12 @@
                 <!-- Main Display Area (Horticultural Analytics Dash) -->
                 <div style="flex: 2; overflow-y: auto; max-height: 550px; padding-right: 10px;">
                     <h2 id="modal-title" style="margin: 0 0 5px 0; color: #0F5132; font-size: 1.8rem;"></h2>
-                    <p style="color: #6c757d; font-size: 0.95rem; margin: 0 0 25px 0;">Horticultural Evaluation vs. National Commercial Benchmarks</p>
                     
-                    <!-- 1. The Matrix Table Mount Point -->
+                    <!-- Updated Subheading String per Request -->
+                    <p style="color: #0F5132; font-weight: 600; font-size: 0.95rem; margin: 0 0 25px 0;">
+                        Nutritional & Quality Comparison Dashboard
+                    </p>
+                    
                     <table id="comparison-table">
                         <thead>
                             <tr>
@@ -86,20 +84,15 @@
                                 <th>Glycemic Index (GI)</th>
                             </tr>
                         </thead>
-                        <tbody id="comparison-body">
-                            <!-- Dynamic row interpolation mount via app.js template stream -->
-                        </tbody>
+                        <tbody id="comparison-body"></tbody>
                     </table>
 
-                    <!-- 2. The Analytical Chart Canvas Layers (With Explicit Heights) -->
                     <div class="analytics-charts-panel" style="margin-top: 15px;">
-                        <!-- Sugar Profile Engine Mount -->
                         <div style="position: relative; height: 180px; margin-bottom: 40px;">
                             <h4 style="margin: 0 0 12px 0; color: #212529; font-size: 0.9rem; font-weight: 700;">🧪 Sugar Profile Analysis (TSS Midpoint Descending)</h4>
                             <canvas id="tssChart"></canvas>
                         </div>
                         
-                        <!-- Metabolic Glycemic Engine Mount -->
                         <div style="position: relative; height: 180px; margin-bottom: 10px;">
                             <h4 style="margin: 0 0 12px 0; color: #212529; font-size: 0.9rem; font-weight: 700;">🩸 Glycemic Index Spectrum (GI Value Descending)</h4>
                             <canvas id="giChart"></canvas>
@@ -111,7 +104,6 @@
         </div>
     </div>
 
-    <!-- IMMUTABLE DEPENDENCY LOADING ORDER ORDER -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="mangoes.js"></script>
     <script src="app.js"></script>

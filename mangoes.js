@@ -1,96 +1,88 @@
-/**
- * Bihar Smart Mango Knowledge Wall - Centralized Horticultural Database
- * Architecture: Normalized Master-Detail Relationship
- * Calibrated: 2026 Lab Metrics & Centralized Commercial Benchmarks
- */
-
-const BENCHMARK_VARIETIES = [
-  { "name": "Alphonso", "tss": "20.0–22.0", "tssMid": 21.00, "gi": 56 },
-  { "name": "Kesar", "tss": "19.0–21.0", "tssMid": 20.00, "gi": 53 },
-  { "name": "Dashehari", "tss": "18.0–20.0", "tssMid": 19.00, "gi": 54 },
-  { "name": "Totapuri", "tss": "15.0–17.0", "tssMid": 16.00, "gi": 51 }
-];
-
 const MANGO_MASTER_DATA = {
-  "dudhiyamaldah": {
-    "id": "dudhiyamaldah",
-    "image": "./images/dudhiyamaldah.jpg",
-    "qrCode": "./qr/dudhiyamaldah-qr.png",
-    "selfMetrics": { "name": "Dudhiya Maldah", "tss": "20.5–22.0", "tssMid": 21.25, "gi": 51 }
-  },
-  "bombai": {
-    "id": "bombai",
-    "image": "./images/bombai.jpg",
-    "qrCode": "./qr/bombai-qr.png",
-    "selfMetrics": { "name": "Bombai", "tss": "18.0–19.0", "tssMid": 18.50, "gi": 55 }
-  },
-  "zardalu": {
-    "id": "zardalu",
-    "image": "./images/zardalu.jpg",
-    "qrCode": "./qr/zardalu-qr.png",
-    "selfMetrics": { "name": "Jardalu", "tss": "19.5–21.0", "tssMid": 20.25, "gi": 45 }
-  },
-  "langra": {
-    "id": "langra",
-    "image": "./images/langra.jpg",
-    "qrCode": "./qr/langra-qr.png",
-    "selfMetrics": { "name": "Langra", "tss": "21.0–22.0", "tssMid": 21.50, "gi": 54 }
-  },
-  "chausa": {
-    "id": "chausa",
-    "image": "./images/chausa.jpg",
-    "qrCode": "./qr/chausa-qr.png",
-    "selfMetrics": { "name": "Chausa", "tss": "21.5–23.0", "tssMid": 22.25, "gi": 55 }
-  },
-  "amrapali": {
-    "id": "amrapali",
-    "image": "./images/amrapali.jpg",
-    "qrCode": "./qr/amrapali-qr.png",
-    "selfMetrics": { "name": "Amrapali", "tss": "20.5–22.0", "tssMid": 21.25, "gi": 54 }
-  },
-  "gulabkhas": {
-    "id": "gulabkhas",
-    "image": "./images/gulabkhas.jpg",
-    "qrCode": "./qr/gulabkhas-qr.png",
-    "selfMetrics": { "name": "Gulabkhas", "tss": "19.0–20.5", "tssMid": 19.75, "gi": 50 }
-  },
-  "maldah": {
-    "id": "maldah",
-    "image": "./images/dudhiyamaldah.jpg",
-    "qrCode": "./qr/dudhiyamaldah-qr.png",
-    "selfMetrics": { "name": "Maldah", "tss": "20.0–21.5", "tssMid": 20.75, "gi": 51 }
-  },
-  "sipahiya": {
-    "id": "sipahiya",
-    "image": "./images/sipahiya.jpg",
-    "qrCode": "./qr/sipahiya-qr.png",
-    "selfMetrics": { "name": "Sipahiya", "tss": "17.5–18.5", "tssMid": 18.00, "gi": 52 }
-  },
-  "sukul": {
-    "id": "sukul",
-    "image": "./images/sukul.jpg",
-    "qrCode": "./qr/sukul-qr.png",
-    "selfMetrics": { "name": "Sukul", "tss": "18.5–19.5", "tssMid": 19.00, "gi": 52 }
-  },
-  "krishnabhog": {
-    "id": "krishnabhog",
-    "image": "./images/krishnabhog.jpg",
-    "qrCode": "./qr/krishnabhog-qr.png",
-    "selfMetrics": { "name": "Krishna Bhog", "tss": "19.5–21.5", "tssMid": 20.50, "gi": 52 }
-  },
-  "kalkatiya": {
-    "id": "kalkatiya",
-    "image": "./images/kalkatiya.jpg",
-    "qrCode": "./qr/kalkatiya-qr.png",
-    "selfMetrics": { "name": "Kalkatiya", "tss": "18.0–19.5", "tssMid": 18.75, "gi": 52 }
-  }
+    "dudhiyamaldah": {
+        "selfMetrics": { "name": "Dudhiya Maldah", "tss": "20.0-21.0", "tssMid": 20.5, "gi": 51 },
+        "image": "img/dudhiyamaldah.png",
+        "qrCode": "./qr/dudhiyamaldah-qr.png"
+    },
+    "zardalu": {
+        "selfMetrics": { "name": "Jardalu", "tss": "21.5-22.5", "tssMid": 22.0, "gi": 48 },
+        "image": "img/zardalu.png",
+        "qrCode": "./qr/zardalu-qr.png"
+    },
+    "langra": {
+        "selfMetrics": { "name": "Langra", "tss": "18.5-19.5", "tssMid": 19.0, "gi": 55 },
+        "image": "img/langra.png",
+        "qrCode": "./qr/langra-qr.png"
+    },
+    "chausa": {
+        "selfMetrics": { "name": "Chausa", "tss": "21.0-22.0", "tssMid": 21.5, "gi": 51 },
+        "image": "img/chausa.png",
+        "qrCode": "./qr/chausa-qr.png"
+    },
+    "amrapali": {
+        "selfMetrics": { "name": "Amrapali", "tss": "18.0-19.0", "tssMid": 18.5, "gi": 54 },
+        "image": "img/amrapali.png",
+        "qrCode": "./qr/amrapali-qr.png"
+    },
+    "gulabkhas": {
+        "selfMetrics": { "name": "Gulabkhas", "tss": "17.0-18.0", "tssMid": 17.5, "gi": 56 },
+        "image": "img/gulabkhas.png",
+        "qrCode": "./qr/gulabkhas-qr.png"
+    },
+    "krishnabhog": {
+        "selfMetrics": { "name": "Krishna Bhog", "tss": "19.5-20.5", "tssMid": 20.0, "gi": 50 },
+        "image": "img/krishnabhog.png",
+        "qrCode": "./qr/krishnabhog-qr.png"
+    },
+    "bombai": {
+        "selfMetrics": { "name": "Bombai", "tss": "16.0-17.0", "tssMid": 16.5, "gi": 58 },
+        "image": "img/bombai.png",
+        "qrCode": "./qr/bombai-qr.png"
+    },
+    "sipahiya": {
+        "selfMetrics": { "name": "Sipahiya", "tss": "16.5-17.5", "tssMid": 17.0, "gi": 57 },
+        "image": "img/sipahiya.png",
+        "qrCode": "./qr/sipahiya-qr.png"
+    },
+    "sukul": {
+        "selfMetrics": { "name": "Sukul", "tss": "17.5-18.5", "tssMid": 18.0, "gi": 53 },
+        "image": "img/sukul.png",
+        "qrCode": "./qr/sukul-qr.png"
+    },
+    "kalkatiya": {
+        "selfMetrics": { "name": "Kalkatiya", "tss": "19.0-20.0", "tssMid": 19.5, "gi": 54 },
+        "image": "img/kalkatiya.png",
+        "qrCode": "./qr/kalkatiya-qr.png"
+    }
 };
 
-Object.freeze(BENCHMARK_VARIETIES);
-Object.freeze(MANGO_MASTER_DATA);
+/**
+ * Returns comparison data with added safety checks and full metric inclusion.
+ */
+function getComparisonData(targetId) {
+    const target = MANGO_MASTER_DATA[targetId];
+    
+    if (!target) {
+        console.error("Variety not found:", targetId);
+        return [];
+    }
 
-function getComparisonData(varietyId) {
-  const variety = MANGO_MASTER_DATA[varietyId];
-  if (!variety) return [];
-  return [JSON.parse(JSON.stringify(variety.selfMetrics)), ...JSON.parse(JSON.stringify(BENCHMARK_VARIETIES))];
+    const others = Object.keys(MANGO_MASTER_DATA)
+        .filter(id => id !== targetId)
+        .map(id => ({
+            name: MANGO_MASTER_DATA[id].selfMetrics.name,
+            tss: MANGO_MASTER_DATA[id].selfMetrics.tss,
+            tssMid: MANGO_MASTER_DATA[id].selfMetrics.tssMid,
+            gi: MANGO_MASTER_DATA[id].selfMetrics.gi
+        }));
+
+    return [
+        {
+            name: target.selfMetrics.name,
+            tss: target.selfMetrics.tss,
+            tssMid: target.selfMetrics.tssMid,
+            gi: target.selfMetrics.gi
+        },
+        ...others
+    ];
 }

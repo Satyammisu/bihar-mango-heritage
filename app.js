@@ -1,16 +1,18 @@
 /**
- * Bihar Smart Mango Knowledge Wall - UI Engine & Audio Lifecycle Controller
+ * Bihar Smart Mango Knowledge Wall - UI Engine & Hybrid Audio Lifecycle Controller
+ * Hardened for Live Government Exhibition Kiosk Environments
  */
 
 let tssChartInstance = null;
 let giChartInstance = null;
 
-// Core Language & Identity Tracking State Variables
+// Core Language, Audio, & Identity Tracking State Variables
 let currentLanguage = "en";
 let activeVarietyId = null;
 let currentLanguageData = null;
+let currentActiveAudioPlayback = null; // Tracks native HTML5 Audio instance to prevent overlap
 
-// Central Kiosk Core Dictionary Models (Acts as local asset fallback)
+// Central Kiosk Core Dictionary Models
 const I18N_FALLBACK_DATA = {
   "en": {
     "lblMainTitle": "Bihar Smart Mango Knowledge Wall",
@@ -107,13 +109,21 @@ const I18N_FALLBACK_DATA = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize default language matrices
+  console.log("🚀 Kiosk Framework DOM Anchored.");
   setLanguage(currentLanguage);
   
-  // Attach layout and core interaction configurations
   setupLanguageSelectors();
   setupModalCloseTriggers();
   setupAudioInterfaceTriggers();
+
+  // FIX 1: Priming OS Web Speech Engine Stack & Handling Async Load Deficiencies
+  if (window.speechSynthesis) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      console.log("🔄 System Speech Synthesis Voices Loaded:", window.speechSynthesis.getVoices().length);
+    };
+    // Initial runtime wake-up kick
+    window.speechSynthesis.getVoices();
+  }
 });
 
 function setupLanguageSelectors() {
@@ -121,6 +131,7 @@ function setupLanguageSelectors() {
     btn.addEventListener("click", () => {
       const selectedLang = btn.getAttribute("data-lang");
       if (selectedLang) {
+        console.log(`🌐 Switching Language Context to: [${selectedLang}]`);
         setLanguage(selectedLang);
       }
     });
@@ -131,7 +142,6 @@ function setLanguage(langCode) {
   currentLanguage = langCode;
   currentLanguageData = I18N_FALLBACK_DATA[langCode];
 
-  // Dynamic DOM UI Text Updates
   document.getElementById("main-headline").innerText = currentLanguageData.lblMainTitle;
   document.getElementById("modal-subheading").innerText = currentLanguageData.lblSubheading;
   document.getElementById("th-variety").innerText = currentLanguageData.thVariety;
@@ -140,10 +150,8 @@ function setLanguage(langCode) {
   document.getElementById("lbl-tss-chart-title").innerText = currentLanguageData.lblTSSChart;
   document.getElementById("lbl-gi-chart-title").innerText = currentLanguageData.lblGIChart;
 
-  // Build/Rebuild Data Grid Gallery elements
   buildGallery();
   
-  // Live update visible modal metrics if language changes while profile view is active
   if (activeVarietyId) {
     const variety = MANGO_MASTER_DATA[activeVarietyId];
     if (variety) {
@@ -202,59 +210,106 @@ function setupAudioInterfaceTriggers() {
   const stopBtn = document.getElementById("btn-modal-stop");
 
   if (audioBtn) {
-    audioBtn.addEventListener("click", playVarietyAudio);
+    audioBtn.addEventListener("click", () => {
+      console.log("🎯 Audio Trigger Button Element Click Captured");
+      playVarietyAudio();
+    });
   }
   if (stopBtn) {
-    stopBtn.addEventListener("click", stopVarietyAudio);
+    stopBtn.addEventListener("click", () => {
+      console.log("🛑 Stop Audio Trigger Button Element Click Captured");
+      stopVarietyAudio();
+    });
   }
 }
 
+/**
+ * FIX 2 & 3: Consolidated Hybrid Audio Processing Routine
+ * Checks for local directory file presence first, fallbacks to TTS safely if empty.
+ */
 function playVarietyAudio() {
+  stopVarietyAudio(); // Drop concurrent runs instantly
+
+  if (!activeVarietyId) {
+    console.error("Audio Execution Halted: Missing Global Variety Identifier Selection State.");
+    return;
+  }
+
+  // Pathing model maps directly to project sound assets directory
+  const audioFilePath = `audio/${activeVarietyId}-${currentLanguage}.mp3`;
+  
+  // High Reliability Step: Speculative instantiation of pre-recorded studio audio file
+  const testAudioAsset = new Audio(audioFilePath);
+  
+  testAudioAsset.addEventListener('canplaythrough', () => {
+    console.log(`🎵 High-Fidelity MP3 Found at [${audioFilePath}]. Launching Kiosk Speaker Stream...`);
+    currentActiveAudioPlayback = testAudioAsset;
+    testAudioAsset.play().catch(err => {
+      console.warn("Audio Context Intercepted by Browser Security Policy, falling back to TTS engine.", err);
+      executeTextToSpeechFallback();
+    });
+  }, { once: true });
+
+  testAudioAsset.addEventListener('error', () => {
+    console.log(`⚠️ MP3 Asset not ready or missing at [${audioFilePath}]. Pivoting to Native OS Speech Engine Fallback...`);
+    executeTextToSpeechFallback();
+  }, { once: true });
+}
+
+function executeTextToSpeechFallback() {
+  if (!window.speechSynthesis) {
+    alert("This system kiosk environment lacks standard web speech audio engine support.");
+    return;
+  }
+
   const title = document.getElementById("modal-title").innerText;
   let text = "";
 
-  // Structured conditional output checks based on targeted language selected
-  if (currentLanguage === "en") {
-    text = title + " is one of Bihar's famous mango varieties.";
-  }
-  if (currentLanguage === "hi") {
-    text = title + " बिहार की प्रसिद्ध आम की किस्म है।";
-  }
-  if (currentLanguage === "mai") {
-    text = title + " बिहारक प्रसिद्ध आमक किस्म अछि।";
-  }
-  if (currentLanguage === "bho") {
-    text = title + " बिहार के प्रसिद्ध आम के किसिम बा।";
+  switch(currentLanguage) {
+    case "hi":
+      text = title + " बिहार की प्रसिद्ध आम की किस्म है।";
+      break;
+    case "mai":
+      text = title + " बिहारक प्रसिद्ध आमक किस्म अछि।";
+      break;
+    case "bho":
+      text = title + " बिहार के प्रसिद्ध आम के किसिम बा।";
+      break;
+    default:
+      text = title + " is one of Bihar's famous mango varieties.";
   }
 
-  speechSynthesis.cancel(); // Drop intersecting queues instantly
-
-  if (!text) return;
-
-  const speech = new SpeechSynthesisUtterance(text);
+  const utterance = new SpeechSynthesisUtterance(text);
   const systemAvailableVoices = window.speechSynthesis.getVoices();
 
-  // Route engine processing language context based on text metrics
+  // Localized Routing Logic using standard Devnagari characters mapping flags
   if (text.match(/[\u0900-\u097F]/)) {
     const hindiVoice = systemAvailableVoices.find(voice => voice.lang.includes("hi") || voice.lang.includes("HI"));
-    if (hindiVoice) {
-      speech.voice = hindiVoice;
-    }
-    speech.lang = "hi-IN";
+    if (hindiVoice) utterance.voice = hindiVoice;
+    utterance.lang = "hi-IN";
   } else {
     const englishVoice = systemAvailableVoices.find(voice => voice.lang.includes("en") || voice.lang.includes("EN"));
-    if (englishVoice) {
-      speech.voice = englishVoice;
-    }
-    speech.lang = "en-IN";
+    if (englishVoice) utterance.voice = englishVoice;
+    utterance.lang = "en-IN";
   }
 
-  speech.rate = 0.90; // Optimized delivery cadence for noisy presentation spaces
-  speechSynthesis.speak(speech);
+  utterance.rate = 0.90; // Slower presentation delivery for open floor halls
+  utterance.pitch = 1.0;
+  
+  window.speechSynthesis.speak(utterance);
 }
 
 function stopVarietyAudio() {
-  speechSynthesis.cancel();
+  // Terminate Native Browser TTS Queue Stream
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
+  // Terminate Native HTML5 MP3 Playback Streams
+  if (currentActiveAudioPlayback) {
+    currentActiveAudioPlayback.pause();
+    currentActiveAudioPlayback.currentTime = 0;
+    currentActiveAudioPlayback = null;
+  }
 }
 
 function destroyActiveChartInstances() {

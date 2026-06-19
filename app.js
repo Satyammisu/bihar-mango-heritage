@@ -6,9 +6,29 @@ let tssChartInstance = null;
 let giChartInstance = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  setupVarietyCardListeners();
+  buildGallery();
   setupModalCloseTriggers();
 });
+
+// Programmatically populates all varieties from the mangoes.js master model
+function buildGallery() {
+  const grid = document.getElementById("gallery-grid");
+  if (!grid) return;
+  
+  grid.innerHTML = ""; 
+
+  Object.keys(MANGO_MASTER_DATA).forEach(id => {
+    const mango = MANGO_MASTER_DATA[id];
+    grid.innerHTML += `
+      <div class="mango-card" data-id="${id}">
+        <img src="${mango.image}" alt="${mango.selfMetrics.name}">
+        <h3>${mango.selfMetrics.name}</h3>
+      </div>
+    `;
+  });
+
+  setupVarietyCardListeners();
+}
 
 function setupVarietyCardListeners() {
   const cards = document.querySelectorAll(".mango-card");
@@ -49,7 +69,6 @@ function destroyActiveChartInstances() {
 }
 
 function openDetailedProfile(id) {
-  // console.log("Triggered Profile Target ID:", id);
   const variety = MANGO_MASTER_DATA[id];
   if (!variety) {
     console.error("Invalid Target Selection Mapping Identifier");
@@ -63,7 +82,6 @@ function openDetailedProfile(id) {
 
   const qrImgElement = document.getElementById("modal-qr-img");
   if (qrImgElement) {
-    // console.log("QR PATH BOUND:", variety.qrCode);
     qrImgElement.src = variety.qrCode;
     qrImgElement.style.display = "block";
     qrImgElement.onerror = () => {
@@ -103,7 +121,6 @@ function populateComparisonTable(dataMatrix) {
 }
 
 function renderTSSChart(rawDataset, activeBiharName) {
-  // console.log("TSS DATA ENGINE INGESTION:", rawDataset);
   const ctxTss = document.getElementById("tssChart");
   if (!ctxTss) return;
 
@@ -134,7 +151,7 @@ function renderTSSChart(rawDataset, activeBiharName) {
         onComplete: function () {
           const chartInstance = this;
           const ctx = chartInstance.ctx;
-          ctx.font = "bold 13px sans-serif"; // Increased font size for presentation screens
+          ctx.font = "bold 13px sans-serif"; 
           ctx.fillStyle = "#212529";
           ctx.textAlign = "center";
           ctx.textBaseline = "bottom";
@@ -153,7 +170,6 @@ function renderTSSChart(rawDataset, activeBiharName) {
 }
 
 function renderGIChart(rawDataset, activeBiharName) {
-  // console.log("GI DATA ENGINE INGESTION:", rawDataset);
   const ctxGi = document.getElementById("giChart");
   if (!ctxGi) return;
 
@@ -184,7 +200,7 @@ function renderGIChart(rawDataset, activeBiharName) {
         onComplete: function () {
           const chartInstance = this;
           const ctx = chartInstance.ctx;
-          ctx.font = "bold 13px sans-serif"; // Increased font size for presentation screens
+          ctx.font = "bold 13px sans-serif"; 
           ctx.fillStyle = "#212529";
           ctx.textAlign = "center";
           ctx.textBaseline = "bottom";
@@ -193,7 +209,7 @@ function renderGIChart(rawDataset, activeBiharName) {
             const meta = chartInstance.getDatasetMeta(i);
             meta.data.forEach(function (bar, index) {
               const data = dataset.data[index];
-              ctx.fillText(data + " GI", bar.x, bar.y - 4); // Explicit indicator text append
+              ctx.fillText(data + " GI", bar.x, bar.y - 4); 
             });
           });
         }

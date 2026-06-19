@@ -49,7 +49,7 @@ const I18N_FALLBACK_DATA = {
     "varieties": {
       "dudhiyamaldah": { "title": "दूधिया मालदह" },
       "bombai": { "title": "बम्बई" },
-      "zardalu": { "title": "जर्दाालू" },
+      "zardalu": { "title": "जर्दालू" }, // FIX #1: Corrected Hindi spelling
       "langra": { "title": "लंगड़ा" },
       "chausa": { "title": "चौसा" },
       "amrapali": { "title": "आम्रपाली" },
@@ -72,7 +72,7 @@ const I18N_FALLBACK_DATA = {
     "varieties": {
       "dudhiyamaldah": { "title": "दूधिया मालदह" },
       "bombai": { "title": "बम्बई" },
-      "zardalu": { "title": "जर्दाालू" },
+      "zardalu": { "title": "जर्दालू" }, // FIX #1: Corrected Maithili fallback spelling
       "langra": { "title": "लंगड़ा" },
       "chausa": { "title": "चौसा" },
       "amrapali": { "title": "आम्रपाली" },
@@ -95,7 +95,7 @@ const I18N_FALLBACK_DATA = {
     "varieties": {
       "dudhiyamaldah": { "title": "दूधिया मालदह" },
       "bombai": { "title": "बम्बई" },
-      "zardalu": { "title": "जर्दाालू" },
+      "zardalu": { "title": "जर्दालू" }, // FIX #1: Corrected Bhojpuri fallback spelling
       "langra": { "title": "लंगड़ा" },
       "chausa": { "title": "चौसा" },
       "amrapali": { "title": "आम्रपाली" },
@@ -157,7 +157,7 @@ function setupLanguageSelectors() {
 }
 
 function setLanguage(langCode) {
-  // FIX #4: Kill any active audio stream instantly before loading new localized text strings
+  // Kill any active audio stream instantly before loading new localized strings
   stopVarietyAudio();
 
   currentLanguage = langCode;
@@ -172,15 +172,12 @@ function setLanguage(langCode) {
   document.getElementById("lbl-tss-chart-title").innerText = currentLanguageData.lblTSSChart;
   document.getElementById("lbl-gi-chart-title").innerText = currentLanguageData.lblGIChart;
 
+  // Build/Rebuild Data Grid Gallery elements
   buildGallery();
   
+  // FIX #3: Pass state entirely back through initialization method to cleanly re-draw charts with new language tokens
   if (activeVarietyId) {
-    const variety = MANGO_MASTER_DATA[activeVarietyId];
-    if (variety) {
-      document.getElementById("modal-title").innerText = currentLanguageData.varieties[activeVarietyId].title;
-      const unifiedDataset = getComparisonData(activeVarietyId);
-      populateComparisonTable(unifiedDataset);
-    }
+    openDetailedProfile(activeVarietyId);
   }
 }
 
@@ -217,12 +214,25 @@ function setupVarietyCardListeners() {
 function setupModalCloseTriggers() {
   const modal = document.getElementById("variety-modal");
   const closeBtn = document.getElementById("close-modal-btn");
+  
   if (closeBtn && modal) {
     closeBtn.addEventListener("click", () => {
       modal.classList.add("hidden");
       stopVarietyAudio();
       destroyActiveChartInstances();
       activeVarietyId = null;
+    });
+  }
+
+  // FIX #2: Dynamic UI outside backdrop click wrapper closure integration
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+        stopVarietyAudio();
+        destroyActiveChartInstances();
+        activeVarietyId = null;
+      }
     });
   }
 }
@@ -349,7 +359,6 @@ function openDetailedProfile(id) {
     qrImgElement.src = variety.qrCode;
     qrImgElement.style.display = "block";
     
-    // FIX #1: Correct string closure quotes format setup to bypass runtime breaks
     qrImgElement.onerror = () => {
       qrImgElement.src = "./qr/dudhiyamaldah-qr.png"; 
     };

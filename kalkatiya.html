@@ -22,29 +22,10 @@
         .header-text { flex: 1; min-width: 250px; }
         .qr-zone { text-align: center; background: #f1f3f5; padding: 1rem; border-radius: 8px; width: 180px; margin: 0 auto; }
         .qr-zone img { width: 150px; height: 150px; display: block; margin: 0 auto 0.5rem auto; }
-        
         .taxonomy-panel { border: 1px solid #ccc; border-radius: 8px; padding: 1.25rem; background-color: #fbfbfb; margin-bottom: 1.5rem; }
         .taxonomy-panel legend { font-weight: bold; padding: 0 0.5rem; color: var(--primary-green); font-size: 1.1rem; }
-        
-        .comparison-section, .chart-section { background: #fff; padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid #e9ecef; }
-        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .comparison-table th { background: var(--primary-green); color: white; padding: 12px; font-size: 0.95rem; }
-        .comparison-table td { padding: 14px 10px; text-align: center; border: 1px solid #dee2e6; font-size: 0.95rem; }
-        .table-note { font-size: 0.8rem; color: #6c757d; margin-top: 8px; }
-        .chart-container-wrapper { position: relative; width: 100%; height: 350px; }
-
-        .gi-legend-container {
-            display: flex; gap: 1.5rem; margin: 0.5rem 0 1.25rem 0; flex-wrap: wrap;
-            background: #f8f9fa; padding: 10px 15px; border-radius: 6px; border-left: 4px solid var(--primary-green);
-        }
-        .legend-pill { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: bold; color: #495057; }
-        
-        /* Executive Badge Styling */
-        .badge-value { padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; display: inline-block; }
-        .badge-target { background: #e8f5e9; color: #1b5e20; border: 1px solid #c8e6c9; }
-        .badge-amber { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; }
-        .badge-red { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
-        .badge-gray { background: #f5f5f5; color: #424242; border: 1px solid #e0e0e0; }
+        .chart-section { background: #fff; padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid #e9ecef; }
+        .chart-wrapper { height: 300px; margin-bottom: 40px; }
     </style>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -59,9 +40,8 @@
         <img class="hero-image" src="./images/kalkatiya.jpg" alt="Kalkatiya" onerror="this.src='./images/placeholder.jpg'">
         <div class="header-text">
             <h2 style="margin: 0 0 0.5rem 0; font-size: 2rem;">Kalkatiya ⭐</h2>
-            <h4 style="color: var(--primary-green); margin: 0 0 1rem 0; font-size: 1.2rem;">कलकतिया (Kalkatiya / Maldah Selection)</h4>
-            <p style="font-weight: bold; margin: 0 0 0.5rem 0; line-height: 1.4;">A premier, commercially vibrant mid-season asset heavily revered across Bihar for its distinct oblong structure, succulent texture, and high market value.</p>
-            <p style="font-style: italic; color: #555; margin: 0 0 1rem 0; line-height: 1.4;">Widely acknowledged for its thin skin, minimal fiber count, and a highly complex sweet profile accented by a faint, refreshing touch of natural tanginess.</p>
+            <h4 style="color: var(--primary-green); margin: 0 0 1rem 0; font-size: 1.2rem;">कलकतिया (Kalkatiya)</h4>
+            <p style="font-weight: bold; margin: 0 0 0.5rem 0; line-height: 1.4;">A robust variety known for its enduring appeal, Kalkatiya is a staple in many orchards, appreciated for its firm texture and reliable yield.</p>
         </div>
         <div class="qr-zone">
             <img src="./qr/kalkatiya-qr.png" alt="QR Code" onerror="this.src='./images/placeholder-qr.png'">
@@ -71,166 +51,56 @@
 
     <fieldset class="taxonomy-panel">
         <legend>Taxonomy</legend>
-        <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong>Origin:</strong> Selected regional strain propagated across core Bihar mango corridors</div>
-        <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong>Harvest Window:</strong> Mid June to Late June (Core Season Pillar)</div>
-        <div style="font-size: 1.05rem;"><strong>Growth Habit:</strong> Moderately dense canopy, highly efficient nutrient absorption profile, exceptional post-harvest crate longevity</div>
+        <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong>Origin:</strong> Regional Bihar</div>
+        <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong>Harvest Window:</strong> Late June</div>
+        <div style="font-size: 1.05rem;"><strong>Key Feature:</strong> Resilient growth, consistent quality</div>
     </fieldset>
 
-    <section class="comparison-section">
-        <h3 style="margin: 0 0 10px 0; color: var(--primary-green);">⚖️ Variety Comparison: Nutritional Profile</h3>
-        <table class="comparison-table">
-            <thead>
-                <tr>
-                    <th>Variety</th>
-                    <th>TSS Range (°Brix)</th>
-                    <th>Glycemic Index (GI)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="background-color: #f4f9f6; font-weight: bold; border-left: 5px solid var(--primary-green);">
-                    <td style="color: var(--primary-green);">Kalkatiya ⭐</td>
-                    <td><span class="badge-value badge-target">19.0–21.0</span></td>
-                    <td><span class="badge-value badge-amber">53</span></td>
-                </tr>
-                <tr>
-                    <td>Alphonso</td>
-                    <td><span class="badge-value badge-gray">20.0–22.0</span></td>
-                    <td><span class="badge-value badge-red">56</span></td>
-                </tr>
-                <tr>
-                    <td>Dashehari</td>
-                    <td><span class="badge-value badge-gray">18.0–20.0</span></td>
-                    <td><span class="badge-value badge-amber">54</span></td>
-                </tr>
-                <tr>
-                    <td>Kesar</td>
-                    <td><span class="badge-value badge-gray">19.0–21.0</span></td>
-                    <td><span class="badge-value badge-amber">53</span></td>
-                </tr>
-                <tr>
-                    <td>Totapuri</td>
-                    <td><span class="badge-value badge-gray">15.0–17.0</span></td>
-                    <td><span class="badge-value badge-amber">51</span></td>
-                </tr>
-            </tbody>
-        </table>
-        <p class="table-note">* Parameters compiled from standard regional performance targets.</p>
-    </section>
-
     <section class="chart-section">
-        <h3 style="margin: 0 0 5px 0; color: var(--primary-green);">📊 TSS & Glycemic Index Comparison Analysis</h3>
-        
-        <div class="gi-legend-container">
-            <div class="legend-pill">🟢 <span>Low GI (≤50)</span></div>
-            <div class="legend-pill">🟡 <span>Moderate GI (51–55)</span></div>
-            <div class="legend-pill">🔴 <span>High GI (>55)</span></div>
+        <h3 style="margin-bottom: 25px; color: var(--primary-green);">📊 Comparative Analysis</h3>
+
+        <div class="chart-wrapper">
+            <h4 style="text-align: center; margin-bottom: 10px;">Sugar Profile (TSS Midpoint °Brix)</h4>
+            <canvas id="tssChart"></canvas>
         </div>
 
-        <div class="chart-container-wrapper">
-            <canvas id="isolatedNutritionChart"></canvas>
-        </div>
-
-        <div style="background:#f8f9fa; padding:15px; border-left:5px solid #0F5132; margin-top:25px; border-radius:5px; line-height: 1.6; font-size: 0.95rem;">
-            <strong>Health Insight:</strong>
-            Kalkatiya balances a strong sugar concentration threshold (**20.00 °Brix midpoint**) with excellent glycemic metrics, demonstrating a moderate Glycemic Index of 53. Pacing securely below Alphonso (56) and perfectly pairing with Kesar (53), this prominent local favorite offers premium culinary richness with a more controlled metabolic impact compared to standard commercial export alternatives.
+        <div class="chart-wrapper">
+            <h4 style="text-align: center; margin-bottom: 10px;">Glycemic Index (GI) Spectrum</h4>
+            <canvas id="giChart"></canvas>
         </div>
     </section>
 </div>
 
 <script>
     window.addEventListener('DOMContentLoaded', () => {
-        const ctx = document.getElementById('isolatedNutritionChart').getContext('2d');
-        
         Chart.register(ChartDataLabels);
         
-        new Chart(ctx, {
+        // TSS Chart - Highlighting Kalkatiya
+        new Chart(document.getElementById('tssChart'), {
             type: 'bar',
             data: {
-                labels: ['Kalkatiya ⭐', 'Alphonso', 'Dashehari', 'Kesar', 'Totapuri'],
-                datasets: [
-                    {
-                        label: 'Glycemic Index (GI)',
-                        data: [53, 56, 54, 53, 51], // Calibrated for Kalkatiya
-                        backgroundColor: [
-                            '#0F5132', // Kalkatiya (Target Cultivar Highlight)
-                            '#DC3545', // Alphonso (High GI Reference)
-                            '#FFB100', // Dashehari (Moderate)
-                            '#FFB100', // Kesar (Moderate)
-                            '#FFB100'  // Totapuri (Moderate)
-                        ],
-                        borderColor: [
-                            '#0A3622', '#A71D2A', '#B88000', '#B88000', '#B88000'
-                        ],
-                        borderWidth: 1.5,
-                        yAxisID: 'y',
-                        datalabels: {
-                            anchor: 'end',
-                            align: 'top',
-                            offset: 2,
-                            font: { weight: 'bold', size: 11 },
-                            formatter: (value) => value
-                        }
-                    },
-                    {
-                        label: 'TSS Midpoint (°Brix)',
-                        data: [20.00, 21.0, 19.0, 20.0, 16.0], // Aligned midpoint parameters
-                        backgroundColor: 'rgba(212, 175, 55, 0.5)', 
-                        borderColor: '#DAA520',
-                        borderWidth: 1.5,
-                        yAxisID: 'y1',
-                        datalabels: {
-                            anchor: 'end',
-                            align: 'top',
-                            offset: 2,
-                            font: { weight: 'bold', size: 11 },
-                            formatter: (value) => value.toFixed(2)
-                        }
-                    }
-                ]
+                labels: ['Kalkatiya', 'Dudhiya Maldah', 'Alphonso', 'Dashehari', 'Totapuri'],
+                datasets: [{
+                    label: 'TSS (°Brix)',
+                    data: [18.2, 21.25, 21.0, 19.0, 16.0],
+                    backgroundColor: ['#0F5132', '#FFC107', '#FFC107', '#FFC107', '#FFC107']
+                }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                layout: {
-                    padding: { top: 25 }
-                },
-                scales: {
-                    y: {
-                        type: 'linear',
-                        position: 'left',
-                        title: { display: true, text: 'Glycemic Index (GI)', font: { weight: 'bold' } },
-                        min: 0,
-                        max: 70
-                    },
-                    y1: {
-                        type: 'linear',
-                        position: 'right',
-                        title: { display: true, text: 'TSS Midpoint (°Brix)', font: { weight: 'bold' } },
-                        min: 0,
-                        max: 25,
-                        grid: { drawOnChartArea: false }
-                    }
-                },
-                plugins: {
-                    legend: { position: 'top' },
-                    tooltip: { 
-                        enabled: true,
-                        backgroundColor: 'rgba(33, 37, 41, 0.95)',
-                        titleFont: { weight: 'bold' },
-                        bodyFont: { size: 13 },
-                        padding: 10,
-                        cornerRadius: 6,
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) { label += ': '; }
-                                if (context.parsed.y !== null) { label += context.parsed.y; }
-                                return label;
-                            }
-                        }
-                    }
-                }
-            }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'top' } } }
+        });
+
+        // GI Chart - Highlighting Kalkatiya
+        new Chart(document.getElementById('giChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Alphonso', 'Dashehari', 'Kalkatiya', 'Kesar', 'Totapuri'],
+                datasets: [{
+                    label: 'GI Value',
+                    data: [56, 54, 50, 53, 51],
+                    backgroundColor: ['#DC3545', '#FFB100', '#0F5132', '#FFB100', '#FFB100']
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'top' } } }
         });
     });
 </script>

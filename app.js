@@ -1,28 +1,172 @@
 /**
- * Bihar Smart Mango Knowledge Wall - UI Engine & Chart Lifecycle Controller
+ * Bihar Smart Mango Knowledge Wall - UI Engine & Audio Lifecycle Controller
  */
 
 let tssChartInstance = null;
 let giChartInstance = null;
 
+// Core Language & Identity Tracking State Variables
+let currentLanguage = "en";
+let activeVarietyId = null;
+let currentLanguageData = null;
+
+// Central Kiosk Core Dictionary Models (Acts as local asset fallback)
+const I18N_FALLBACK_DATA = {
+  "en": {
+    "lblMainTitle": "Bihar Smart Mango Knowledge Wall",
+    "lblSubheading": "Nutritional & Quality Comparison Dashboard",
+    "thVariety": "Variety",
+    "thTSS": "TSS Range (°Brix)",
+    "thGI": "Glycemic Index (GI)",
+    "lblTSSChart": "🧪 Sugar Profile Analysis (TSS Midpoint Descending)",
+    "lblGIChart": "🩸 Glycemic Index Spectrum (GI Value Descending)",
+    "varieties": {
+      "dudhiyamaldah": { "title": "Dudhiya Maldah" },
+      "bombai": { "title": "Bombai" },
+      "zardalu": { "title": "Jardalu" },
+      "langra": { "title": "Langra" },
+      "chausa": { "title": "Chausa" },
+      "amrapali": { "title": "Amrapali" },
+      "gulabkhas": { "title": "Gulabkhas" },
+      "maldah": { "title": "Maldah" },
+      "sipahiya": { "title": "Sipahiya" },
+      "sukul": { "title": "Sukul" },
+      "krishnabhog": { "title": "Krishna Bhog" },
+      "kalkatiya": { "title": "Kalkatiya" }
+    }
+  },
+  "hi": {
+    "lblMainTitle": "बिहार स्मार्ट मैंगो नॉलेज वॉल",
+    "lblSubheading": "पोषण और गुणवत्ता तुलनात्मक डैशबोर्ड",
+    "thVariety": "किस्म",
+    "thTSS": "कुल घुलनशील ठोस (TSS Range)",
+    "thGI": "ग्लाइसेमिक इंडेक्स (GI)",
+    "lblTSSChart": "🧪 शर्करा विश्लेषण (TSS मिडपॉइंट अवरोही क्रम)",
+    "lblGIChart": "🩸 ग्लाइसेमिक इंडेक्स स्पेक्ट्रम (GI मान अवरोही क्रम)",
+    "varieties": {
+      "dudhiyamaldah": { "title": "दूधिया मालदह" },
+      "bombai": { "title": "बम्बई" },
+      "zardalu": { "title": "जर्दाालू" },
+      "langra": { "title": "लंगड़ा" },
+      "chausa": { "title": "चौसा" },
+      "amrapali": { "title": "आम्रपाली" },
+      "gulabkhas": { "title": "गुलाबखास" },
+      "maldah": { "title": "मालदह" },
+      "sipahiya": { "title": "सिपाहिया" },
+      "sukul": { "title": "सुकुल" },
+      "krishnabhog": { "title": "कृष्णभोग" },
+      "kalkatiya": { "title": "कलकतिया" }
+    }
+  },
+  "mai": {
+    "lblMainTitle": "बिहार स्मार्ट आम ज्ञान दीवार",
+    "lblSubheading": "पोषण आ गुणवत्ता तुलनात्मक डैशबोर्ड",
+    "thVariety": "प्रकार",
+    "thTSS": "टीएसएस रेंज (°Brix)",
+    "thGI": "ग्लाइसेमिक इंडेक्स (GI)",
+    "lblTSSChart": "🧪 चीनीक मात्रा विश्लेषण (अवरोही क्रम)",
+    "lblGIChart": "🩸 ग्लाइसेमिक इंडेक्स स्पेक्ट्रम (अवरोही क्रम)",
+    "varieties": {
+      "dudhiyamaldah": { "title": "दूधिया मालदह" },
+      "bombai": { "title": "बम्बई" },
+      "zardalu": { "title": "जर्दाालू" },
+      "langra": { "title": "लंगड़ा" },
+      "chausa": { "title": "चौसा" },
+      "amrapali": { "title": "आम्रपाली" },
+      "gulabkhas": { "title": "गुलाबखास" },
+      "maldah": { "title": "मालदह" },
+      "sipahiya": { "title": "सिपाहिया" },
+      "sukul": { "title": "सुकुल" },
+      "krishnabhog": { "title": "कृष्णभोग" },
+      "kalkatiya": { "title": "कलकतिया" }
+    }
+  },
+  "bho": {
+    "lblMainTitle": "बिहार स्मार्ट आम ज्ञान दीवार",
+    "lblSubheading": "पोषण अउर गुणवत्ता तुलनात्मक डैशबोर्ड",
+    "thVariety": "किसिम",
+    "thTSS": "टीएसएस रेंज (°Brix)",
+    "thGI": "ग्लाइसेमिक इंडेक्स (GI)",
+    "lblTSSChart": "🧪 शर्करा जांच (अवरोही क्रम)",
+    "lblGIChart": "🩸 ग्लाइसेमिक इंडेक्स जांच (अवरोही क्रम)",
+    "varieties": {
+      "dudhiyamaldah": { "title": "दूधिया मालदह" },
+      "bombai": { "title": "बम्बई" },
+      "zardalu": { "title": "जर्दाालू" },
+      "langra": { "title": "लंगड़ा" },
+      "chausa": { "title": "चौसा" },
+      "amrapali": { "title": "आम्रपाली" },
+      "gulabkhas": { "title": "गुलाबखास" },
+      "maldah": { "title": "मालदह" },
+      "sipahiya": { "title": "सिपाहिया" },
+      "sukul": { "title": "सुकुल" },
+      "krishnabhog": { "title": "कृष्णभोग" },
+      "kalkatiya": { "title": "कलकतिया" }
+    }
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
-  buildGallery();
+  // Initialize default language matrices
+  setLanguage(currentLanguage);
+  
+  // Attach layout and core interaction configurations
+  setupLanguageSelectors();
   setupModalCloseTriggers();
+  setupAudioInterfaceTriggers();
 });
 
-// Programmatically populates all varieties from the mangoes.js master model
+function setupLanguageSelectors() {
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const selectedLang = btn.getAttribute("data-lang");
+      if (selectedLang) {
+        setLanguage(selectedLang);
+      }
+    });
+  });
+}
+
+function setLanguage(langCode) {
+  currentLanguage = langCode;
+  currentLanguageData = I18N_FALLBACK_DATA[langCode];
+
+  // Dynamic DOM UI Text Updates
+  document.getElementById("main-headline").innerText = currentLanguageData.lblMainTitle;
+  document.getElementById("modal-subheading").innerText = currentLanguageData.lblSubheading;
+  document.getElementById("th-variety").innerText = currentLanguageData.thVariety;
+  document.getElementById("th-tss").innerText = currentLanguageData.thTSS;
+  document.getElementById("th-gi").innerText = currentLanguageData.thGI;
+  document.getElementById("lbl-tss-chart-title").innerText = currentLanguageData.lblTSSChart;
+  document.getElementById("lbl-gi-chart-title").innerText = currentLanguageData.lblGIChart;
+
+  // Build/Rebuild Data Grid Gallery elements
+  buildGallery();
+  
+  // Live update visible modal metrics if language changes while profile view is active
+  if (activeVarietyId) {
+    const variety = MANGO_MASTER_DATA[activeVarietyId];
+    if (variety) {
+      document.getElementById("modal-title").innerText = currentLanguageData.varieties[activeVarietyId].title;
+      const unifiedDataset = getComparisonData(activeVarietyId);
+      populateComparisonTable(unifiedDataset);
+    }
+  }
+}
+
 function buildGallery() {
   const grid = document.getElementById("gallery-grid");
   if (!grid) return;
-  
   grid.innerHTML = ""; 
 
   Object.keys(MANGO_MASTER_DATA).forEach(id => {
     const mango = MANGO_MASTER_DATA[id];
+    const localizedTitle = currentLanguageData.varieties[id] ? currentLanguageData.varieties[id].title : mango.selfMetrics.name;
+    
     grid.innerHTML += `
       <div class="mango-card" data-id="${id}">
-        <img src="${mango.image}" alt="${mango.selfMetrics.name}">
-        <h3>${mango.selfMetrics.name}</h3>
+        <img src="${mango.image}" alt="${localizedTitle}">
+        <h3>${localizedTitle}</h3>
       </div>
     `;
   });
@@ -46,38 +190,87 @@ function setupModalCloseTriggers() {
   if (closeBtn && modal) {
     closeBtn.addEventListener("click", () => {
       modal.classList.add("hidden");
+      stopVarietyAudio();
       destroyActiveChartInstances();
-    });
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-        destroyActiveChartInstances();
-      }
+      activeVarietyId = null;
     });
   }
+}
+
+function setupAudioInterfaceTriggers() {
+  const audioBtn = document.getElementById("btn-modal-audio");
+  const stopBtn = document.getElementById("btn-modal-stop");
+
+  if (audioBtn) {
+    audioBtn.addEventListener("click", playVarietyAudio);
+  }
+  if (stopBtn) {
+    stopBtn.addEventListener("click", stopVarietyAudio);
+  }
+}
+
+function playVarietyAudio() {
+  const title = document.getElementById("modal-title").innerText;
+  let text = "";
+
+  // Structured conditional output checks based on targeted language selected
+  if (currentLanguage === "en") {
+    text = title + " is one of Bihar's famous mango varieties.";
+  }
+  if (currentLanguage === "hi") {
+    text = title + " बिहार की प्रसिद्ध आम की किस्म है।";
+  }
+  if (currentLanguage === "mai") {
+    text = title + " बिहारक प्रसिद्ध आमक किस्म अछि।";
+  }
+  if (currentLanguage === "bho") {
+    text = title + " बिहार के प्रसिद्ध आम के किसिम बा।";
+  }
+
+  speechSynthesis.cancel(); // Drop intersecting queues instantly
+
+  if (!text) return;
+
+  const speech = new SpeechSynthesisUtterance(text);
+  const systemAvailableVoices = window.speechSynthesis.getVoices();
+
+  // Route engine processing language context based on text metrics
+  if (text.match(/[\u0900-\u097F]/)) {
+    const hindiVoice = systemAvailableVoices.find(voice => voice.lang.includes("hi") || voice.lang.includes("HI"));
+    if (hindiVoice) {
+      speech.voice = hindiVoice;
+    }
+    speech.lang = "hi-IN";
+  } else {
+    const englishVoice = systemAvailableVoices.find(voice => voice.lang.includes("en") || voice.lang.includes("EN"));
+    if (englishVoice) {
+      speech.voice = englishVoice;
+    }
+    speech.lang = "en-IN";
+  }
+
+  speech.rate = 0.90; // Optimized delivery cadence for noisy presentation spaces
+  speechSynthesis.speak(speech);
+}
+
+function stopVarietyAudio() {
+  speechSynthesis.cancel();
 }
 
 function destroyActiveChartInstances() {
-  if (tssChartInstance) {
-    tssChartInstance.destroy();
-    tssChartInstance = null;
-  }
-  if (giChartInstance) {
-    giChartInstance.destroy();
-    giChartInstance = null;
-  }
+  if (tssChartInstance) { tssChartInstance.destroy(); tssChartInstance = null; }
+  if (giChartInstance) { giChartInstance.destroy(); giChartInstance = null; }
 }
 
 function openDetailedProfile(id) {
+  activeVarietyId = id;
   const variety = MANGO_MASTER_DATA[id];
-  if (!variety) {
-    console.error("Invalid Target Selection Mapping Identifier");
-    return;
-  }
+  if (!variety) return;
 
   destroyActiveChartInstances();
 
-  document.getElementById("modal-title").innerText = variety.selfMetrics.name;
+  const localizedTitle = currentLanguageData.varieties[id] ? currentLanguageData.varieties[id].title : variety.selfMetrics.name;
+  document.getElementById("modal-title").innerText = localizedTitle;
   document.getElementById("modal-variety-img").src = variety.image;
 
   const qrImgElement = document.getElementById("modal-qr-img");
@@ -85,7 +278,6 @@ function openDetailedProfile(id) {
     qrImgElement.src = variety.qrCode;
     qrImgElement.style.display = "block";
     qrImgElement.onerror = () => {
-      console.warn(`Asset missing at target deployment path: ${variety.qrCode}`);
       qrImgElement.src = "./qr/dudhiyamaldah-qr.png"; 
     };
   }
@@ -107,11 +299,19 @@ function populateComparisonTable(dataMatrix) {
   
   dataMatrix.forEach((item, index) => {
     const isTarget = (index === 0);
+    let displayName = item.name;
+    
+    Object.keys(MANGO_MASTER_DATA).forEach(key => {
+      if (MANGO_MASTER_DATA[key].selfMetrics.name === item.name && currentLanguageData.varieties[key]) {
+        displayName = currentLanguageData.varieties[key].title;
+      }
+    });
+
     const textStyle = isTarget ? "font-weight: 700; color: #0F5132; background-color: #f1f8f5;" : "";
     body.innerHTML += `
       <tr style="${textStyle}">
         <td style="padding: 8px; border-bottom: 1px solid #dee2e6; text-align: left;">
-          ${item.name} ${isTarget ? '⭐' : ''}
+          ${displayName} ${isTarget ? '⭐' : ''}
         </td>
         <td style="padding: 8px; border-bottom: 1px solid #dee2e6; text-align: center;">${item.tss}</td>
         <td style="padding: 8px; border-bottom: 1px solid #dee2e6; text-align: center;">${item.gi}</td>
@@ -130,9 +330,17 @@ function renderTSSChart(rawDataset, activeBiharName) {
   tssChartInstance = new Chart(ctxTss.getContext("2d"), {
     type: 'bar',
     data: {
-      labels: tssData.map(d => d.name),
+      labels: tssData.map(d => {
+        let label = d.name;
+        Object.keys(MANGO_MASTER_DATA).forEach(k => {
+          if (MANGO_MASTER_DATA[k].selfMetrics.name === d.name && currentLanguageData.varieties[k]) {
+            label = currentLanguageData.varieties[k].title;
+          }
+        });
+        return label;
+      }),
       datasets: [{
-        label: 'Total Soluble Solids (TSS Midpoint °Brix)',
+        label: 'Total Soluble Solids',
         data: tssData.map(d => d.value),
         backgroundColor: tssData.map(d => d.name === activeBiharName ? '#0F5132' : '#FFC107'),
         borderColor: tssData.map(d => d.name === activeBiharName ? '#0A3622' : '#FFC107'),
@@ -144,14 +352,12 @@ function renderTSSChart(rawDataset, activeBiharName) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
-      scales: { 
-        y: { beginAtZero: true, max: 25, ticks: { display: true } } 
-      },
+      scales: { y: { beginAtZero: true, max: 25 } },
       animation: {
         onComplete: function () {
           const chartInstance = this;
           const ctx = chartInstance.ctx;
-          ctx.font = "bold 13px sans-serif"; 
+          ctx.font = "bold 13px sans-serif";
           ctx.fillStyle = "#212529";
           ctx.textAlign = "center";
           ctx.textBaseline = "bottom";
@@ -179,9 +385,17 @@ function renderGIChart(rawDataset, activeBiharName) {
   giChartInstance = new Chart(ctxGi.getContext("2d"), {
     type: 'bar',
     data: {
-      labels: giData.map(d => d.name),
+      labels: giData.map(d => {
+        let label = d.name;
+        Object.keys(MANGO_MASTER_DATA).forEach(k => {
+          if (MANGO_MASTER_DATA[k].selfMetrics.name === d.name && currentLanguageData.varieties[k]) {
+            label = currentLanguageData.varieties[k].title;
+          }
+        });
+        return label;
+      }),
       datasets: [{
-        label: 'Glycemic Index Score',
+        label: 'Glycemic Index',
         data: giData.map(d => d.value),
         backgroundColor: giData.map(d => d.name === activeBiharName ? '#198754' : '#DEE2E6'),
         borderColor: giData.map(d => d.name === activeBiharName ? '#0A3622' : '#ADB5BD'),
@@ -193,14 +407,12 @@ function renderGIChart(rawDataset, activeBiharName) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
-      scales: { 
-        y: { beginAtZero: true, max: 65, ticks: { display: true } } 
-      },
+      scales: { y: { beginAtZero: true, max: 65 } },
       animation: {
         onComplete: function () {
           const chartInstance = this;
           const ctx = chartInstance.ctx;
-          ctx.font = "bold 13px sans-serif"; 
+          ctx.font = "bold 13px sans-serif";
           ctx.fillStyle = "#212529";
           ctx.textAlign = "center";
           ctx.textBaseline = "bottom";
@@ -209,7 +421,7 @@ function renderGIChart(rawDataset, activeBiharName) {
             const meta = chartInstance.getDatasetMeta(i);
             meta.data.forEach(function (bar, index) {
               const data = dataset.data[index];
-              ctx.fillText(data + " GI", bar.x, bar.y - 4); 
+              ctx.fillText(data + " GI", bar.x, bar.y - 4);
             });
           });
         }

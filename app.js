@@ -49,7 +49,7 @@ const I18N_FALLBACK_DATA = {
     "varieties": {
       "dudhiyamaldah": { "title": "दूधिया मालदह" },
       "bombai": { "title": "बम्बई" },
-      "zardalu": { "title": "जर्दालू" }, // FIX #1: Corrected Hindi spelling
+      "zardalu": { "title": "जर्दालू" }, 
       "langra": { "title": "लंगड़ा" },
       "chausa": { "title": "चौसा" },
       "amrapali": { "title": "आम्रपाली" },
@@ -72,7 +72,7 @@ const I18N_FALLBACK_DATA = {
     "varieties": {
       "dudhiyamaldah": { "title": "दूधिया मालदह" },
       "bombai": { "title": "बम्बई" },
-      "zardalu": { "title": "जर्दालू" }, // FIX #1: Corrected Maithili fallback spelling
+      "zardalu": { "title": "जर्दालू" }, 
       "langra": { "title": "लंगड़ा" },
       "chausa": { "title": "चौसा" },
       "amrapali": { "title": "आम्रपाली" },
@@ -95,7 +95,7 @@ const I18N_FALLBACK_DATA = {
     "varieties": {
       "dudhiyamaldah": { "title": "दूधिया मालदह" },
       "bombai": { "title": "बम्बई" },
-      "zardalu": { "title": "जर्दालू" }, // FIX #1: Corrected Bhojpuri fallback spelling
+      "zardalu": { "title": "जर्दालू" }, 
       "langra": { "title": "लंगड़ा" },
       "chausa": { "title": "चौसा" },
       "amrapali": { "title": "आम्रपाली" },
@@ -144,6 +144,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+function buildGallery() {
+  const grid = document.getElementById("gallery-grid");
+  if (!grid) return;
+  grid.innerHTML = ""; 
+
+  Object.keys(MANGO_MASTER_DATA).forEach(id => {
+    const mango = MANGO_MASTER_DATA[id];
+    const localizedTitle = currentLanguageData.varieties[id] ? currentLanguageData.varieties[id].title : mango.selfMetrics.name;
+    
+    grid.innerHTML += `
+      <div class="mango-card" data-id="${id}">
+        <img src="${mango.image}" alt="${localizedTitle}">
+        <h3>${localizedTitle}</h3>
+      </div>
+    `;
+  });
+
+  setupVarietyCardListeners();
+}
+
+function setupVarietyCardListeners() {
+  const cards = document.querySelectorAll(".mango-card");
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      const id = card.getAttribute("data-id");
+      if (id) openDetailedProfile(id);
+    });
+  });
+}
+
 function setupLanguageSelectors() {
   document.querySelectorAll(".lang-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -175,40 +205,9 @@ function setLanguage(langCode) {
   // Build/Rebuild Data Grid Gallery elements
   buildGallery();
   
-  // FIX #3: Pass state entirely back through initialization method to cleanly re-draw charts with new language tokens
   if (activeVarietyId) {
     openDetailedProfile(activeVarietyId);
   }
-}
-
-function buildGallery() {
-  const grid = document.getElementById("gallery-grid");
-  if (!grid) return;
-  grid.innerHTML = ""; 
-
-  Object.keys(MANGO_MASTER_DATA).forEach(id => {
-    const mango = MANGO_MASTER_DATA[id];
-    const localizedTitle = currentLanguageData.varieties[id] ? currentLanguageData.varieties[id].title : mango.selfMetrics.name;
-    
-    grid.innerHTML += `
-      <div class="mango-card" data-id="${id}">
-        <img src="${mango.image}" alt="${localizedTitle}">
-        <h3>${localizedTitle}</h3>
-      </div>
-    `;
-  });
-
-  setupVarietyCardListeners();
-}
-
-function setupVarietyCardListeners() {
-  const cards = document.querySelectorAll(".mango-card");
-  cards.forEach(card => {
-    card.addEventListener("click", () => {
-      const id = card.getAttribute("data-id");
-      if (id) openDetailedProfile(id);
-    });
-  });
 }
 
 function setupModalCloseTriggers() {
@@ -224,7 +223,6 @@ function setupModalCloseTriggers() {
     });
   }
 
-  // FIX #2: Dynamic UI outside backdrop click wrapper closure integration
   if (modal) {
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {

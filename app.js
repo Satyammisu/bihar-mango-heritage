@@ -22,7 +22,6 @@ function setupVarietyCardListeners() {
 
 function setupModalCloseTriggers() {
   const modal = document.getElementById("variety-modal");
-  // Synchronized seamlessly with HTML id: close-modal-btn
   const closeBtn = document.getElementById("close-modal-btn");
   if (closeBtn && modal) {
     closeBtn.addEventListener("click", () => {
@@ -62,7 +61,6 @@ function openDetailedProfile(id) {
   document.getElementById("modal-title").innerText = variety.selfMetrics.name;
   document.getElementById("modal-variety-img").src = variety.image;
 
-  // Asset validation tracer injection
   const qrImgElement = document.getElementById("modal-qr-img");
   if (qrImgElement) {
     console.log("QR PATH BOUND:", variety.qrCode);
@@ -107,10 +105,7 @@ function populateComparisonTable(dataMatrix) {
 function renderTSSChart(rawDataset, activeBiharName) {
   console.log("TSS DATA ENGINE INGESTION:", rawDataset);
   const ctxTss = document.getElementById("tssChart");
-  if (!ctxTss) {
-    console.error("Critical: Canvas tssChart Element Target Context Missing from DOM.");
-    return;
-  }
+  if (!ctxTss) return;
 
   const tssData = rawDataset.map(item => ({ name: item.name, value: item.tssMid }))
                             .sort((a, b) => b.value - a.value);
@@ -130,7 +125,27 @@ function renderTSSChart(rawDataset, activeBiharName) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, max: 25 } }
+      scales: { 
+        y: { beginAtZero: true, max: 25, ticks: { display: true } } 
+      },
+      animation: {
+        onComplete: function () {
+          const chartInstance = this;
+          const ctx = chartInstance.ctx;
+          ctx.font = "bold 11px sans-serif";
+          ctx.fillStyle = "#212529";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "bottom";
+
+          this.data.datasets.forEach(function (dataset, i) {
+            const meta = chartInstance.getDatasetMeta(i);
+            meta.data.forEach(function (bar, index) {
+              const data = dataset.data[index];
+              ctx.fillText(data.toFixed(1) + "°", bar.x, bar.y - 4);
+            });
+          });
+        }
+      }
     }
   });
 }
@@ -138,10 +153,7 @@ function renderTSSChart(rawDataset, activeBiharName) {
 function renderGIChart(rawDataset, activeBiharName) {
   console.log("GI DATA ENGINE INGESTION:", rawDataset);
   const ctxGi = document.getElementById("giChart");
-  if (!ctxGi) {
-    console.error("Critical: Canvas giChart Element Target Context Missing from DOM.");
-    return;
-  }
+  if (!ctxGi) return;
 
   const giData = rawDataset.map(item => ({ name: item.name, value: item.gi }))
                            .sort((a, b) => b.value - a.value);
@@ -161,7 +173,27 @@ function renderGIChart(rawDataset, activeBiharName) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, max: 65 } }
+      scales: { 
+        y: { beginAtZero: true, max: 65, ticks: { display: true } } 
+      },
+      animation: {
+        onComplete: function () {
+          const chartInstance = this;
+          const ctx = chartInstance.ctx;
+          ctx.font = "bold 11px sans-serif";
+          ctx.fillStyle = "#212529";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "bottom";
+
+          this.data.datasets.forEach(function (dataset, i) {
+            const meta = chartInstance.getDatasetMeta(i);
+            meta.data.forEach(function (bar, index) {
+              const data = dataset.data[index];
+              ctx.fillText(data, bar.x, bar.y - 4);
+            });
+          });
+        }
+      }
     }
   });
 }

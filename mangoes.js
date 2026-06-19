@@ -5,10 +5,10 @@
  */
 
 const BENCHMARK_VARIETIES = [
-  { "name": "Alphonso", "tss": "20.0–22.0", "tssMid": 21.0, "gi": 56 },
-  { "name": "Kesar", "tss": "19.0–21.0", "tssMid": 20.0, "gi": 53 },
-  { "name": "Dashehari", "tss": "18.0–20.0", "tssMid": 19.0, "gi": 54 },
-  { "name": "Totapuri", "tss": "15.0–17.0", "tssMid": 16.0, "gi": 51 }
+  { "name": "Alphonso", "tss": "20.0–22.0", "tssMid": 21.00, "gi": 56 },
+  { "name": "Kesar", "tss": "19.0–21.0", "tssMid": 20.00, "gi": 53 },
+  { "name": "Dashehari", "tss": "18.0–20.0", "tssMid": 19.00, "gi": 54 },
+  { "name": "Totapuri", "tss": "15.0–17.0", "tssMid": 16.00, "gi": 51 }
 ];
 
 const MANGO_MASTER_DATA = {
@@ -22,7 +22,7 @@ const MANGO_MASTER_DATA = {
     "id": "bombai",
     "image": "./images/bombai.jpg",
     "qrCode": "./qr/bombai-qr.png",
-    "selfMetrics": { "name": "Bombai", "tss": "18.0–19.0", "tssMid": 18.5, "gi": 55 }
+    "selfMetrics": { "name": "Bombai", "tss": "18.0–19.0", "tssMid": 18.50, "gi": 55 }
   },
   "jardalu": {
     "id": "jardalu",
@@ -34,7 +34,7 @@ const MANGO_MASTER_DATA = {
     "id": "langra",
     "image": "./images/langra.jpg",
     "qrCode": "./qr/langra-qr.png",
-    "selfMetrics": { "name": "Langra", "tss": "21.0–22.0", "tssMid": 21.5, "gi": 54 }
+    "selfMetrics": { "name": "Langra", "tss": "21.0–22.0", "tssMid": 21.50, "gi": 54 }
   },
   "chausa": {
     "id": "chausa",
@@ -64,19 +64,19 @@ const MANGO_MASTER_DATA = {
     "id": "sipahiya",
     "image": "./images/sipahiya.jpg",
     "qrCode": "./qr/sipahiya-qr.png",
-    "selfMetrics": { "name": "Sipahiya", "tss": "17.5–18.5", "tssMid": 18.0, "gi": 52 }
+    "selfMetrics": { "name": "Sipahiya", "tss": "17.5–18.5", "tssMid": 18.00, "gi": 52 }
   },
   "sukul": {
     "id": "sukul",
     "image": "./images/sukul.jpg",
     "qrCode": "./qr/sukul-qr.png",
-    "selfMetrics": { "name": "Sukul", "tss": "18.5–19.5", "tssMid": 19.0, "gi": 52 }
+    "selfMetrics": { "name": "Sukul", "tss": "18.5–19.5", "tssMid": 19.00, "gi": 52 }
   },
   "krishnabhog": {
     "id": "krishnabhog",
     "image": "./images/krishnabhog.jpg",
     "qrCode": "./qr/krishnabhog-qr.png",
-    "selfMetrics": { "name": "Krishna Bhog", "tss": "19.0–20.5", "tssMid": 19.75, "gi": 55 }
+    "selfMetrics": { "name": "Krishna Bhog", "tss": "19.5–21.5", "tssMid": 20.50, "gi": 52 }
   },
   "kalkatiya": {
     "id": "kalkatiya",

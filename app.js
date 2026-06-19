@@ -6,7 +6,8 @@
 
 let currentLanguageData = {};
 let activeSpeechUtterance = null;
-let currentChartInstance = null;
+let currentTssChartInstance = null;
+let currentGiChartInstance = null;
 const DEFAULT_LANG = 'en';
 const SUPPORTED_LOCALES = ['en', 'hi', 'bho', 'mai'];
 
@@ -90,7 +91,33 @@ function openDetailedProfile(id) {
     activeVarietyIdInModal = id; 
 
     document.getElementById('modal-variety-img').src = structuralData.image;
-    document.getElementById('modal-qr-img').src = structuralData.qrCode;
+    
+    // --- STATIC REAL-TIME QR GENERATION ---
+    const qrImgElement = document.getElementById('modal-qr-img');
+    if (qrImgElement) {
+        let qrContainer = document.getElementById('modal-qr-container-box');
+        if (!qrContainer) {
+            qrContainer = document.createElement('div');
+            qrContainer.id = 'modal-qr-container-box';
+            qrContainer.style.width = "150px";
+            qrContainer.style.height = "150px";
+            qrContainer.style.margin = "0 auto";
+            qrImgElement.parentNode.replaceChild(qrContainer, qrImgElement);
+        }
+        qrContainer.innerHTML = ""; 
+        
+        const dynamicLink = window.location.origin + window.location.pathname.replace('index.html', '') + `krishnabhog.html`;
+        
+        new QRCode(qrContainer, {
+            text: dynamicLink,
+            width: 150,
+            height: 150,
+            colorDark : "#212529",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    }
+
     document.getElementById('modal-title').textContent = translationData.title;
     document.getElementById('modal-local-name').textContent = translationData.localName;
     document.getElementById('modal-tagline').textContent = translationData.tagline;
@@ -101,7 +128,10 @@ function openDetailedProfile(id) {
     
     const unifiedDataset = getComparisonData(id);
     populateComparisonTable(unifiedDataset);
-    renderNutritionChart(unifiedDataset);
+    
+    // Independent analytics renders called sequentially
+    renderTSSChart(unifiedDataset);
+    renderGIChart(unifiedDataset);
 
     const modal = document.getElementById('variety-modal');
     if (modal) {
@@ -129,51 +159,87 @@ function populateComparisonTable(dataMatrix) {
         body.innerHTML += `
             <tr style="${textWeightStyle}">
                 <td style="font-weight: 600; text-align: left;">${item.name} ${index === 0 ? '⭐' : ''}</td>
-                <td>${item.tss}</td>
-                <td>${item.gi}</td>
+                <td><span class="badge-value ${index === 0 ? 'badge-target' : 'badge-gray'}">${item.tss}</span></td>
+                <td><span class="badge-value ${item.gi <= 55 ? 'badge-amber' : 'badge-red'}">${item.gi}</span></td>
             </tr>
         `;
     });
 }
 
-function renderNutritionChart(dataMatrix) {
-    const ctx = document.getElementById('nutritionChart');
+// 🧪 CHART 1: TSS ONLY (STRICT DESCENDING ORDER)
+function renderTSSChart(dataMatrix) {
+    const ctx = document.getElementById('tssChart');
     if (!ctx) return;
-    if (currentChartInstance) currentChartInstance.destroy();
+    if (currentTssChartInstance) currentTssChartInstance.destroy();
 
-    const tssLabel = currentLanguageData.thTss || 'TSS (°Brix)';
+    const tssLabel = currentLanguageData.thTss || 'TSS Midpoint (°Brix)';
+
+    // Safely extract numbers from data matrix structures - FIXED Typo bug here
+    const tssData = [...dataMatrix].map(item => {
+        let val = item.tssMid;
+        if (val === undefined && typeof item.tss === 'string') {
+            const parts = item.tss.split('–');
+            val = parts.length === 2 ? (parseFloat(parts[0]) + parseFloat(parts[1])) / 2 : parseFloat(parts[0]);
+        }
+        return { name: item.name, value: val || 0 };
+    }).sort((a, b) => b.value - a.value);
+
+    currentTssChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: tssData.map(x => x.name),
+            datasets: [{
+                label: tssLabel,
+                data: tssData.map(x => x.value),
+                backgroundColor: '#0F5132',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, max: 25 } }
+        }
+    });
+}
+
+// 🩸 CHART 2: GI ONLY (STRICT DESCENDING ORDER)
+function renderGIChart(dataMatrix) {
+    const ctx = document.getElementById('giChart');
+    if (!ctx) return;
+    if (currentGiChartInstance) currentGiChartInstance.destroy();
+
     const giLabel = currentLanguageData.thGi || 'Glycemic Index';
 
-    const assignedColors = dataMatrix.map(item => {
+    const giData = [...dataMatrix]
+        .map(item => ({ name: item.name, gi: parseInt(item.gi, 10) || 0 }))
+        .sort((a, b) => b.gi - a.gi);
+
+    const assignedColors = giData.map(item => {
         if (item.gi <= 50) return '#198754';      
         if (item.gi <= 55) return '#ffc107';      
         return '#dc3545';                         
     });
 
-    currentChartInstance = new Chart(ctx, {
+    currentGiChartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: dataMatrix.map(x => x.name),
-            datasets: [
-                {
-                    label: tssLabel,
-                    data: dataMatrix.map(x => x.tssMid),
-                    backgroundColor: '#0F5132',
-                    borderWidth: 0
-                },
-                {
-                    label: giLabel,
-                    data: dataMatrix.map(x => x.gi),
-                    backgroundColor: assignedColors, 
-                    borderWidth: 0
-                }
-            ]
+            labels: giData.map(x => x.name),
+            datasets: [{
+                label: giLabel,
+                data: giData.map(x => x.gi),
+                backgroundColor: assignedColors,
+                borderRadius: 4
+            }]
         },
         options: {
+            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'top' } },
-            scales: { y: { beginAtZero: true, max: 60 } }
+            plugins: { legend: { display: false } },
+            scales: { x: { beginAtZero: true, max: 65 } }
         }
     });
 }
@@ -190,7 +256,7 @@ function triggerNarration(contextType) {
     if (!textToSpeak) return;
 
     activeSpeechUtterance = new SpeechSynthesisUtterance(textToSpeak);
-    activeSpeechUtterance.lang = (currentLanguageData.lblMainTitle.includes("दबार") || textToSpeak.match(/[\u0900-\u097F]/)) ? 'hi-IN' : 'en-IN';
+    activeSpeechUtterance.lang = (currentLanguageData.lblMainTitle?.includes("दबार") || textToSpeak.match(/[\u0900-\u097F]/)) ? 'hi-IN' : 'en-IN';
     activeSpeechUtterance.rate = 0.95; 
     window.speechSynthesis.speak(activeSpeechUtterance);
 }

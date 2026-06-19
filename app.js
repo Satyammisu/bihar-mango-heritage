@@ -22,7 +22,8 @@ function setupVarietyCardListeners() {
 
 function setupModalCloseTriggers() {
   const modal = document.getElementById("variety-modal");
-  const closeBtn = document.getElementById("modal-close-btn");
+  // Synchronized seamlessly with HTML id: close-modal-btn
+  const closeBtn = document.getElementById("close-modal-btn");
   if (closeBtn && modal) {
     closeBtn.addEventListener("click", () => {
       modal.classList.add("hidden");
@@ -49,36 +50,36 @@ function destroyActiveChartInstances() {
 }
 
 function openDetailedProfile(id) {
+  console.log("Triggered Profile Target ID:", id);
   const variety = MANGO_MASTER_DATA[id];
-  if (!variety) return;
+  if (!variety) {
+    console.error("Invalid Target Selection Mapping Identifier");
+    return;
+  }
 
-  // Clear previous instances before rendering fresh data
   destroyActiveChartInstances();
 
-  // Set core UI elements inside the modal
   document.getElementById("modal-title").innerText = variety.selfMetrics.name;
   document.getElementById("modal-variety-img").src = variety.image;
 
-  // QR Code asset assignment with local kiosk safe fallback
+  // Asset validation tracer injection
   const qrImgElement = document.getElementById("modal-qr-img");
   if (qrImgElement) {
+    console.log("QR PATH BOUND:", variety.qrCode);
     qrImgElement.src = variety.qrCode;
     qrImgElement.style.display = "block";
     qrImgElement.onerror = () => {
-      console.warn(`Asset missing at path: ${variety.qrCode}. Falling back.`);
+      console.warn(`Asset missing at target deployment path: ${variety.qrCode}`);
       qrImgElement.src = "./qr/dudhiyamaldah-qr.png"; 
     };
   }
 
-  // Generate dynamic data matrices for components (1 Selected vs 4 Benchmarks)
   const unifiedDataset = getComparisonData(id);
   
-  // Populates data rows and handles independent rendering engines
   populateComparisonTable(unifiedDataset);
   renderTSSChart(unifiedDataset, variety.selfMetrics.name);
   renderGIChart(unifiedDataset, variety.selfMetrics.name);
 
-  // Reveal Modal View
   const modal = document.getElementById("variety-modal");
   if (modal) modal.classList.remove("hidden");
 }
@@ -104,10 +105,13 @@ function populateComparisonTable(dataMatrix) {
 }
 
 function renderTSSChart(rawDataset, activeBiharName) {
+  console.log("TSS DATA ENGINE INGESTION:", rawDataset);
   const ctxTss = document.getElementById("tssChart");
-  if (!ctxTss) return;
+  if (!ctxTss) {
+    console.error("Critical: Canvas tssChart Element Target Context Missing from DOM.");
+    return;
+  }
 
-  // Re-ranks the active 5 items in clean descending order
   const tssData = rawDataset.map(item => ({ name: item.name, value: item.tssMid }))
                             .sort((a, b) => b.value - a.value);
 
@@ -118,7 +122,6 @@ function renderTSSChart(rawDataset, activeBiharName) {
       datasets: [{
         label: 'Total Soluble Solids (TSS Midpoint °Brix)',
         data: tssData.map(d => d.value),
-        // Highlights the specific target Bihar variety in dark green, benchmarks in amber
         backgroundColor: tssData.map(d => d.name === activeBiharName ? '#0F5132' : '#FFC107'),
         borderRadius: 4
       }]
@@ -133,10 +136,13 @@ function renderTSSChart(rawDataset, activeBiharName) {
 }
 
 function renderGIChart(rawDataset, activeBiharName) {
+  console.log("GI DATA ENGINE INGESTION:", rawDataset);
   const ctxGi = document.getElementById("giChart");
-  if (!ctxGi) return;
+  if (!ctxGi) {
+    console.error("Critical: Canvas giChart Element Target Context Missing from DOM.");
+    return;
+  }
 
-  // Re-ranks glycemic values in descending order
   const giData = rawDataset.map(item => ({ name: item.name, value: item.gi }))
                            .sort((a, b) => b.value - a.value);
 
@@ -147,7 +153,6 @@ function renderGIChart(rawDataset, activeBiharName) {
       datasets: [{
         label: 'Glycemic Index Score',
         data: giData.map(d => d.value),
-        // Highlights the targeted Bihar selection in medical green, benchmarks in neutral gray
         backgroundColor: giData.map(d => d.name === activeBiharName ? '#198754' : '#DEE2E6'),
         borderRadius: 4
       }]

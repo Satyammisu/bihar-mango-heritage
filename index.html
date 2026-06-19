@@ -3,97 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bihar Smart Mango Knowledge Wall</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f4f6f9; margin: 0; padding: 20px; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
-        .mango-card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; text-align: center; transition: transform 0.2s; }
-        .mango-card:hover { transform: translateY(-5px); }
-        .mango-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; }
-        
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        .modal.hidden { display: none !important; }
-        .modal-box { background: white; width: 92%; max-width: 850px; border-radius: 12px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #6c757d; border: none; background: none; z-index: 10; }
-        
-        table { width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 0.95rem; }
-        th { background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; padding: 10px; font-weight: 600; text-align: center; }
-        th:first-child { text-align: left; }
-    </style>
+    <title>Bihar Smart Mango Heritage</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
-    <div style="max-width: 1200px; margin: 0 auto 15px auto; display: flex; justify-content: space-between; align-items: center;">
-        <h1 id="main-headline" style="color: #0F5132; margin: 0; font-weight: 700;">🥭 Bihar Smart Mango Knowledge Wall</h1>
-        <div id="language-selector-panel">
-            <button class="lang-btn" data-lang="en" style="padding: 6px 12px; margin-left: 5px; cursor: pointer; font-weight: bold;">English</button>
-            <button class="lang-btn" data-lang="hi" style="padding: 6px 12px; margin-left: 5px; cursor: pointer; font-weight: bold;">हिन्दी</button>
-            <button class="lang-btn" data-lang="mai" style="padding: 6px 12px; margin-left: 5px; cursor: pointer; font-weight: bold;">मैथिली</button>
-            <button class="lang-btn" data-lang="bho" style="padding: 6px 12px; margin-left: 5px; cursor: pointer; font-weight: bold;">भोजपुरी</button>
+    <header>
+        <h1 id="main-headline">Bihar Smart Mango Knowledge Wall</h1>
+        <div class="lang-controls">
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="hi">हिन्दी</button>
+            <button class="lang-btn" data-lang="mai">मैथिली</button>
+            <button class="lang-btn" data-lang="bho">भोजपुरी</button>
         </div>
-    </div>
-    
-    <div id="gallery-grid" class="grid-container"></div>
+    </header>
 
-    <div id="variety-modal" class="modal hidden">
-        <div class="modal-box">
-            <button id="close-modal-btn" class="close-btn">&times;</button>
+    <main id="gallery-grid" class="grid-container"></main>
+
+    <!-- Modal for Detailed Profile -->
+    <div id="variety-modal" class="hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">Variety Title</h2>
+            <p id="modal-subheading">Nutritional & Quality Comparison Dashboard</p>
             
-            <div style="display: flex; gap: 25px; padding: 30px;">
-                <div style="flex: 1; text-align: center; border-right: 1px solid #dee2e6; padding-right: 20px;">
-                    <img id="modal-variety-img" src="" alt="Mango Profile View" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="margin-top: 25px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
-                        <img id="modal-qr-img" src="" alt="Scan Node" style="width: 130px; height: 130px; margin: 0 auto; display: block;">
-                        <p style="font-size: 0.8rem; margin: 10px 0 0 0; font-weight: 600; color: #495057; text-transform: uppercase; letter-spacing: 0.5px;">Scan for Analytics</p>
-                    </div>
-                </div>
-
-                <div style="flex: 2; overflow-y: auto; max-height: 550px; padding-right: 10px;">
-                    <h2 id="modal-title" style="margin: 0; color: #0F5132; font-size: 1.8rem;"></h2>
-                    
-                    <div style="margin: 15px 0;">
-                        <button id="btn-modal-audio" style="background:#198754; color:white; border:none; padding:10px 15px; border-radius:6px; cursor:pointer; font-weight:600; font-size:0.9rem;">
-                            🎙️ Audio Guide / ऑडियो गाइड
-                        </button>
-                        <button id="btn-modal-stop" style="background:#dc3545; color:white; border:none; padding:10px 15px; border-radius:6px; cursor:pointer; font-weight:600; font-size:0.9rem; margin-left:10px;">
-                            ⏹️ Stop / बंद करें
-                        </button>
-                    </div>
-
-                    <p id="modal-subheading" style="color: #0F5132; font-weight: 600; font-size: 0.95rem; margin: 0 0 25px 0;">
-                        Nutritional & Quality Comparison Dashboard
-                    </p>
-                    
-                    <table id="comparison-table">
-                        <thead>
-                            <tr>
-                                <th id="th-variety">Variety</th>
-                                <th id="th-tss">TSS Range (°Brix)</th>
-                                <th id="th-gi">Glycemic Index (GI)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="comparison-body"></tbody>
-                    </table>
-
-                    <div class="analytics-charts-panel" style="margin-top: 15px;">
-                        <div style="position: relative; height: 180px; margin-bottom: 40px;">
-                            <h4 id="lbl-tss-chart-title" style="margin: 0 0 12px 0; color: #212529; font-size: 0.9rem; font-weight: 700;">🧪 Sugar Profile Analysis (TSS Midpoint Descending)</h4>
-                            <canvas id="tssChart"></canvas>
-                        </div>
-                        
-                        <div style="position: relative; height: 180px; margin-bottom: 10px;">
-                            <h4 id="lbl-gi-chart-title" style="margin: 0 0 12px 0; color: #212529; font-size: 0.9rem; font-weight: 700;">🩸 Glycemic Index Spectrum (GI Value Descending)</h4>
-                            <canvas id="giChart"></canvas>
-                        </div>
-                    </div>
-                </div>
+            <div class="audio-control-wrapper">
+                <button id="btn-modal-audio">🎙️ Play Audio Guide</button>
+                <button id="btn-modal-stop">⏹️ Stop</button>
             </div>
 
+            <img id="modal-variety-img" src="" alt="Mango">
+            <img id="modal-qr-img" src="" alt="QR Code">
+
+            <table id="comparison-table">
+                <thead>
+                    <tr id="th-row">
+                        <th id="th-variety">Variety</th>
+                        <th id="th-tss">TSS Range</th>
+                        <th id="th-gi">GI</th>
+                    </tr>
+                </thead>
+                <tbody id="comparison-body"></tbody>
+            </table>
+
+            <div class="chart-container">
+                <h3 id="lbl-tss-chart-title"></h3>
+                <canvas id="tssChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 id="lbl-gi-chart-title"></h3>
+                <canvas id="giChart"></canvas>
+            </div>
+
+            <button id="close-modal-btn">Close</button>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="mangoes.js"></script>
-    <script src="app.js"></script>
+    <script src="js/mangoes.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

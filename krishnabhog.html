@@ -31,7 +31,6 @@
         .comparison-table th { background: var(--primary-green); color: white; padding: 12px; font-size: 0.95rem; }
         .comparison-table td { padding: 14px 10px; text-align: center; border: 1px solid #dee2e6; font-size: 0.95rem; }
         .table-note { font-size: 0.8rem; color: #6c757d; margin-top: 8px; }
-        .chart-container-wrapper { position: relative; width: 100%; height: 350px; }
 
         .gi-legend-container {
             display: flex; gap: 1.5rem; margin: 0.5rem 0 1.25rem 0; flex-wrap: wrap;
@@ -47,6 +46,7 @@
         .badge-gray { background: #f5f5f5; color: #424242; border: 1px solid #e0e0e0; }
     </style>
     
+    <!-- Charting Core Engines -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
@@ -59,9 +59,9 @@
         <img class="hero-image" src="./images/krishnabhog.jpg" alt="Krishnabhog" onerror="this.src='./images/placeholder.jpg'">
         <div class="header-text">
             <h2 style="margin: 0 0 0.5rem 0; font-size: 2rem;">Krishnabhog ⭐</h2>
-            <h4 style="color: var(--primary-green); margin: 0 0 1rem 0; font-size: 1.2rem;">कृष्णभोग (Krishnabhog)</h4>
-            <p style="font-weight: bold; margin: 0 0 0.5rem 0; line-height: 1.4;">A highly aristocratic, heritage variety historically offered in sacred rituals, celebrated for its perfect round form, handsome skin blush, and majestic flavor profile.</p>
-            <p style="font-style: italic; color: #555; margin: 0 0 1rem 0; line-height: 1.4;">Deeply embedded in the premium horticultural fabric of Bihar, it is exceptionally revered for its firm, bright yellow, fiberless flesh and unforgettable, sweet, floral aroma.</p>
+            <h4 style="color: var(--primary-green); margin: 0 0 1rem 0; font-size: 1.2rem;">कृष्णभोग (Premium Selection)</h4>
+            <p style="font-weight: bold; margin: 0 0 0.5rem 0; line-height: 1.4;">A highly aristocratic, heritage variety historically offered in sacred rituals, celebrated for its perfect round form and majestic flavor profile.</p>
+            <p style="font-style: italic; color: #555; margin: 0 0 1rem 0; line-height: 1.4;">Deeply embedded in the premium horticultural fabric of Bihar, it features exceptional post-harvest longevity and minimal fiber count.</p>
         </div>
         <div class="qr-zone">
             <img src="./qr/krishnabhog-qr.png" alt="QR Code" onerror="this.src='./images/placeholder-qr.png'">
@@ -70,18 +70,19 @@
     </div>
 
     <fieldset class="taxonomy-panel">
-        <legend>Taxonomy</legend>
+        <legend>Taxonomy & Growth</legend>
         <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong>Origin:</strong> Traditional elite heritage orchards of Bihar, India</div>
         <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong>Harvest Window:</strong> Early June to Mid June (Mid-Season Asset)</div>
-        <div style="font-size: 1.05rem;"><strong>Growth Habit:</strong> Medium erect canopy, balanced branching pattern, exceptional response to dynamic organic nutrient applications</div>
+        <div style="font-size: 1.05rem;"><strong>Growth Habit:</strong> Medium erect canopy layout, exceptional response to high-grade organic nutrient treatments</div>
     </fieldset>
 
+    <!-- Executive Table Dataset -->
     <section class="comparison-section">
-        <h3 style="margin: 0 0 10px 0; color: var(--primary-green);">⚖️ Variety Comparison: Nutritional Profile</h3>
+        <h3 style="margin: 0 0 10px 0; color: var(--primary-green);">⚖️ Variety Comparison Matrix</h3>
         <table class="comparison-table">
             <thead>
                 <tr>
-                    <th>Variety</th>
+                    <th>Variety Name</th>
                     <th>TSS Range (°Brix)</th>
                     <th>Glycemic Index (GI)</th>
                 </tr>
@@ -117,117 +118,136 @@
         <p class="table-note">* Parameters compiled from standard regional performance targets.</p>
     </section>
 
+    <!-- SPLIT CHARTS PRESENTATION AREA -->
     <section class="chart-section">
-        <h3 style="margin: 0 0 5px 0; color: var(--primary-green);">📊 TSS & Glycemic Index Comparison Analysis</h3>
+        <h3 style="margin: 0 0 20px 0; color: var(--primary-green); border-bottom: 2px solid #e9ecef; padding-bottom: 8px;">📊 Variety Sugar & Glycemic Analytics</h3>
         
-        <div class="gi-legend-container">
-            <div class="legend-pill">🟢 <span>Low GI (≤50)</span></div>
-            <div class="legend-pill">🟡 <span>Moderate GI (51–55)</span></div>
-            <div class="legend-pill">🔴 <span>High GI (>55)</span></div>
+        <!-- CHART 1: Total Soluble Solids (TSS) -->
+        <div style="margin-bottom: 35px;">
+            <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 1.1rem; font-weight: 600;">🧪 Total Soluble Solids Profile (Sweetness Midpoint)</h4>
+            <div style="position: relative; width: 100%; height: 260px;">
+                <canvas id="tssIndependentChart"></canvas>
+            </div>
         </div>
 
-        <div class="chart-container-wrapper">
-            <canvas id="isolatedNutritionChart"></canvas>
+        <hr style="border: 0; border-top: 1px dashed #dee2e6; margin: 30px 0;">
+
+        <!-- CHART 2: Glycemic Index (GI) -->
+        <div>
+            <h4 style="margin: 0 0 5px 0; color: #495057; font-size: 1.1rem; font-weight: 600;">🩸 Glycemic Index (GI) Classification Matrix</h4>
+            <div class="gi-legend-container">
+                <div class="legend-pill">🟢 <span>Low GI (≤50)</span></div>
+                <div class="legend-pill">🟡 <span>Moderate GI (51–55)</span></div>
+                <div class="legend-pill">🔴 <span>High GI (>55)</span></div>
+            </div>
+            <div style="position: relative; width: 100%; height: 260px;">
+                <canvas id="giIndependentChart"></canvas>
+            </div>
         </div>
 
+        <!-- Analytical Insights Box -->
         <div style="background:#f8f9fa; padding:15px; border-left:5px solid #0F5132; margin-top:25px; border-radius:5px; line-height: 1.6; font-size: 0.95rem;">
-            <strong>Health Insight:</strong>
-            Krishnabhog achieves an extraordinary dietary balance, delivering an elite sweetness profile with a **20.50 °Brix midpoint** while safely maintaining a moderate Glycemic Index (52). This registers significantly lower than Alphonso (56) and trends closely to Totapuri (51), proving that this legendary indigenous variety offers premium, luxurious table quality with remarkably superior glycemic control compared to mainstream commercial standards.
+            <strong>Exhibition Panel Note:</strong>
+            Separating these metrics into dedicated canvases eliminates reading errors caused by multiple overlapping vertical scales. The upper chart clean-tracks absolute sugar density values (°Brix), while the lower chart monitors metabolic response metrics independently.
         </div>
     </section>
 </div>
 
+<!-- Unified Independent Charting Logic Scripts -->
 <script>
     window.addEventListener('DOMContentLoaded', () => {
-        const ctx = document.getElementById('isolatedNutritionChart').getContext('2d');
+        const ctxTss = document.getElementById('tssIndependentChart').getContext('2d');
+        const ctxGi = document.getElementById('giIndependentChart').getContext('2d');
         
         Chart.register(ChartDataLabels);
         
-        new Chart(ctx, {
+        // Universal layout styles for high-scannability displays
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: { padding: { top: 25 } },
+            plugins: {
+                legend: { display: false },
+                tooltip: { 
+                    enabled: true,
+                    backgroundColor: 'rgba(33, 37, 41, 0.95)',
+                    titleFont: { weight: 'bold' },
+                    bodyFont: { size: 13 },
+                    padding: 10,
+                    cornerRadius: 6
+                }
+            }
+        };
+
+        // 1. GENERATING THE INDEPENDENT TSS CHART
+        new Chart(ctxTss, {
             type: 'bar',
             data: {
-                labels: ['Krishnabhog ⭐', 'Alphonso', 'Dashehari', 'Kesar', 'Totapuri'],
-                datasets: [
-                    {
-                        label: 'Glycemic Index (GI)',
-                        data: [52, 56, 54, 53, 51], // Calibrated for Krishnabhog
-                        backgroundColor: [
-                            '#0F5132', // Krishnabhog (Target Cultivar Highlight)
-                            '#DC3545', // Alphonso (High GI Reference)
-                            '#FFB100', // Dashehari (Moderate)
-                            '#FFB100', // Kesar (Moderate)
-                            '#FFB100'  // Totapuri (Moderate)
-                        ],
-                        borderColor: [
-                            '#0A3622', '#A71D2A', '#B88000', '#B88000', '#B88000'
-                        ],
-                        borderWidth: 1.5,
-                        yAxisID: 'y',
-                        datalabels: {
-                            anchor: 'end',
-                            align: 'top',
-                            offset: 2,
-                            font: { weight: 'bold', size: 11 },
-                            formatter: (value) => value
-                        }
-                    },
-                    {
-                        label: 'TSS Midpoint (°Brix)',
-                        data: [20.50, 21.0, 19.0, 20.0, 16.0], // Aligned midpoint parameters
-                        backgroundColor: 'rgba(212, 175, 55, 0.5)', 
-                        borderColor: '#DAA520',
-                        borderWidth: 1.5,
-                        yAxisID: 'y1',
-                        datalabels: {
-                            anchor: 'end',
-                            align: 'top',
-                            offset: 2,
-                            font: { weight: 'bold', size: 11 },
-                            formatter: (value) => value.toFixed(2)
-                        }
+                labels: ['Krishnabhog ⭐', 'Alphonso', 'Kesar', 'Dashehari', 'Totapuri'],
+                datasets: [{
+                    label: 'TSS Midpoint (°Brix)',
+                    data: [20.50, 21.00, 20.00, 19.00, 16.00], 
+                    backgroundColor: ['#0F5132', '#285C40', '#285C40', '#285C40', '#285C40'], 
+                    borderRadius: 4,
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 2,
+                        font: { weight: 'bold', size: 11 },
+                        formatter: (value) => value.toFixed(2) + ' °Brix'
                     }
-                ]
+                }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                layout: {
-                    padding: { top: 25 }
-                },
+                ...commonOptions,
                 scales: {
                     y: {
                         type: 'linear',
-                        position: 'left',
-                        title: { display: true, text: 'Glycemic Index (GI)', font: { weight: 'bold' } },
-                        min: 0,
-                        max: 70
-                    },
-                    y1: {
-                        type: 'linear',
-                        position: 'right',
-                        title: { display: true, text: 'TSS Midpoint (°Brix)', font: { weight: 'bold' } },
                         min: 0,
                         max: 25,
-                        grid: { drawOnChartArea: false }
+                        title: { display: true, text: 'Sugar Content Value (°Brix)', font: { weight: 'bold' } }
                     }
-                },
-                plugins: {
-                    legend: { position: 'top' },
-                    tooltip: { 
-                        enabled: true,
-                        backgroundColor: 'rgba(33, 37, 41, 0.95)',
-                        titleFont: { weight: 'bold' },
-                        bodyFont: { size: 13 },
-                        padding: 10,
-                        cornerRadius: 6,
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) { label += ': '; }
-                                if (context.parsed.y !== null) { label += context.parsed.y; }
-                                return label;
-                            }
-                        }
+                }
+            }
+        });
+
+        // 2. GENERATING THE INDEPENDENT GLYCEMIC INDEX CHART
+        new Chart(ctxGi, {
+            type: 'bar',
+            data: {
+                labels: ['Krishnabhog ⭐', 'Alphonso', 'Kesar', 'Dashehari', 'Totapuri'], 
+                datasets: [{
+                    label: 'Glycemic Index (GI)',
+                    data: [52, 56, 53, 54, 51], 
+                    backgroundColor: [
+                        '#FFB100', // Target Variety: Moderate (Amber)
+                        '#DC3545', // Alphonso: High GI (Red Alert Reference)
+                        '#FFB100', // Kesar
+                        '#FFB100', // Dashehari
+                        '#FFB100'  // Totapuri
+                    ],
+                    borderColor: [
+                        '#B88000', '#A71D2A', '#B88000', '#B88000', '#B88000'
+                    ],
+                    borderWidth: 1.5,
+                    borderRadius: 4,
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 2,
+                        font: { weight: 'bold', size: 11 },
+                        formatter: (value) => value
+                    }
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        min: 0,
+                        max: 70,
+                        title: { display: true, text: 'Glycemic Index Score', font: { weight: 'bold' } }
                     }
                 }
             }

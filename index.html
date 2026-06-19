@@ -23,7 +23,15 @@
 </head>
 <body>
 
-    <h1 style="text-align: center; color: #0F5132; margin-bottom: 30px; font-weight: 700;">🥭 Bihar Smart Mango Knowledge Wall</h1>
+    <div style="max-width: 1200px; margin: 0 auto 15px auto; display: flex; justify-content: space-between; align-items: center;">
+        <h1 id="main-headline" style="color: #0F5132; margin: 0; font-weight: 700;">🥭 Bihar Smart Mango Knowledge Wall</h1>
+        <div id="language-selector-panel">
+            <button class="lang-btn" data-lang="en" style="padding: 6px 12px; margin-left: 5px; cursor: pointer; font-weight: bold;">English</button>
+            <button class="lang-btn" data-lang="hi" style="padding: 6px 12px; margin-left: 5px; cursor: pointer; font-weight: bold;">हिन्दी</button>
+            <button class="lang-btn" data-lang="mai" style="padding: 6px 12px; margin-left: 5px; cursor: pointer; font-weight: bold;">मैथिली</button>
+            <button class="lang-btn" data-lang="bho" style="padding: 6px 12px; margin-left: 5px; cursor: pointer; font-weight: bold;">भोजपुरी</button>
+        </div>
+    </div>
     
     <div id="gallery-grid" class="grid-container"></div>
 
@@ -41,18 +49,27 @@
                 </div>
 
                 <div style="flex: 2; overflow-y: auto; max-height: 550px; padding-right: 10px;">
-                    <h2 id="modal-title" style="margin: 0 0 5px 0; color: #0F5132; font-size: 1.8rem;"></h2>
+                    <h2 id="modal-title" style="margin: 0; color: #0F5132; font-size: 1.8rem;"></h2>
                     
-                    <p style="color: #0F5132; font-weight: 600; font-size: 0.95rem; margin: 0 0 25px 0;">
+                    <div style="margin: 15px 0;">
+                        <button id="btn-modal-audio" style="background:#198754; color:white; border:none; padding:10px 15px; border-radius:6px; cursor:pointer; font-weight:600; font-size:0.9rem;">
+                            🎙️ Audio Guide / ऑडियो गाइड
+                        </button>
+                        <button id="btn-modal-stop" style="background:#dc3545; color:white; border:none; padding:10px 15px; border-radius:6px; cursor:pointer; font-weight:600; font-size:0.9rem; margin-left:10px;">
+                            ⏹️ Stop / बंद करें
+                        </button>
+                    </div>
+
+                    <p id="modal-subheading" style="color: #0F5132; font-weight: 600; font-size: 0.95rem; margin: 0 0 25px 0;">
                         Nutritional & Quality Comparison Dashboard
                     </p>
                     
                     <table id="comparison-table">
                         <thead>
                             <tr>
-                                <th>Variety</th>
-                                <th>TSS Range (°Brix)</th>
-                                <th>Glycemic Index (GI)</th>
+                                <th id="th-variety">Variety</th>
+                                <th id="th-tss">TSS Range (°Brix)</th>
+                                <th id="th-gi">Glycemic Index (GI)</th>
                             </tr>
                         </thead>
                         <tbody id="comparison-body"></tbody>
@@ -60,12 +77,12 @@
 
                     <div class="analytics-charts-panel" style="margin-top: 15px;">
                         <div style="position: relative; height: 180px; margin-bottom: 40px;">
-                            <h4 style="margin: 0 0 12px 0; color: #212529; font-size: 0.9rem; font-weight: 700;">🧪 Sugar Profile Analysis (TSS Midpoint Descending)</h4>
+                            <h4 id="lbl-tss-chart-title" style="margin: 0 0 12px 0; color: #212529; font-size: 0.9rem; font-weight: 700;">🧪 Sugar Profile Analysis (TSS Midpoint Descending)</h4>
                             <canvas id="tssChart"></canvas>
                         </div>
                         
                         <div style="position: relative; height: 180px; margin-bottom: 10px;">
-                            <h4 style="margin: 0 0 12px 0; color: #212529; font-size: 0.9rem; font-weight: 700;">🩸 Glycemic Index Spectrum (GI Value Descending)</h4>
+                            <h4 id="lbl-gi-chart-title" style="margin: 0 0 12px 0; color: #212529; font-size: 0.9rem; font-weight: 700;">🩸 Glycemic Index Spectrum (GI Value Descending)</h4>
                             <canvas id="giChart"></canvas>
                         </div>
                     </div>

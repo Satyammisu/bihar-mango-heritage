@@ -20,8 +20,11 @@
         .hero-section { display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 1.5rem; }
         .hero-image { width: 250px; height: 250px; object-fit: cover; border-radius: 8px; background-color: #e9ecef; }
         .header-text { flex: 1; min-width: 250px; }
+        
+        /* QR Code Container Styling */
         .qr-zone { text-align: center; background: #f1f3f5; padding: 1rem; border-radius: 8px; width: 180px; margin: 0 auto; }
-        .qr-zone img { width: 150px; height: 150px; display: block; margin: 0 auto 0.5rem auto; }
+        .qr-canvas-target { width: 150px; height: 150px; display: block; margin: 0 auto 0.5rem auto; background: #fff; padding: 5px; border-radius: 4px; box-sizing: border-box; }
+        .qr-canvas-target canvas { width: 100% !important; height: 100% !important; }
         
         .taxonomy-panel { border: 1px solid #ccc; border-radius: 8px; padding: 1.25rem; background-color: #fbfbfb; margin-bottom: 1.5rem; }
         .taxonomy-panel legend { font-weight: bold; padding: 0 0.5rem; color: var(--primary-green); font-size: 1.1rem; }
@@ -48,6 +51,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -62,9 +66,10 @@
             <p style="font-weight: bold; margin: 0 0 0.5rem 0; line-height: 1.4;">A highly aristocratic, heritage variety historically offered in sacred rituals, celebrated for its perfect round form and majestic flavor profile.</p>
             <p style="font-style: italic; color: #555; margin: 0 0 1rem 0; line-height: 1.4;">Deeply embedded in the premium horticultural fabric of Bihar, it features exceptional post-harvest longevity and minimal fiber count.</p>
         </div>
+        
         <div class="qr-zone">
-            <img src="./qr/krishnabhog-qr.png" alt="QR Code" onerror="this.src='./images/placeholder-qr.png'">
-            <p style="font-size: 0.8rem; margin: 0; font-weight: 500; color: #495057;">Scan QR Code</p>
+            <div id="liveQRCode" class="qr-canvas-target"></div>
+            <p style="font-size: 0.8rem; margin: 0; font-weight: 500; color: #495057;">Scan To View Page</p>
         </div>
     </div>
 
@@ -121,7 +126,7 @@
         
         <div style="margin-bottom: 35px;">
             <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 1.1rem; font-weight: 600;">🧪 Sugar Profile Analysis (TSS Midpoint Descending)</h4>
-            <div style="position: relative; width: 100%; height: 260px;">
+            <div style="position: relative; width: 100%; height: 280px;">
                 <canvas id="tssIndependentChart"></canvas>
             </div>
         </div>
@@ -135,30 +140,44 @@
                 <div class="legend-pill">🟡 <span>Moderate GI (51–55)</span></div>
                 <div class="legend-pill">🔴 <span>High GI (>55)</span></div>
             </div>
-            <div style="position: relative; width: 100%; height: 260px;">
+            <div style="position: relative; width: 100%; height: 280px;">
                 <canvas id="giIndependentChart"></canvas>
             </div>
         </div>
 
         <div style="background:#f8f9fa; padding:15px; border-left:5px solid #0F5132; margin-top:25px; border-radius:5px; line-height: 1.6; font-size: 0.95rem;">
             <strong>Exhibition Panel Note:</strong>
-            Charts are arranged in strict descending order. The upper panel showcases sweetness metrics from most concentrated to least, highlighting that our indigenous varieties comfortably challenge export standards. The lower panel displays blood glucose impact values from highest to lowest.
+            Charts are arranged in strict descending order utilizing horizontal display rendering. This structure improves data legibility from extended walking clearances. The upper chart logs absolute sugar density values (°Brix) from highest down, while the lower chart maps systemic glucose acceleration ratings independently.
         </div>
     </section>
 </div>
 
 <script>
     window.addEventListener('DOMContentLoaded', () => {
+        // --- PART A: SELF-REGENERATING UNLIMITED QR CODE ENGINE ---
+        // Automatically reads the active browser address bar location (or falls back to domain root)
+        const currentTargetURL = window.location.href.includes('http') ? window.location.href : "https://krishnabhog-portal.bihar.gov.in";
+        
+        new QRCode(document.getElementById("liveQRCode"), {
+            text: currentTargetURL,
+            width: 300,  // Native high-res canvas scale
+            height: 300, // Native high-res canvas scale
+            colorDark : "#212529", // Clean dark charcoal layout theme match
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H // High Error Correction (Handles fast scans from distance)
+        });
+
+        // --- PART B: ANALYTICS VISUALIZATION CHARTS ENGINE ---
         const ctxTss = document.getElementById('tssIndependentChart').getContext('2d');
         const ctxGi = document.getElementById('giIndependentChart').getContext('2d');
         
         Chart.register(ChartDataLabels);
         
-        // Universal layout options for presentation displays
         const commonOptions = {
+            indexAxis: 'y', 
             responsive: true,
             maintainAspectRatio: false,
-            layout: { padding: { top: 25 } },
+            layout: { padding: { right: 55 } },
             plugins: {
                 legend: { display: false },
                 tooltip: { 
@@ -172,7 +191,7 @@
             }
         };
 
-        // 1. GENERATING THE INDEPENDENT TSS CHART (Strictly Descending Order)
+        // 1. HORIZONTAL TSS CHART
         new Chart(ctxTss, {
             type: 'bar',
             data: {
@@ -180,12 +199,12 @@
                 datasets: [{
                     label: 'TSS Midpoint (°Brix)',
                     data: [21.00, 20.50, 20.00, 19.00, 16.00], 
-                    backgroundColor: ['#285C40', '#0F5132', '#285C40', '#285C40', '#285C40'], // Targeted variety highlighted green
+                    backgroundColor: ['#285C40', '#0F5132', '#285C40', '#285C40', '#285C40'], 
                     borderRadius: 4,
                     datalabels: {
                         anchor: 'end',
-                        align: 'top',
-                        offset: 2,
+                        align: 'right',
+                        offset: 4,
                         font: { weight: 'bold', size: 11 },
                         formatter: (value) => value.toFixed(2) + ' °Brix'
                     }
@@ -194,17 +213,18 @@
             options: {
                 ...commonOptions,
                 scales: {
-                    y: {
+                    x: {
                         type: 'linear',
                         min: 0,
                         max: 25,
                         title: { display: true, text: 'Sugar Content Value (°Brix)', font: { weight: 'bold' } }
-                    }
+                    },
+                    y: { ticks: { font: { weight: 'bold', size: 12 } } }
                 }
             }
         });
 
-        // 2. GENERATING THE INDEPENDENT GLYCEMIC INDEX CHART (Strictly Descending Order)
+        // 2. HORIZONTAL GLYCEMIC INDEX CHART
         new Chart(ctxGi, {
             type: 'bar',
             data: {
@@ -212,22 +232,14 @@
                 datasets: [{
                     label: 'Glycemic Index (GI)',
                     data: [56, 54, 53, 52, 51], 
-                    backgroundColor: [
-                        '#DC3545', // Alphonso: High GI (Red)
-                        '#FFB100', // Dashehari: Moderate (Amber)
-                        '#FFB100', // Kesar: Moderate (Amber)
-                        '#FFB100', // Krishnabhog: Moderate (Amber)
-                        '#FFB100'  // Totapuri: Moderate (Amber)
-                    ],
-                    borderColor: [
-                        '#A71D2A', '#B88000', '#B88000', '#B88000', '#B88000'
-                    ],
+                    backgroundColor: ['#DC3545', '#FFB100', '#FFB100', '#FFB100', '#FFB100'],
+                    borderColor: ['#A71D2A', '#B88000', '#B88000', '#B88000', '#B88000'],
                     borderWidth: 1.5,
                     borderRadius: 4,
                     datalabels: {
                         anchor: 'end',
-                        align: 'top',
-                        offset: 2,
+                        align: 'right',
+                        offset: 4,
                         font: { weight: 'bold', size: 11 },
                         formatter: (value) => value
                     }
@@ -236,12 +248,13 @@
             options: {
                 ...commonOptions,
                 scales: {
-                    y: {
+                    x: {
                         type: 'linear',
                         min: 0,
                         max: 70,
                         title: { display: true, text: 'Glycemic Index Score', font: { weight: 'bold' } }
-                    }
+                    },
+                    y: { ticks: { font: { weight: 'bold', size: 12 } } }
                 }
             }
         });

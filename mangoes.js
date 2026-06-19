@@ -24,8 +24,8 @@ const MANGO_MASTER_DATA = {
     "qrCode": "./qr/bombai-qr.png",
     "selfMetrics": { "name": "Bombai", "tss": "18.0–19.0", "tssMid": 18.50, "gi": 55 }
   },
-  "jardalu": {
-    "id": "jardalu",
+  "zardalu": {
+    "id": "zardalu",
     "image": "./images/zardalu.jpg",
     "qrCode": "./qr/zardalu-qr.png",
     "selfMetrics": { "name": "Jardalu", "tss": "19.5–21.0", "tssMid": 20.25, "gi": 45 }
@@ -88,3 +88,9 @@ const MANGO_MASTER_DATA = {
 
 Object.freeze(BENCHMARK_VARIETIES);
 Object.freeze(MANGO_MASTER_DATA);
+
+function getComparisonData(varietyId) {
+  const variety = MANGO_MASTER_DATA[varietyId];
+  if (!variety) return [];
+  return [JSON.parse(JSON.stringify(variety.selfMetrics)), ...JSON.parse(JSON.stringify(BENCHMARK_VARIETIES))];
+}

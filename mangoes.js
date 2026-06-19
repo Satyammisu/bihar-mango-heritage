@@ -1,167 +1,96 @@
 /**
- * Bihar Smart Mango Knowledge Wall - UI Engine & Chart Lifecycle Controller
+ * Bihar Smart Mango Knowledge Wall - Centralized Horticultural Database
+ * Architecture: Normalized Master-Detail Relationship
+ * Calibrated: 2026 Lab Metrics & Centralized Commercial Benchmarks
  */
 
-let tssChartInstance = null;
-let giChartInstance = null;
+const BENCHMARK_VARIETIES = [
+  { "name": "Alphonso", "tss": "20.0–22.0", "tssMid": 21.00, "gi": 56 },
+  { "name": "Kesar", "tss": "19.0–21.0", "tssMid": 20.00, "gi": 53 },
+  { "name": "Dashehari", "tss": "18.0–20.0", "tssMid": 19.00, "gi": 54 },
+  { "name": "Totapuri", "tss": "15.0–17.0", "tssMid": 16.00, "gi": 51 }
+];
 
-document.addEventListener("DOMContentLoaded", () => {
-  setupVarietyCardListeners();
-  setupModalCloseTriggers();
-});
-
-function setupVarietyCardListeners() {
-  const cards = document.querySelectorAll(".mango-card");
-  cards.forEach(card => {
-    card.addEventListener("click", () => {
-      const id = card.getAttribute("data-id");
-      if (id) openDetailedProfile(id);
-    });
-  });
-}
-
-function setupModalCloseTriggers() {
-  const modal = document.getElementById("variety-modal");
-  // Synchronized seamlessly with HTML id: close-modal-btn
-  const closeBtn = document.getElementById("close-modal-btn");
-  if (closeBtn && modal) {
-    closeBtn.addEventListener("click", () => {
-      modal.classList.add("hidden");
-      destroyActiveChartInstances();
-    });
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-        destroyActiveChartInstances();
-      }
-    });
+const MANGO_MASTER_DATA = {
+  "dudhiyamaldah": {
+    "id": "dudhiyamaldah",
+    "image": "./images/dudhiyamaldah.jpg",
+    "qrCode": "./qr/dudhiyamaldah-qr.png",
+    "selfMetrics": { "name": "Dudhiya Maldah", "tss": "20.5–22.0", "tssMid": 21.25, "gi": 51 }
+  },
+  "bombai": {
+    "id": "bombai",
+    "image": "./images/bombai.jpg",
+    "qrCode": "./qr/bombai-qr.png",
+    "selfMetrics": { "name": "Bombai", "tss": "18.0–19.0", "tssMid": 18.50, "gi": 55 }
+  },
+  "zardalu": {
+    "id": "zardalu",
+    "image": "./images/zardalu.jpg",
+    "qrCode": "./qr/zardalu-qr.png",
+    "selfMetrics": { "name": "Jardalu", "tss": "19.5–21.0", "tssMid": 20.25, "gi": 45 }
+  },
+  "langra": {
+    "id": "langra",
+    "image": "./images/langra.jpg",
+    "qrCode": "./qr/langra-qr.png",
+    "selfMetrics": { "name": "Langra", "tss": "21.0–22.0", "tssMid": 21.50, "gi": 54 }
+  },
+  "chausa": {
+    "id": "chausa",
+    "image": "./images/chausa.jpg",
+    "qrCode": "./qr/chausa-qr.png",
+    "selfMetrics": { "name": "Chausa", "tss": "21.5–23.0", "tssMid": 22.25, "gi": 55 }
+  },
+  "amrapali": {
+    "id": "amrapali",
+    "image": "./images/amrapali.jpg",
+    "qrCode": "./qr/amrapali-qr.png",
+    "selfMetrics": { "name": "Amrapali", "tss": "20.5–22.0", "tssMid": 21.25, "gi": 54 }
+  },
+  "gulabkhas": {
+    "id": "gulabkhas",
+    "image": "./images/gulabkhas.jpg",
+    "qrCode": "./qr/gulabkhas-qr.png",
+    "selfMetrics": { "name": "Gulabkhas", "tss": "19.0–20.5", "tssMid": 19.75, "gi": 50 }
+  },
+  "maldah": {
+    "id": "maldah",
+    "image": "./images/dudhiyamaldah.jpg",
+    "qrCode": "./qr/dudhiyamaldah-qr.png",
+    "selfMetrics": { "name": "Maldah", "tss": "20.0–21.5", "tssMid": 20.75, "gi": 51 }
+  },
+  "sipahiya": {
+    "id": "sipahiya",
+    "image": "./images/sipahiya.jpg",
+    "qrCode": "./qr/sipahiya-qr.png",
+    "selfMetrics": { "name": "Sipahiya", "tss": "17.5–18.5", "tssMid": 18.00, "gi": 52 }
+  },
+  "sukul": {
+    "id": "sukul",
+    "image": "./images/sukul.jpg",
+    "qrCode": "./qr/sukul-qr.png",
+    "selfMetrics": { "name": "Sukul", "tss": "18.5–19.5", "tssMid": 19.00, "gi": 52 }
+  },
+  "krishnabhog": {
+    "id": "krishnabhog",
+    "image": "./images/krishnabhog.jpg",
+    "qrCode": "./qr/krishnabhog-qr.png",
+    "selfMetrics": { "name": "Krishna Bhog", "tss": "19.5–21.5", "tssMid": 20.50, "gi": 52 }
+  },
+  "kalkatiya": {
+    "id": "kalkatiya",
+    "image": "./images/kalkatiya.jpg",
+    "qrCode": "./qr/kalkatiya-qr.png",
+    "selfMetrics": { "name": "Kalkatiya", "tss": "18.0–19.5", "tssMid": 18.75, "gi": 52 }
   }
-}
+};
 
-function destroyActiveChartInstances() {
-  if (tssChartInstance) {
-    tssChartInstance.destroy();
-    tssChartInstance = null;
-  }
-  if (giChartInstance) {
-    giChartInstance.destroy();
-    giChartInstance = null;
-  }
-}
+Object.freeze(BENCHMARK_VARIETIES);
+Object.freeze(MANGO_MASTER_DATA);
 
-function openDetailedProfile(id) {
-  console.log("Triggered Profile Target ID:", id);
-  const variety = MANGO_MASTER_DATA[id];
-  if (!variety) {
-    console.error("Invalid Target Selection Mapping Identifier");
-    return;
-  }
-
-  destroyActiveChartInstances();
-
-  document.getElementById("modal-title").innerText = variety.selfMetrics.name;
-  document.getElementById("modal-variety-img").src = variety.image;
-
-  // Asset validation tracer injection
-  const qrImgElement = document.getElementById("modal-qr-img");
-  if (qrImgElement) {
-    console.log("QR PATH BOUND:", variety.qrCode);
-    qrImgElement.src = variety.qrCode;
-    qrImgElement.style.display = "block";
-    qrImgElement.onerror = () => {
-      console.warn(`Asset missing at target deployment path: ${variety.qrCode}`);
-      qrImgElement.src = "./qr/dudhiyamaldah-qr.png"; 
-    };
-  }
-
-  const unifiedDataset = getComparisonData(id);
-  
-  populateComparisonTable(unifiedDataset);
-  renderTSSChart(unifiedDataset, variety.selfMetrics.name);
-  renderGIChart(unifiedDataset, variety.selfMetrics.name);
-
-  const modal = document.getElementById("variety-modal");
-  if (modal) modal.classList.remove("hidden");
-}
-
-function populateComparisonTable(dataMatrix) {
-  const body = document.getElementById("comparison-body");
-  if (!body) return;
-  body.innerHTML = "";
-  
-  dataMatrix.forEach((item, index) => {
-    const isTarget = (index === 0);
-    const textStyle = isTarget ? "font-weight: 700; color: #0F5132; background-color: #f1f8f5;" : "";
-    body.innerHTML += `
-      <tr style="${textStyle}">
-        <td style="padding: 8px; border-bottom: 1px solid #dee2e6; text-align: left;">
-          ${item.name} ${isTarget ? '⭐' : ''}
-        </td>
-        <td style="padding: 8px; border-bottom: 1px solid #dee2e6; text-align: center;">${item.tss}</td>
-        <td style="padding: 8px; border-bottom: 1px solid #dee2e6; text-align: center;">${item.gi}</td>
-      </tr>
-    `;
-  });
-}
-
-function renderTSSChart(rawDataset, activeBiharName) {
-  console.log("TSS DATA ENGINE INGESTION:", rawDataset);
-  const ctxTss = document.getElementById("tssChart");
-  if (!ctxTss) {
-    console.error("Critical: Canvas tssChart Element Target Context Missing from DOM.");
-    return;
-  }
-
-  const tssData = rawDataset.map(item => ({ name: item.name, value: item.tssMid }))
-                            .sort((a, b) => b.value - a.value);
-
-  tssChartInstance = new Chart(ctxTss.getContext("2d"), {
-    type: 'bar',
-    data: {
-      labels: tssData.map(d => d.name),
-      datasets: [{
-        label: 'Total Soluble Solids (TSS Midpoint °Brix)',
-        data: tssData.map(d => d.value),
-        backgroundColor: tssData.map(d => d.name === activeBiharName ? '#0F5132' : '#FFC107'),
-        borderRadius: 4
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, max: 25 } }
-    }
-  });
-}
-
-function renderGIChart(rawDataset, activeBiharName) {
-  console.log("GI DATA ENGINE INGESTION:", rawDataset);
-  const ctxGi = document.getElementById("giChart");
-  if (!ctxGi) {
-    console.error("Critical: Canvas giChart Element Target Context Missing from DOM.");
-    return;
-  }
-
-  const giData = rawDataset.map(item => ({ name: item.name, value: item.gi }))
-                           .sort((a, b) => b.value - a.value);
-
-  giChartInstance = new Chart(ctxGi.getContext("2d"), {
-    type: 'bar',
-    data: {
-      labels: giData.map(d => d.name),
-      datasets: [{
-        label: 'Glycemic Index Score',
-        data: giData.map(d => d.value),
-        backgroundColor: giData.map(d => d.name === activeBiharName ? '#198754' : '#DEE2E6'),
-        borderRadius: 4
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, max: 65 } }
-    }
-  });
+function getComparisonData(varietyId) {
+  const variety = MANGO_MASTER_DATA[varietyId];
+  if (!variety) return [];
+  return [JSON.parse(JSON.stringify(variety.selfMetrics)), ...JSON.parse(JSON.stringify(BENCHMARK_VARIETIES))];
 }

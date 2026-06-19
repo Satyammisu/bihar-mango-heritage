@@ -1,5 +1,6 @@
 /**
  * Bihar Smart Mango Knowledge Wall - UI Engine & Hybrid Audio Lifecycle Controller
+ * Architecture: Normalized Master-Detail Dynamic UI Handler
  * Hardened for Live Government Exhibition Kiosk Environments
  */
 
@@ -12,7 +13,7 @@ let activeVarietyId = null;
 let currentLanguageData = null;
 let currentActiveAudioPlayback = null; // Tracks native HTML5 Audio instance to prevent overlap
 
-// Central Kiosk Core Dictionary Models
+// Central Kiosk Core Dictionary Models (Acts as local asset fallback)
 const I18N_FALLBACK_DATA = {
   "en": {
     "lblMainTitle": "Bihar Smart Mango Knowledge Wall",
@@ -110,19 +111,37 @@ const I18N_FALLBACK_DATA = {
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("🚀 Kiosk Framework DOM Anchored.");
+  
+  // 1. Initialize default language matrices
   setLanguage(currentLanguage);
   
+  // 2. Attach layout and core interaction configurations
   setupLanguageSelectors();
   setupModalCloseTriggers();
   setupAudioInterfaceTriggers();
 
-  // FIX 1: Priming OS Web Speech Engine Stack & Handling Async Load Deficiencies
+  // 3. Priming OS Web Speech Engine Stack & Handling Async Load Deficiencies
   if (window.speechSynthesis) {
     window.speechSynthesis.onvoiceschanged = () => {
       console.log("🔄 System Speech Synthesis Voices Loaded:", window.speechSynthesis.getVoices().length);
     };
     // Initial runtime wake-up kick
     window.speechSynthesis.getVoices();
+  }
+
+  // 4. Deep-Linking QR Code Scanner Check (?variety=zardalu)
+  const urlParams = new URLSearchParams(window.location.search);
+  const deepLinkVarietyId = urlParams.get("variety");
+
+  if (deepLinkVarietyId && typeof openDetailedProfile === "function") {
+    if (typeof MANGO_MASTER_DATA !== 'undefined' && MANGO_MASTER_DATA[deepLinkVarietyId]) {
+      console.log(`📱 QR Scan Detected! Deep-linking directly to profile: [${deepLinkVarietyId}]`);
+      setTimeout(() => {
+        openDetailedProfile(deepLinkVarietyId);
+      }, 100);
+    } else {
+      console.warn(`⚠️ QR Code query parameter matched no valid master records: [${deepLinkVarietyId}]`);
+    }
   }
 });
 
@@ -142,6 +161,7 @@ function setLanguage(langCode) {
   currentLanguage = langCode;
   currentLanguageData = I18N_FALLBACK_DATA[langCode];
 
+  // Dynamic DOM UI Text Updates
   document.getElementById("main-headline").innerText = currentLanguageData.lblMainTitle;
   document.getElementById("modal-subheading").innerText = currentLanguageData.lblSubheading;
   document.getElementById("th-variety").innerText = currentLanguageData.thVariety;
@@ -150,8 +170,10 @@ function setLanguage(langCode) {
   document.getElementById("lbl-tss-chart-title").innerText = currentLanguageData.lblTSSChart;
   document.getElementById("lbl-gi-chart-title").innerText = currentLanguageData.lblGIChart;
 
+  // Build/Rebuild Data Grid Gallery elements
   buildGallery();
   
+  // Live update visible modal metrics if language changes while profile view is active
   if (activeVarietyId) {
     const variety = MANGO_MASTER_DATA[activeVarietyId];
     if (variety) {
@@ -224,7 +246,7 @@ function setupAudioInterfaceTriggers() {
 }
 
 /**
- * FIX 2 & 3: Consolidated Hybrid Audio Processing Routine
+ * Consolidated Hybrid Audio Processing Routine
  * Checks for local directory file presence first, fallbacks to TTS safely if empty.
  */
 function playVarietyAudio() {
@@ -235,10 +257,7 @@ function playVarietyAudio() {
     return;
   }
 
-  // Pathing model maps directly to project sound assets directory
   const audioFilePath = `audio/${activeVarietyId}-${currentLanguage}.mp3`;
-  
-  // High Reliability Step: Speculative instantiation of pre-recorded studio audio file
   const testAudioAsset = new Audio(audioFilePath);
   
   testAudioAsset.addEventListener('canplaythrough', () => {
@@ -282,7 +301,6 @@ function executeTextToSpeechFallback() {
   const utterance = new SpeechSynthesisUtterance(text);
   const systemAvailableVoices = window.speechSynthesis.getVoices();
 
-  // Localized Routing Logic using standard Devnagari characters mapping flags
   if (text.match(/[\u0900-\u097F]/)) {
     const hindiVoice = systemAvailableVoices.find(voice => voice.lang.includes("hi") || voice.lang.includes("HI"));
     if (hindiVoice) utterance.voice = hindiVoice;
@@ -300,11 +318,9 @@ function executeTextToSpeechFallback() {
 }
 
 function stopVarietyAudio() {
-  // Terminate Native Browser TTS Queue Stream
   if (window.speechSynthesis) {
     window.speechSynthesis.cancel();
   }
-  // Terminate Native HTML5 MP3 Playback Streams
   if (currentActiveAudioPlayback) {
     currentActiveAudioPlayback.pause();
     currentActiveAudioPlayback.currentTime = 0;
@@ -333,7 +349,7 @@ function openDetailedProfile(id) {
     qrImgElement.src = variety.qrCode;
     qrImgElement.style.display = "block";
     qrImgElement.onerror = () => {
-      qrImgElement.src = "./qr/dudhiyamaldah-qr.png"; 
+      qrImgElement.src = `./qr/dudhiyamaldah-qr.png"; 
     };
   }
 

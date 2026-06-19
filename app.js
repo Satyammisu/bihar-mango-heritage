@@ -49,7 +49,7 @@ function destroyActiveChartInstances() {
 }
 
 function openDetailedProfile(id) {
-  console.log("Triggered Profile Target ID:", id);
+  // console.log("Triggered Profile Target ID:", id);
   const variety = MANGO_MASTER_DATA[id];
   if (!variety) {
     console.error("Invalid Target Selection Mapping Identifier");
@@ -63,7 +63,7 @@ function openDetailedProfile(id) {
 
   const qrImgElement = document.getElementById("modal-qr-img");
   if (qrImgElement) {
-    console.log("QR PATH BOUND:", variety.qrCode);
+    // console.log("QR PATH BOUND:", variety.qrCode);
     qrImgElement.src = variety.qrCode;
     qrImgElement.style.display = "block";
     qrImgElement.onerror = () => {
@@ -103,7 +103,7 @@ function populateComparisonTable(dataMatrix) {
 }
 
 function renderTSSChart(rawDataset, activeBiharName) {
-  console.log("TSS DATA ENGINE INGESTION:", rawDataset);
+  // console.log("TSS DATA ENGINE INGESTION:", rawDataset);
   const ctxTss = document.getElementById("tssChart");
   if (!ctxTss) return;
 
@@ -118,6 +118,8 @@ function renderTSSChart(rawDataset, activeBiharName) {
         label: 'Total Soluble Solids (TSS Midpoint °Brix)',
         data: tssData.map(d => d.value),
         backgroundColor: tssData.map(d => d.name === activeBiharName ? '#0F5132' : '#FFC107'),
+        borderColor: tssData.map(d => d.name === activeBiharName ? '#0A3622' : '#FFC107'),
+        borderWidth: tssData.map(d => d.name === activeBiharName ? 2 : 1),
         borderRadius: 4
       }]
     },
@@ -132,7 +134,7 @@ function renderTSSChart(rawDataset, activeBiharName) {
         onComplete: function () {
           const chartInstance = this;
           const ctx = chartInstance.ctx;
-          ctx.font = "bold 11px sans-serif";
+          ctx.font = "bold 13px sans-serif"; // Increased font size for presentation screens
           ctx.fillStyle = "#212529";
           ctx.textAlign = "center";
           ctx.textBaseline = "bottom";
@@ -151,7 +153,7 @@ function renderTSSChart(rawDataset, activeBiharName) {
 }
 
 function renderGIChart(rawDataset, activeBiharName) {
-  console.log("GI DATA ENGINE INGESTION:", rawDataset);
+  // console.log("GI DATA ENGINE INGESTION:", rawDataset);
   const ctxGi = document.getElementById("giChart");
   if (!ctxGi) return;
 
@@ -166,6 +168,8 @@ function renderGIChart(rawDataset, activeBiharName) {
         label: 'Glycemic Index Score',
         data: giData.map(d => d.value),
         backgroundColor: giData.map(d => d.name === activeBiharName ? '#198754' : '#DEE2E6'),
+        borderColor: giData.map(d => d.name === activeBiharName ? '#0A3622' : '#ADB5BD'),
+        borderWidth: giData.map(d => d.name === activeBiharName ? 2 : 1),
         borderRadius: 4
       }]
     },
@@ -180,7 +184,7 @@ function renderGIChart(rawDataset, activeBiharName) {
         onComplete: function () {
           const chartInstance = this;
           const ctx = chartInstance.ctx;
-          ctx.font = "bold 11px sans-serif";
+          ctx.font = "bold 13px sans-serif"; // Increased font size for presentation screens
           ctx.fillStyle = "#212529";
           ctx.textAlign = "center";
           ctx.textBaseline = "bottom";
@@ -189,7 +193,7 @@ function renderGIChart(rawDataset, activeBiharName) {
             const meta = chartInstance.getDatasetMeta(i);
             meta.data.forEach(function (bar, index) {
               const data = dataset.data[index];
-              ctx.fillText(data, bar.x, bar.y - 4);
+              ctx.fillText(data + " GI", bar.x, bar.y - 4); // Explicit indicator text append
             });
           });
         }

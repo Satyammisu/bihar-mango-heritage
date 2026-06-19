@@ -112,24 +112,23 @@ const I18N_FALLBACK_DATA = {
 document.addEventListener("DOMContentLoaded", () => {
   console.log("🚀 Kiosk Framework DOM Anchored.");
   
-  // 1. Initialize default language matrices
+  // Initialize default language matrices
   setLanguage(currentLanguage);
   
-  // 2. Attach layout and core interaction configurations
+  // Attach layout and core interaction configurations
   setupLanguageSelectors();
   setupModalCloseTriggers();
   setupAudioInterfaceTriggers();
 
-  // 3. Priming OS Web Speech Engine Stack & Handling Async Load Deficiencies
+  // Priming OS Web Speech Engine Stack & Handling Async Load Deficiencies
   if (window.speechSynthesis) {
     window.speechSynthesis.onvoiceschanged = () => {
       console.log("🔄 System Speech Synthesis Voices Loaded:", window.speechSynthesis.getVoices().length);
     };
-    // Initial runtime wake-up kick
     window.speechSynthesis.getVoices();
   }
 
-  // 4. Deep-Linking QR Code Scanner Check (?variety=zardalu)
+  // Deep-Linking QR Code Scanner Check (?variety=zardalu)
   const urlParams = new URLSearchParams(window.location.search);
   const deepLinkVarietyId = urlParams.get("variety");
 
@@ -158,6 +157,9 @@ function setupLanguageSelectors() {
 }
 
 function setLanguage(langCode) {
+  // FIX #4: Kill any active audio stream instantly before loading new localized text strings
+  stopVarietyAudio();
+
   currentLanguage = langCode;
   currentLanguageData = I18N_FALLBACK_DATA[langCode];
 
@@ -170,10 +172,8 @@ function setLanguage(langCode) {
   document.getElementById("lbl-tss-chart-title").innerText = currentLanguageData.lblTSSChart;
   document.getElementById("lbl-gi-chart-title").innerText = currentLanguageData.lblGIChart;
 
-  // Build/Rebuild Data Grid Gallery elements
   buildGallery();
   
-  // Live update visible modal metrics if language changes while profile view is active
   if (activeVarietyId) {
     const variety = MANGO_MASTER_DATA[activeVarietyId];
     if (variety) {
@@ -250,7 +250,7 @@ function setupAudioInterfaceTriggers() {
  * Checks for local directory file presence first, fallbacks to TTS safely if empty.
  */
 function playVarietyAudio() {
-  stopVarietyAudio(); // Drop concurrent runs instantly
+  stopVarietyAudio(); 
 
   if (!activeVarietyId) {
     console.error("Audio Execution Halted: Missing Global Variety Identifier Selection State.");
@@ -311,7 +311,7 @@ function executeTextToSpeechFallback() {
     utterance.lang = "en-IN";
   }
 
-  utterance.rate = 0.90; // Slower presentation delivery for open floor halls
+  utterance.rate = 0.90; 
   utterance.pitch = 1.0;
   
   window.speechSynthesis.speak(utterance);
@@ -348,8 +348,10 @@ function openDetailedProfile(id) {
   if (qrImgElement) {
     qrImgElement.src = variety.qrCode;
     qrImgElement.style.display = "block";
+    
+    // FIX #1: Correct string closure quotes format setup to bypass runtime breaks
     qrImgElement.onerror = () => {
-      qrImgElement.src = `./qr/dudhiyamaldah-qr.png"; 
+      qrImgElement.src = "./qr/dudhiyamaldah-qr.png"; 
     };
   }
 

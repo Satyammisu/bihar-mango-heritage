@@ -4,73 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dudhiya Maldah - Bihar Smart Mango Knowledge Wall</title>
-    <!-- We use the same CSS structure as your main app for visual consistency -->
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-green: #0F5132;
+            --accent-gold: #FFC107;
+            --dark-charcoal: #212529;
+            --soft-cream: #F8F9FA;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            margin: 0; background-color: var(--soft-cream); color: var(--dark-charcoal); padding: 1.5rem;
+        }
+        .container { max-width: 850px; margin: 0 auto; background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .back-btn { display: inline-block; padding: 0.5rem 1rem; font-weight: bold; cursor: pointer; background: #e9ecef; border: none; border-radius: 4px; text-decoration: none; color: black; margin-bottom: 1.5rem; }
+        .hero-section { display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 1.5rem; }
+        .hero-image { width: 250px; height: 250px; object-fit: cover; border-radius: 8px; background-color: #e9ecef; }
+        .header-text { flex: 1; min-width: 250px; }
+        .qr-zone { text-align: center; background: #f1f3f5; padding: 1rem; border-radius: 8px; width: 180px; margin: 0 auto; }
+        .qr-zone img { width: 150px; height: 150px; display: block; margin: 0 auto 0.5rem auto; }
+        .taxonomy-panel { border: 1px solid #ccc; border-radius: 8px; padding: 1.25rem; background-color: #fbfbfb; margin-bottom: 1.5rem; }
+        .taxonomy-panel legend { font-weight: bold; padding: 0 0.5rem; color: var(--primary-green); font-size: 1.1rem; }
+        .chart-section { background: #fff; padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid #e9ecef; }
+        .chart-wrapper { height: 300px; margin-bottom: 40px; }
+    </style>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
 <body>
 
-<div class="container" style="max-width: 800px; margin: 20px auto; background: white; padding: 30px; border-radius: 12px;">
-    <a href="index.html" class="back-btn" style="text-decoration:none; color:#0F5132; font-weight:bold;">← Back To Gallery</a>
+<div class="container">
+    <a href="index.html" class="back-btn">← Back To Gallery</a>
     
-    <div class="hero-section" style="display: flex; gap: 20px; margin-top: 20px;">
-        <img class="hero-image" src="img/dudhiyamaldah.png" alt="Dudhiya Maldah" style="width: 200px; border-radius: 8px;">
-        <div>
-            <h2 id="modal-title">Dudhiya Maldah</h2>
-            <p>The legendary King of Mangoes from Digha, Patna, known for its milky aroma and melt-in-the-mouth texture.</p>
+    <div class="hero-section">
+        <img class="hero-image" src="./images/dudhiyamaldah.jpg" alt="Dudhiya Maldah" onerror="this.src='./images/placeholder.jpg'">
+        <div class="header-text">
+            <h2 style="margin: 0 0 0.5rem 0; font-size: 2rem;">Dudhiya Maldah ⭐</h2>
+            <h4 style="color: var(--primary-green); margin: 0 0 1rem 0; font-size: 1.2rem;">दूधिया मालदह (Dudhiya Maldah)</h4>
+            <p style="font-weight: bold; margin: 0 0 0.5rem 0; line-height: 1.4;">The undisputed King of Mangoes in Bihar, legendary for its unique milky aroma, exceptionally thin skin, and melt-in-the-mouth pulp texture.</p>
+        </div>
+        <div class="qr-zone">
+            <img src="./qr/dudhiyamaldah-qr.png" alt="QR Code" onerror="this.src='./images/placeholder-qr.png'">
+            <p style="font-size: 0.8rem; margin: 0; font-weight: 500; color: #495057;">Scan QR Code</p>
         </div>
     </div>
 
-    <!-- Separate Charts Section -->
-    <div class="chart-container" style="margin-top: 40px;">
-        <h3>🧪 Sugar Profile Analysis (TSS Midpoint)</h3>
-        <canvas id="tssChart"></canvas>
-    </div>
+    <fieldset class="taxonomy-panel">
+        <legend>Taxonomy</legend>
+        <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong>Origin:</strong> Digha, Patna, Bihar</div>
+        <div style="margin-bottom: 0.6rem; font-size: 1.05rem;"><strong>Harvest Window:</strong> Mid June to Late June</div>
+        <div style="font-size: 1.05rem;"><strong>Growth Habit:</strong> Medium to Large Canopy, Vigorous Spread</div>
+    </fieldset>
 
-    <div class="chart-container" style="margin-top: 40px;">
-        <h3>🩸 Glycemic Index Spectrum (GI Value)</h3>
-        <canvas id="giChart"></canvas>
-    </div>
+    <section class="chart-section">
+        <h3 style="margin-bottom: 25px; color: var(--primary-green);">📊 Comparative Analysis</h3>
+
+        <div class="chart-wrapper">
+            <h4 style="text-align: center; margin-bottom: 10px;">Sugar Profile (TSS Midpoint °Brix)</h4>
+            <canvas id="tssChart"></canvas>
+        </div>
+
+        <div class="chart-wrapper">
+            <h4 style="text-align: center; margin-bottom: 10px;">Glycemic Index (GI) Spectrum</h4>
+            <canvas id="giChart"></canvas>
+        </div>
+    </section>
 </div>
 
 <script>
-    // Data specifically for this variety to ensure the charts highlight "Dudhiya Maldah"
-    const varietyName = "Dudhiya Maldah";
-    
-    const tssData = {
-        labels: ['Dudhiya Maldah', 'Alphonso', 'Kesar', 'Dashehari', 'Totapuri'],
-        values: [21.3, 21.0, 20.0, 19.0, 16.0]
-    };
+    window.addEventListener('DOMContentLoaded', () => {
+        Chart.register(ChartDataLabels);
+        
+        // TSS Chart
+        new Chart(document.getElementById('tssChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Dudhiya Maldah', 'Alphonso', 'Kesar', 'Dashehari', 'Totapuri'],
+                datasets: [{
+                    label: 'TSS (°Brix)',
+                    data: [21.25, 21.0, 20.0, 19.0, 16.0],
+                    backgroundColor: ['#0F5132', '#FFC107', '#FFC107', '#FFC107', '#FFC107']
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'top' } } }
+        });
 
-    const giData = {
-        labels: ['Alphonso', 'Dashehari', 'Kesar', 'Dudhiya Maldah', 'Totapuri'],
-        values: [56, 54, 53, 51, 51]
-    };
-
-    // Render TSS Chart
-    new Chart(document.getElementById("tssChart"), {
-        type: 'bar',
-        data: {
-            labels: tssData.labels,
-            datasets: [{
-                data: tssData.values,
-                backgroundColor: tssData.labels.map(l => l === varietyName ? '#0F5132' : '#FFC107')
-            }]
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } }
-    });
-
-    // Render GI Chart
-    new Chart(document.getElementById("giChart"), {
-        type: 'bar',
-        data: {
-            labels: giData.labels,
-            datasets: [{
-                data: giData.values,
-                backgroundColor: giData.labels.map(l => l === varietyName ? '#0F5132' : '#DEE2E6')
-            }]
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } }
+        // GI Chart
+        new Chart(document.getElementById('giChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Alphonso', 'Dashehari', 'Kesar', 'Dudhiya Maldah', 'Totapuri'],
+                datasets: [{
+                    label: 'GI Value',
+                    data: [56, 54, 53, 51, 51],
+                    backgroundColor: ['#DC3545', '#FFB100', '#FFB100', '#0F5132', '#FFB100']
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'top' } } }
+        });
     });
 </script>
 </body>
